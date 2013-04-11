@@ -376,20 +376,20 @@ au BufNewFile,BufReadPost *.coffee normal zMzr
 " shown, selects first element. If there's no completion window it tries to
 " jump to next placeholder. If there's no placeholder it just returns TAB key 
 function! g:UltiSnips_Complete()
-    call UltiSnips_ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips_JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
+  call UltiSnips_ExpandSnippet()
+  if g:ulti_expand_res == 0
+    call UltiSnips_JumpForwards()
+    if g:ulti_jump_forwards_res == 0
+      if pumvisible()
+        return "\<C-n>"
+      else
+        return "\<TAB>"
+      endif
     endif
-    return ""
+  endif
+  return ""
 endfunction
-let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger = "<Tab>"
 exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
 " Meta-Tab forces UltiSnips to jump forwards (for if autocomplete is
