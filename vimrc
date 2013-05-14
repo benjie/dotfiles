@@ -64,7 +64,6 @@ Bundle 'sjl/vitality.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 
 Bundle 'tpope/vim-abolish'
-Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or} {despe,sepa}rat{}
 
 set number
 syntax on
