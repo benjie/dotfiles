@@ -8,30 +8,38 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 call vundle#rc()
 
+Bundle 'gmarik/vundle'
+
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 "Bundle 'tpope/vim-haml'
+
 Bundle 'pangloss/vim-javascript'
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/taglist.vim'
 "Bundle 'tpope/vim-rails'
-Bundle 'msanders/snipmate.vim'
+"Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-markdown'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'vim-scripts/searchfold.vim'
+"Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'tpope/vim-endwise'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/syntastic'
 "Bundle 'mattn/gist-vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'juvenn/mustache.vim'
-Bundle 'slim-template/vim-slim'
+"Bundle 'juvenn/mustache.vim'
+"Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-commentary'
 "Bundle 'vim-ruby/vim-ruby'
 Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 
 Bundle 'Lokaltog/powerline'
 Bundle 'wgibbs/vim-irblack'
@@ -46,11 +54,17 @@ Bundle 'SirVer/ultisnips'
 " Don't use this: you can't use `.` to repeat dt" reliably
 "Bundle 'dahu/vim-fanfingtastic'
 
-Bundle 'ap/vim-css-color'
-Bundle 'mileszs/ack.vim'
+"Bundle 'ap/vim-css-color'
+"Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'sjl/vitality.vim'
+
+Bundle 'michaeljsmith/vim-indent-object'
+
+Bundle 'tpope/vim-abolish'
+Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or} {despe,sepa}rat{}
 
 set number
 syntax on
