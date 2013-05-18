@@ -9,6 +9,7 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+Bundle 'wgibbs/vim-irblack'
 
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
