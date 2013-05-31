@@ -66,6 +66,8 @@ Bundle 'michaeljsmith/vim-indent-object'
 
 Bundle 'tpope/vim-abolish'
 
+Bundle 'Rip-Rip/clang_complete'
+
 set number
 syntax on
 set autoread " Automatically reload changes if detected
@@ -110,9 +112,9 @@ map <Leader>rt :!/usr/local/bin/ctags --extra=+f -R *<CR><CR>
 map <C-\> :tnext<CR>
 
 function! s:setupWrapping()
-  set wrap
-  set wrapmargin=2
-  set textwidth=72
+  setlocal wrap
+  setlocal wrapmargin=2
+  setlocal textwidth=72
 endfunction
 
 " make uses real tabs
@@ -123,6 +125,15 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru,Guardfile
 "
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupWrapping()
+
+" Objective-C, c
+function! s:objcSettings()
+  setlocal ts=4
+  setlocal sw=4
+  setlocal noexpandtab
+  setlocal nolist
+endfunction
+au BufRead,BufNewFile *.{c,m,h} call s:objcSettings()
 
 " add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
@@ -182,7 +193,7 @@ set noswapfile
 set noar
 
 " Delete all whitespace in end of line
-autocmd BufWritePre *.{coffee,js} :%s/\s\+$//e
+autocmd BufWritePre *.{coffee,js,h,m} :%s/\s\+$//e
 
 " Autocomplete Fabricator gem
 autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
@@ -383,7 +394,10 @@ let g:ctrlp_working_path_mode=0
 " Code folding based on indent for CoffeeScript
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 " Unfold one level
-au BufNewFile,BufReadPost *.coffee normal zMzr
+"au BufNewFile,BufReadPost *.coffee normal zMzr
+" Unfold fully
+au BufNewFile,BufReadPost *.coffee normal zn
+au BufNewFile,BufReadPost *.* normal zn
 
 " UltiSnips completion function that tries to expand a snippet. If there's no
 " snippet for expanding, it checks for completion window and if it's
@@ -415,3 +429,6 @@ let g:UltiSnipsEditSplit = 'vertical'
 
 " Opens UltiSpips editor
 nmap <silent> <leader>es :UltiSnipsEdit<CR>
+
+" Prevent numbers like 007 being manipulated as octal
+set nrformats=
