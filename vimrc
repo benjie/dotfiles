@@ -68,6 +68,8 @@ Bundle 'tpope/vim-abolish'
 
 Bundle 'Rip-Rip/clang_complete'
 
+Bundle 'vim-scripts/Align'
+
 set number
 syntax on
 set autoread " Automatically reload changes if detected
