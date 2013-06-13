@@ -7,6 +7,4 @@ ln -s "`pwd`"/profile_common ../.profile_common
 mkdir -p ~/.vim/plugin/after/
 ln -s vim/plugin/after/* ~/.vim/plugin/after/
 vim -c 'BundleInstall!' -c "q" -c "q"
-cd ~/.vim/bundle/YouCompleteMe
-./install.sh
-cd -
+cd ~/.vim/bundle/YouCompleteMe && ./install.sh; cd -
