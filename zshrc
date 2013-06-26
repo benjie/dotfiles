@@ -11,6 +11,12 @@ setopt completealiases
 
 setopt prompt_subst
 
+# Emacs mode (I find vim mode too slow on command line)
+bindkey -e
+
+# Make up and down complete based on currently typed text
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
 
 # Formatting for VCS
 zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
