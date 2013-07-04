@@ -17,3 +17,6 @@ alias get='git '
 alias MacVim="open -a MacVim.app"
 
 alias chrome="open -a 'Google Chrome'"
+
+# tig pull - for doing a git pull and then having `tig` show you the changes.
+alias 'tigpull'='RANGE=$(git -c color.ui=always pull | tee /dev/tty | grep "^Updating .*\.\." | sed "s/Updating //"); if [ "$RANGE" != "" ]; then tig $RANGE; fi'
