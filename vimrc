@@ -434,3 +434,13 @@ nmap <silent> <leader>es :UltiSnipsEdit<CR>
 
 " Prevent numbers like 007 being manipulated as octal
 set nrformats=
+
+" Toggle between relative and absolute line numbering
+function! g:ToggleNuMode()
+  if(&rnu == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-n> :call g:ToggleNuMode()<cr>
