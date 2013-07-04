@@ -9,7 +9,23 @@ colors
 # Auto-complete command line switches for aliases
 setopt completealiases
 
+# Interpret substitutions in PS1
 setopt prompt_subst
+
+
+# If a new command line being added to the history list duplicates an older
+# one, the older command is removed from the list
+setopt histignorealldups
+
+# remove command lines from the history list when the first character on the
+# line is a space
+setopt histignorespace
+
+# try to avoid the 'zsh: no matches found...'
+setopt nonomatch
+
+# * shouldn't match dotfiles. ever.
+setopt noglobdots
 
 # Emacs mode (I find vim mode too slow on command line)
 bindkey -e
@@ -45,3 +61,7 @@ fi
 
 # Common
 . ~/.profile_common
+
+########## NOTES ##########
+#
+# james147 recommends http://git.grml.org/?p=grml-etc-core.git;a=blob_plain;f=etc/zsh/zshrc;hb=HEAD
