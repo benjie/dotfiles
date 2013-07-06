@@ -50,11 +50,13 @@ vcs_info_wrapper() {
 
 
 # Theme
+function collapse_pwd {
+    echo $(pwd | sed -e "s,^$HOME,~,")
+}
 if [ "$(hostname)" = "imac" ]; then
-  function collapse_pwd {
-      echo $(pwd | sed -e "s,^$HOME,~,")
-  }
   PS1='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
+elif [ "$(hostname)" =~ "^zee" ]; then
+  PS1='%{$fg_bold[blue]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
 else
   prompt walters
 fi
