@@ -62,6 +62,9 @@ else
 fi
 
 # Common
+# HACK for rbenv
+export SHELL=/bin/zsh
+export PATH="/usr/local/bin:$PATH"
 . ~/.profile_common
 
 ########## NOTES ##########
