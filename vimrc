@@ -4,15 +4,12 @@ filetype off                   " required!
 let mapleader = "\<Space>"
 
 set rtp+=~/.vim/bundle/vundle/
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'wgibbs/vim-irblack'
+Bundle 'brainbakery/vim-brainbakery'
 
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
 "Bundle 'tpope/vim-haml'
 
 Bundle 'pangloss/vim-javascript'
@@ -20,34 +17,25 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-abolish'
 "Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-markdown'
-Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-unimpaired'
 "Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'tpope/vim-endwise'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'scrooloose/syntastic'
 "Bundle 'mattn/gist-vim'
 Bundle 'kien/ctrlp.vim'
 "Bundle 'juvenn/mustache.vim'
 "Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-commentary'
 "Bundle 'vim-ruby/vim-ruby'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
 
-Bundle 'Lokaltog/powerline'
 Bundle 'wgibbs/vim-irblack'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'vim-scripts/vim-stylus'
 "Bundle 'airblade/vim-gitgutter'
-Bundle 'SirVer/ultisnips'
+
 
 " Following one pisses me off too much
 "Bundle 'Raimondi/delimitMate'
@@ -57,18 +45,51 @@ Bundle 'SirVer/ultisnips'
 
 "Bundle 'ap/vim-css-color'
 "Bundle 'mileszs/ack.vim'
-Bundle 'rking/ag.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'sjl/vitality.vim'
 
-Bundle 'michaeljsmith/vim-indent-object'
 
-Bundle 'tpope/vim-abolish'
 
-Bundle 'Rip-Rip/clang_complete'
+" Automatically close things
+Bundle 'tpope/vim-endwise'
 
-Bundle 'vim-scripts/Align'
+" Plugins that I tend not to use in terminal vim
+" (where I tend to favour faster startup)
+if has("gui_running")
+  Bundle 'godlygeek/tabular'
+  Bundle 'tpope/vim-fugitive'
+  Bundle 'tpope/vim-git'
+  Bundle 'tpope/vim-rails'
+  Bundle 'vim-scripts/taglist.vim'
+  Bundle 'michaeljsmith/vim-indent-object'
+  Bundle 'SirVer/ultisnips'
+  Bundle 'rking/ag.vim'
+  Bundle 'nathanaelkane/vim-indent-guides'
+  Bundle 'vim-scripts/Align'
+  Bundle 'scrooloose/syntastic'
+  Bundle 'scrooloose/nerdcommenter'
+
+  Bundle 'scrooloose/nerdtree'
+  " NERDTree configuration
+  let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
+  map <Leader>n :NERDTreeToggle<CR>
+
+  Bundle 'mattn/gist-vim'
+  Bundle 'Rip-Rip/clang_complete'
+
+  set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+  Bundle 'Lokaltog/powerline'
+
+  Bundle 'mattn/webapi-vim'
+
+  " Databases access in Vim!
+  Bundle 'vim-scripts/dbext.vim'
+
+  Bundle 'Valloric/YouCompleteMe'
+endif
+
+" Make vim wait less time for <Esc> codes.
+set ttimeoutlen=10
 
 set number
 syntax on
@@ -98,16 +119,11 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 " Status bar
 set laststatus=2
 
-" NERDTree configuration
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-map <Leader>n :NERDTreeToggle<CR>
-
 " Remember last location in file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal g'\"" | endif
 endif
-
 
 " CTags
 map <Leader>rt :!/usr/local/bin/ctags --extra=+f -R *<CR><CR>
@@ -224,7 +240,7 @@ let g:ctrlp_custom_ignore = {
 nmap <silent> <leader>cd :lcd %:h<CR>
 
 " Reload vimrc; install bundle
-nmap <silent> <leader>rc :so ~/.vimrc \| :BundleInstall<CR>
+nmap <silent> <leader>rc :so ~/.vimrc \| BundleInstall<CR>
 
 " Map the arrow keys to be based on display lines, not physical lines
 map <Down> gj
@@ -345,21 +361,27 @@ nnoremap <leader>cd :lcd %:h<cr>
 nnoremap <leader>w <C-w>v<C-w>l
 " Insert variable definition for default register content using last
 " inserted text.
-nnoremap <leader>v O<C-A> = <C-R>"<Esc>
+nnoremap <leader>v O<C-a> = <C-r>"<Esc>
 " Control-[hjkl] navigate between splits.
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 set background=dark
+" 
+" Markdown macros
+" Header - type = or - afterwards to choose header type
 nnoremap <leader>mh yypv$r
 "nnoremap <leader>ml mLyi]Go[<Esc>pA]: <Esc>`L
+" Copies the link spec to bottom - defers entry
 nnoremap <leader>ml mLya]Go: <Esc>0P`L
+" Copies the link spec to bottom and populates with system clipboard
 nnoremap <leader>mL mLya]Go: <Esc>"*p0P`L
+
+" Deletes
 nnoremap <leader>bd :b#<bar>bd#<CR>
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} setlocal spell spelllang=en
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} match ExtraWhitespace /\s\+$\|\t/
 " Don't unload buffers when switching (preserves undo history):
 set hidden
 "*****************************************************************************
