@@ -7,5 +7,5 @@ ln -s "`pwd`"/profile_common ../.profile_common
 ln -s "`pwd`"/tmux.conf ../.tmux.conf
 mkdir -p ~/.vim/plugin/after/
 ln -s vim/plugin/after/* ~/.vim/plugin/after/
-vim -c 'BundleInstall!' -c "q" -c "q"
+vim +BundleInstall +qall
 cd ~/.vim/bundle/YouCompleteMe && ./install.sh; cd -
