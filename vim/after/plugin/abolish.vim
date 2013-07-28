@@ -38,3 +38,4 @@ Abolish su{c,cc}e{s,ss} su{cc}e{ss}
 Abolish tranasction{,s} transaction{}
 Abolish fucntion{,s} function{}
 Abolish ambiance ambience
+Abolish vender vendor
