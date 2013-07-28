@@ -1,4 +1,6 @@
 #!/bin/bash
+export PATH="/usr/local/bin:/usr/local/share/npm/bin:$PATH"
+
 alias vim="mvim -v"
 export EDITOR="vim"
 alias TextWrangler="open -a TextWrangler"
