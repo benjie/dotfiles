@@ -61,6 +61,9 @@ else
   prompt walters
 fi
 
+# jump, mark, unmark, marks functions
+source ~/.dotfiles/marks
+
 # Common
 # HACK for rbenv
 export SHELL=/bin/zsh
