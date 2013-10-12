@@ -55,7 +55,7 @@ function collapse_pwd {
 }
 if [ "$(hostname)" = "imac" ]; then
   PS1='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
-elif [ "$(hostname)" =~ "^zee" ]; then
+elif [ "$(hostname)" =~ "^benjie" ]; then
   PS1='%{$fg_bold[blue]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
 else
   prompt walters
