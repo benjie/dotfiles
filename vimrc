@@ -443,7 +443,9 @@ function! g:UltiSnips_Complete()
   return ""
 endfunction
 let g:UltiSnipsExpandTrigger = "<Tab>"
-exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+if has("gui_running")
+  exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+endif
 
 " Meta-Tab forces UltiSnips to jump forwards (for if autocomplete is
 " being a pain).
