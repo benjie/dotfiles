@@ -381,6 +381,11 @@ nnoremap <leader>ml mLya]Go: <Esc>0P`L
 " Copies the link spec to bottom and populates with system clipboard
 nnoremap <leader>mL mLya]Go: <Esc>"*p0P`L
 
+" Open current line on github
+" Credit: http://felixge.de/2013/08/08/vim-trick-open-current-line-on-github.html
+nnoremap <leader>o :!echo `git ghurl`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
+vnoremap <leader>o <Esc>:!echo `git ghurl`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line("'<")<CR>-<C-R>=line("'>")<CR> \| xargs open<CR><CR>gv
+
 " Deletes
 nnoremap <leader>bd :b#<bar>bd#<CR>
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} setlocal spell spelllang=en
