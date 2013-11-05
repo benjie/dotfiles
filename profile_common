@@ -16,6 +16,7 @@ alias gr='git reset '
 alias gt='git tag '
 alias gk='gitk --all&'
 alias gx='gitx --all'
+alias ghurl='git ghurl'
 
 alias got='git '
 alias get='git '
