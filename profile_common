@@ -1,5 +1,6 @@
 #!/bin/bash
-export PATH="/usr/local/bin:/usr/local/share/npm/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/share/npm/bin:$PATH:/Users/benjiegillam/.apportable/SDK/bin"
+export ANDROID_HOME=/usr/local/opt/android-sdk
 
 alias vim="mvim -v"
 export EDITOR="vim"
@@ -11,6 +12,7 @@ alias gc='git commit'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias go='git checkout '
+alias gr='git reset '
 alias gt='git tag '
 alias gk='gitk --all&'
 alias gx='gitx --all'
@@ -27,6 +29,12 @@ alias chrome="open -a 'Google Chrome'"
 
 # tig pull - for doing a git pull and then having `tig` show you the changes.
 alias 'tigpull'='RANGE=$(git -c color.ui=always pull | tee /dev/tty | grep "^Updating .*\.\." | sed "s/Updating //"); if [ "$RANGE" != "" ]; then tig $RANGE; fi'
+
+# Selenium browser testing
+alias 'selenium-server-standalone'='java -jar /usr/local/opt/selenium-server-standalone/selenium-server-standalone-2.35.0.jar -p 4444'
+
+# Mocha
+alias 'mocha-bg'='./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script'
 
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
