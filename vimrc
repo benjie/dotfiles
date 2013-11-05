@@ -35,6 +35,7 @@ Bundle 'tpope/vim-commentary'
 
 Bundle 'wgibbs/vim-irblack'
 Bundle 'vim-scripts/vim-stylus'
+autocmd filetype stylus setl suffixesadd=.styl
 "Bundle 'airblade/vim-gitgutter'
 
 
@@ -47,6 +48,7 @@ Bundle 'vim-scripts/vim-stylus'
 "Bundle 'ap/vim-css-color'
 "Bundle 'mileszs/ack.vim'
 Bundle 'digitaltoad/vim-jade'
+autocmd filetype jade setl suffixesadd=.jade
 Bundle 'sjl/vitality.vim'
 
 
