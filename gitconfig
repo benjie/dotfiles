@@ -1,0 +1,57 @@
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = cyan
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = cyan bold
+
+[color "status"]
+  added = yellow
+  changed = cyan
+  untracked = red
+
+[user]
+	name = Benjie Gillam
+  email = benjie@jemjie.com
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+	lg = log --graph --pretty=format:'%Cgreen%h%Creset -%Creset %s%C(yellow)%d %Cblue(%aN, %cr)%Creset' --abbrev-commit --date=relative
+	heir = log --all --graph --decorate --oneline --simplify-by-decoration
+  ghurl =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
+
+[core]
+  excludesfile = /Users/benjiegillam/.gitignore_global
+	whitespace = tab-in-indent
+	editor = mvim -v
+
+[instaweb]
+  httpd=webrick
+[push]
+	default = simple
+[diff]
+	renames = copies
+	mnemonicprefix = true
+
+[url "mbp:/Users/benjiegillam/Documents/"]
+  insteadOf = mbp:
+
+[url "git@github.com:"]
+  insteadOf = github:
+[github]
+	user = Benjie
