@@ -431,7 +431,7 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 "au BufNewFile,BufReadPost *.coffee normal zMzr
 " Unfold fully
 au BufNewFile,BufReadPost *.coffee normal zn
-au BufNewFile,BufReadPost *.* normal zn
+au BufNewFile,BufReadPost * normal zn
 
 " UltiSnips completion function that tries to expand a snippet. If there's no
 " snippet for expanding, it checks for completion window and if it's
