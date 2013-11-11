@@ -3,6 +3,8 @@ filetype off                   " required!
 
 let mapleader = "\<Space>"
 
+let g:syntastic_ruby_exec = system("/bin/echo -n '~/.rbenv/versions/'`cat ~/.rbenv/version`'/bin/ruby'")
+
 set rtp+=~/.vim/bundle/vundle/
 
 call vundle#rc()
