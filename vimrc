@@ -65,6 +65,7 @@ if has("gui_running")
   Bundle 'tpope/vim-fugitive'
   Bundle 'tpope/vim-git'
   Bundle 'tpope/vim-rails'
+  Bundle 'tpope/vim-bundler'
   Bundle 'vim-scripts/taglist.vim'
   Bundle 'michaeljsmith/vim-indent-object'
   Bundle 'SirVer/ultisnips'
