@@ -32,7 +32,7 @@ alias chrome="open -a 'Google Chrome'"
 alias 'tigpull'='RANGE=$(git -c color.ui=always pull | tee /dev/tty | grep "^Updating .*\.\." | sed "s/Updating //"); if [ "$RANGE" != "" ]; then tig $RANGE; fi'
 
 # Selenium browser testing
-alias 'selenium-server-standalone'='java -jar /usr/local/opt/selenium-server-standalone/selenium-server-standalone-2.35.0.jar -p 4444'
+alias 'selenium-server-standalone'='java -jar /usr/local/opt/selenium-server-standalone/selenium-server-standalone-2.*.jar -p 4444'
 
 # Mocha
 alias 'mocha-bg'='./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script'
