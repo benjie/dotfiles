@@ -92,6 +92,8 @@ if has("gui_running")
   Bundle 'vim-scripts/dbext.vim'
 
   Bundle 'Valloric/YouCompleteMe'
+
+  Bundle 'majutsushi/tagbar'
 endif
 
 " Make vim wait less time for <Esc> codes.
