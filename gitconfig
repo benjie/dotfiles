@@ -36,7 +36,7 @@
   ghurl =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
 
 [core]
-  excludesfile = /Users/benjiegillam/.gitignore_global
+  excludesfile = /Users/benjiegillam/.gitignore
   whitespace = tab-in-indent
   editor = mvim -v
 
