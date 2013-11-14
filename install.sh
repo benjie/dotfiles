@@ -7,6 +7,7 @@ ln -s "`pwd`"/profile_common ../.profile_common
 ln -s "`pwd`"/tmux.conf ../.tmux.conf
 ln -s "`pwd`"/gitconfig ../.gitconfig
 ln -s "`pwd`"/ackrc ../.ackrc
+ln -s "`pwd`"/ctags ../.ctags
 mkdir -p ~/.vim/plugin/after/
 ln -s vim/plugin/after/* ~/.vim/plugin/after/
 vim +BundleInstall +qall

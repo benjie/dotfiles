@@ -37,8 +37,5 @@ alias 'selenium-server-standalone'='java -jar /usr/local/opt/selenium-server-sta
 # Mocha
 alias 'mocha-bg'='./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script'
 
-# Ctags
-alias 'btags'='ctags -R --exclude=.git --exclude=log --exclude=doc --exclude=tmp *'
-
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
