@@ -53,10 +53,11 @@ Bundle 'digitaltoad/vim-jade'
 autocmd filetype jade setl suffixesadd=.jade
 Bundle 'sjl/vitality.vim'
 
-
-
 " Automatically close things
 Bundle 'tpope/vim-endwise'
+
+" Navigate vim windows inside tmux as if they were tmux panes
+Bundle 'christoomey/vim-tmux-navigator'
 
 " Plugins that I tend not to use in terminal vim
 " (where I tend to favour faster startup)
@@ -382,10 +383,11 @@ nnoremap <leader>w <C-w>v<C-w>l
 " inserted text.
 nnoremap <leader>v O<C-a> = <C-r>"<Esc>
 " Control-[hjkl] navigate between splits.
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Disabled because of vim-tmux-navigator
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
 set background=dark
 " 
 " Markdown macros
