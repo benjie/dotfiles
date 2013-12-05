@@ -3,6 +3,10 @@
 --exclude=log
 --exclude=doc
 --exclude=tmp
+--exclude=node_modules
+--exclude=LOCAL
+--exclude=platforms
+--exclude=plugins
 --langdef=coffee
 --langmap=coffee:.coffee
 --regex-coffee=/(^|=[ \t])*class ([A-Za-z_][A-Za-z0-9_]+\.)*([A-Za-z_][A-Za-z0-9_]+)( extends ([A-Za-z][A-Za-z0-9_.]*)+)?$/\3/c,class/
