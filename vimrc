@@ -130,7 +130,12 @@ set smartcase
 " Tab completion
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/LOCAL/*
+set wildignore+=*/tags
+"Coffeescript
+set wildignore+=*/node_modules/*
+"Rails
+set wildignore+=*/migrate/*,*/log/*,*/doc/*
 
 " Status bar
 set laststatus=2
@@ -258,7 +263,7 @@ let g:tagbar_type_coffee = {
 autocmd filetype svn,*commit* set spell
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn\|doc$',
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|doc$\|node_modules$\|migrate$',
   \ 'file': '\.exe$\|\.so$\|\.dll$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
