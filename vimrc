@@ -271,6 +271,9 @@ let g:ctrlp_custom_ignore = {
 " cd to the directory containing the file in the buffer
 nmap <silent> <leader>cd :lcd %:h<CR>
 
+" mkdir the folder for the current buffer
+nmap <silent> <leader>md :!mkdir -p %:h<CR><CR>
+
 " Reload vimrc; install bundle
 nmap <silent> <leader>rc :so ~/.vimrc \| BundleInstall<CR>
 
