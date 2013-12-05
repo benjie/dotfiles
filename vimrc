@@ -53,6 +53,8 @@ autocmd filetype stylus setl suffixesadd=.styl
 "Bundle 'mileszs/ack.vim'
 Bundle 'digitaltoad/vim-jade'
 autocmd filetype jade setl suffixesadd=.jade
+" mustache and handlebars vim mode
+Bundle 'mustache/vim-mode'
 Bundle 'sjl/vitality.vim'
 
 " Automatically close things
@@ -60,6 +62,9 @@ Bundle 'tpope/vim-endwise'
 
 " Navigate vim windows inside tmux as if they were tmux panes
 Bundle 'christoomey/vim-tmux-navigator'
+
+" Unix command helpers, especially :Move
+Bundle 'tpope/vim-eunuch'
 
 " Plugins that I tend not to use in terminal vim
 " (where I tend to favour faster startup)
