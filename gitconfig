@@ -35,9 +35,6 @@
   heir = log --all --graph --decorate --oneline --simplify-by-decoration
   ghurl =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
 
-  # Source: http://blogs.atlassian.com/2013/06/git-diff/
-  diffh = "!f() { git diff --color=always \"$@\" | $(dirname $(dirname $(which git))"/"$(readlink -n $(which git)))/../share/git-core/contrib/diff-highlight/diff-highlight; }; f" # What?! $(Don't $(look at) me $(like that)).
-
 [core]
   excludesfile = /Users/benjiegillam/.gitignore
   whitespace = tab-in-indent
@@ -61,3 +58,9 @@
 
 [github]
   user = Benjie
+
+[pager]
+  # Src: http://blogs.atlassian.com/2013/06/git-diff/
+  diff = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
+  show = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
+  log = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
