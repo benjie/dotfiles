@@ -24,6 +24,8 @@ Bundle 'tpope/vim-abolish'
 "Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-unimpaired'
+nnoremap <leader>a :argadd %<cr>
+nnoremap <leader>A :argdel %<cr>
 "Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-ragtag'
