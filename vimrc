@@ -68,7 +68,7 @@ Bundle 'tpope/vim-eunuch'
 
 " Plugins that I tend not to use in terminal vim
 " (where I tend to favour faster startup)
-if has("gui_running")
+if has("gui_running") || 1 > 0
   Bundle 'godlygeek/tabular'
   Bundle 'tpope/vim-fugitive'
   Bundle 'tpope/vim-git'
@@ -340,14 +340,14 @@ else
   " Bubble single lines
   nmap <C-Up> [e
   nmap <C-Down> ]e
-  nmap <C-k> [e
-  nmap <C-j> ]e
+  "nmap <C-k> [e
+  "nmap <C-j> ]e
 
   " Bubble multiple lines
   vmap <C-Up> [egv
   vmap <C-Down> ]egv
-  vmap <C-k> [egv
-  vmap <C-j> ]egv
+  "vmap <C-k> [egv
+  "vmap <C-j> ]egv
 
   " Make shift-insert work like in Xterm
   map <S-Insert> <MiddleMouse>
