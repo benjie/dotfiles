@@ -23,6 +23,22 @@ alias get='git '
 alias MacVim="open -a MacVim.app"
 alias vim='mvim -v'
 
+function gpr {
+  # `git pull --rebase` with automatic stash and attempt to restore
+  MOD_COUNT=$(git status --porcelain --untracked-files=no | wc -l)
+  if [ $MOD_COUNT -gt 0 ]; then
+    if git stash save "git pull --rebase stash" && git pull --rebase && git stash apply && git stash drop; then
+      echo "Success";
+    else
+      echo
+      echo
+      echo "WARNING: Something failed! Read the above!"
+    fi
+  else
+    git pull --rebase
+  fi
+}
+
 # jemjie's s3cmd
 alias s3cmd_jemjie="s3cmd --config=/Users/benjiegillam/.s3cfg_jemjie --bucket-location=EU"
 alias js3cmd=s3cmd_jemjie
