@@ -10,6 +10,7 @@ ln -s "`pwd`"/ackrc ../.ackrc
 ln -s "`pwd`"/ctags ../.ctags
 ln -s "`pwd`"/gitignore ../.gitignore
 ln -s "`pwd`"/agignore ../.agignore
+ln -s "`pwd`"/npmrc ../.npmrc
 mkdir -p ~/.vim/plugin/after/
 ln -s vim/plugin/after/* ~/.vim/plugin/after/
 vim +BundleInstall +qall
