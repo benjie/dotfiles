@@ -455,6 +455,8 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_clear_cache_on_exit=0
 " Have CtrlP use Vim's cwd not it's smarty pants stuff.
 let g:ctrlp_working_path_mode=0
+let g:ctrlp_cmd='CtrlPCurWD'
+nnoremap <silent> <leader>p :<c-u>CtrlPBuffer<cr>
 
 " Code folding based on indent for CoffeeScript
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
