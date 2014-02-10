@@ -132,10 +132,13 @@ set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/LOCAL/*,*/log/*
 set wildignore+=*/tags
+set wildignore+=*/sessions/*
 "Coffeescript
 set wildignore+=*/node_modules/*
 "Rails
 set wildignore+=*/migrate/*,*/log/*,*/doc/*
+" Patter ignore when use the completion in search file
+set wildignore+=*.o,*.obj,*~,#*#,*.pyc,*.tar*,*.avi,*.ogg,*.mp3
 
 " Status bar
 set laststatus=2
@@ -222,9 +225,6 @@ let g:JSLintHighlightErrorLine = 0
 
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
 let macvim_hig_shift_movement = 1
-
-" Patter ignore when use the completion in search file
-set wig=*.o,*.obj,*~,#*#,*.pyc,*.tar*,*.avi,*.ogg,*.mp3
 
 " No save backup by .swp
 set nowb
