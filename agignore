@@ -1,4 +1,6 @@
-LOCAL
-doc
-node_modules
-log
+*/LOCAL/
+*/doc/
+*/node_modules/
+*/log/
+*/sessions/
+compiledTemplates.js
