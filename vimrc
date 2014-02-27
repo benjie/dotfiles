@@ -134,9 +134,9 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/LOCAL/*,*/log/*
 set wildignore+=*/tags
 set wildignore+=*/sessions/*
 "Coffeescript
-set wildignore+=*/node_modules/*
+"set wildignore+=*/node_modules/*
 "Rails
-set wildignore+=*/migrate/*,*/log/*,*/doc/*
+set wildignore+=*/doc/*
 " Patter ignore when use the completion in search file
 set wildignore+=*.o,*.obj,*~,#*#,*.pyc,*.tar*,*.avi,*.ogg,*.mp3
 
