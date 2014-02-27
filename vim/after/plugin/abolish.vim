@@ -40,3 +40,4 @@ Abolish fucntion{,s} function{}
 Abolish ambiance ambience
 Abolish vender vendor
 Abolish liek like
+Abolish publically publicly
