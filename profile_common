@@ -53,5 +53,8 @@ alias 'selenium-server-standalone'='java -jar /usr/local/opt/selenium-server-sta
 # Mocha
 alias 'mocha-bg'='./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script'
 
+# I want to be able to open more than a couple files, OSX, please
+ulimit -n 4096
+
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
