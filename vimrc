@@ -511,3 +511,7 @@ function! g:ToggleNuMode()
   endif
 endfunc
 nnoremap <C-n> :call g:ToggleNuMode()<cr>
+
+" Syntax syncing
+nnoremap <F5> <Esc>:syntax sync fromstart<CR>
+inoremap <F5> <C-o>:syntax sync fromstart<CR>
