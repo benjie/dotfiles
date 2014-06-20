@@ -4,3 +4,4 @@
 */log/
 */sessions/
 compiledTemplates.js
+*.heapsnapshot
