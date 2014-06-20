@@ -76,7 +76,7 @@ if has("gui_running") || 1 > 0
   Bundle 'tpope/vim-bundler'
   Bundle 'vim-scripts/taglist.vim'
   Bundle 'michaeljsmith/vim-indent-object'
-  Bundle 'SirVer/ultisnips'
+  "Bundle 'SirVer/ultisnips'
   Bundle 'rking/ag.vim'
   Bundle 'nathanaelkane/vim-indent-guides'
   Bundle 'vim-scripts/Align'
