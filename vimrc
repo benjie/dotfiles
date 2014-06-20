@@ -129,8 +129,8 @@ set smartcase
 
 " Tab completion
 set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/LOCAL/*,*/log/*
+set wildignore+=*.o,*.obj,*.rbc,*.class,.svn,vendor/gems/*
+set wildignore+=*/.hg/*,*/.svn/*,*/LOCAL/*,*/log/*
 set wildignore+=*/tags
 set wildignore+=*/sessions/*
 "Coffeescript
