@@ -65,3 +65,5 @@
   diff = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
   show = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
   log = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
+[merge]
+	tool = vimdiff
