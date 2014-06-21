@@ -4,6 +4,7 @@ filetype off                   " required!
 let mapleader = "\<Space>"
 
 let g:syntastic_ruby_exec = system("/bin/echo -n '~/.rbenv/versions/'`cat ~/.rbenv/version`'/bin/ruby'")
+let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 set rtp+=~/.vim/bundle/vundle/
 
