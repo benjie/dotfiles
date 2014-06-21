@@ -55,7 +55,7 @@ autocmd filetype stylus setl suffixesadd=.styl
 Bundle 'digitaltoad/vim-jade'
 autocmd filetype jade setl suffixesadd=.jade
 " mustache and handlebars vim mode
-Bundle 'mustache/vim-mode'
+"Bundle 'mustache/vim-mode'
 Bundle 'sjl/vitality.vim'
 
 " Automatically close things
@@ -75,14 +75,15 @@ if has("gui_running") || 1 > 0
   Bundle 'tpope/vim-git'
   Bundle 'tpope/vim-rails'
   Bundle 'tpope/vim-bundler'
-  Bundle 'vim-scripts/taglist.vim'
+  "Bundle 'vim-scripts/taglist.vim'
   Bundle 'michaeljsmith/vim-indent-object'
   "Bundle 'SirVer/ultisnips'
   Bundle 'rking/ag.vim'
   Bundle 'nathanaelkane/vim-indent-guides'
-  Bundle 'vim-scripts/Align'
+  "Bundle 'vim-scripts/Align'
   Bundle 'scrooloose/syntastic'
-  Bundle 'scrooloose/nerdcommenter'
+  " Disabled in favour of vim-commentary:
+  "Bundle 'scrooloose/nerdcommenter'
 
   Bundle 'scrooloose/nerdtree'
   " NERDTree configuration
@@ -90,15 +91,16 @@ if has("gui_running") || 1 > 0
   map <Leader>n :NERDTreeToggle<CR>
 
   Bundle 'mattn/gist-vim'
-  Bundle 'Rip-Rip/clang_complete'
+  " Commented in favour of YCM
+  "Bundle 'Rip-Rip/clang_complete'
 
   set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
   Bundle 'Lokaltog/powerline'
 
-  Bundle 'mattn/webapi-vim'
+  "Bundle 'mattn/webapi-vim'
 
   " Databases access in Vim!
-  Bundle 'vim-scripts/dbext.vim'
+  "Bundle 'vim-scripts/dbext.vim'
 
   Bundle 'Valloric/YouCompleteMe'
 
