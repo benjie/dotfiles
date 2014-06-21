@@ -514,7 +514,7 @@ function! g:ToggleNuMode()
     set relativenumber
   endif
 endfunc
-nnoremap <C-n> :call g:ToggleNuMode()<cr>
+noremap <C-n> :call g:ToggleNuMode()<cr>
 
 " Syntax syncing
 nnoremap <F5> <Esc>:syntax sync fromstart<CR>
