@@ -105,6 +105,7 @@ if has("gui_running") || 1 > 0
   Bundle 'Valloric/YouCompleteMe'
 
   Bundle 'majutsushi/tagbar'
+  nmap <F8> :TagbarToggle<CR>
 endif
 
 " Make vim wait less time for <Esc> codes.
