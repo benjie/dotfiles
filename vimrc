@@ -471,42 +471,43 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 au BufNewFile,BufReadPost *.coffee normal zn
 au BufNewFile,BufReadPost * normal zn
 
-" UltiSnips completion function that tries to expand a snippet. If there's no
-" snippet for expanding, it checks for completion window and if it's
-" shown, selects first element. If there's no completion window it tries to
-" jump to next placeholder. If there's no placeholder it just returns TAB key 
-function! g:UltiSnips_Complete()
-  call UltiSnips_ExpandSnippet()
-  if g:ulti_expand_res == 0
-    call UltiSnips_JumpForwards()
-    if g:ulti_jump_forwards_res == 0
-      if pumvisible()
-        return "\<C-n>"
-      else
-        return "\<TAB>"
+if exists('did_UltiSnips_plugin')
+  " UltiSnips completion function that tries to expand a snippet. If there's no
+  " snippet for expanding, it checks for completion window and if it's
+  " shown, selects first element. If there's no completion window it tries to
+  " jump to next placeholder. If there's no placeholder it just returns TAB key 
+  function! g:UltiSnips_Complete()
+    call UltiSnips_ExpandSnippet()
+    if g:ulti_expand_res == 0
+      call UltiSnips_JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        if pumvisible()
+          return "\<C-n>"
+        else
+          return "\<TAB>"
+        endif
       endif
     endif
+    return ""
+  endfunction
+  let g:UltiSnipsExpandTrigger = "<Tab>"
+  if has("gui_running")
+    exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
   endif
-  return ""
-endfunction
-let g:UltiSnipsExpandTrigger = "<Tab>"
-if has("gui_running")
-  exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+  " Meta-Tab forces UltiSnips to jump forwards (for if autocomplete is
+  " being a pain).
+  inoremap <silent> <M-Tab> <C-R>=UltiSnips_JumpForwards()<cr>
+
+  " Open ultisnips edits in vertical split
+  let g:UltiSnipsEditSplit = 'vertical'
+
+  " Opens UltiSpips editor
+  nmap <silent> <leader>es :UltiSnipsEdit<CR>
 endif
-
-" Meta-Tab forces UltiSnips to jump forwards (for if autocomplete is
-" being a pain).
-inoremap <silent> <M-Tab> <C-R>=UltiSnips_JumpForwards()<cr>
-
-" Open ultisnips edits in vertical split
-let g:UltiSnipsEditSplit = 'vertical'
-
-" Opens UltiSpips editor
-nmap <silent> <leader>es :UltiSnipsEdit<CR>
 
 " Prevent numbers like 007 being manipulated as octal
 set nrformats=
-
 " Toggle between relative and absolute line numbering
 function! g:ToggleNuMode()
   if(&rnu == 1)
