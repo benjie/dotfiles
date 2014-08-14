@@ -39,7 +39,8 @@ Bundle 'tpope/vim-commentary'
 "Bundle 'vim-ruby/vim-ruby'
 
 Bundle 'wgibbs/vim-irblack'
-Bundle 'vim-scripts/vim-stylus'
+"Bundle 'vim-scripts/vim-stylus'
+Bundle 'wavded/vim-stylus'
 autocmd filetype stylus setl suffixesadd=.styl
 "Bundle 'airblade/vim-gitgutter'
 
