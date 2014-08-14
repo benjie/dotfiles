@@ -36,7 +36,7 @@ Bundle 'kien/ctrlp.vim'
 "Bundle 'juvenn/mustache.vim'
 "Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-commentary'
-"Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-ruby/vim-ruby'
 
 Bundle 'wgibbs/vim-irblack'
 "Bundle 'vim-scripts/vim-stylus'
