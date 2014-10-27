@@ -15,6 +15,8 @@ alias gds='git diff --staged'
 alias go='git checkout '
 alias gr='git reset '
 alias gt='git tag '
+alias gr='git rebase '
+alias gri='git rebase -i '
 alias gk='gitk --all&'
 alias gx='gitx --all'
 alias ghurl='git ghurl'
@@ -23,6 +25,12 @@ alias got='git '
 alias get='git '
 alias MacVim="open -a MacVim.app"
 alias vim='mvim -v'
+
+alias z='zeus'
+alias zr='zeus rspec'
+alias zpr='zeus parallel_rspec'
+alias migrate='zeus rake db:migrate'
+alias rollback='zeus rake db:rollback'
 
 function gpr {
   # `git pull --rebase` with automatic stash and attempt to restore
