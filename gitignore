@@ -54,3 +54,4 @@ project.xcworkspace
 LOCAL
 node_modules
 tags
+tmux.sh
