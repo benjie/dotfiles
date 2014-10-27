@@ -1,6 +1,8 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
+autocmd filetype * setl nofoldenable
+
 let mapleader = "\<Space>"
 
 let g:syntastic_ruby_exec = system("/bin/echo -n '~/.rbenv/versions/'`cat ~/.rbenv/version`'/bin/ruby'")
@@ -135,7 +137,7 @@ set smartcase
 " Tab completion
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,*.rbc,*.class,.svn,vendor/gems/*
-set wildignore+=*/.hg/*,*/.svn/*,*/LOCAL/*,*/log/*
+set wildignore+=*/.hg/*,*/.svn/*,*/log/*
 set wildignore+=*/tags
 set wildignore+=*/sessions/*
 "Coffeescript
@@ -268,8 +270,8 @@ let g:tagbar_type_coffee = {
 autocmd filetype svn,*commit* set spell
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|doc$\|node_modules$\|migrate$',
-  \ 'file': '\.exe$\|\.so$\|\.dll$',
+  \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|LOCAL$|nanoc[\/]output$',
+  \ 'file': '\v\.exe$|\.so$|\.dll|nanoc[\/]content[\/].*\.yaml$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
@@ -440,9 +442,9 @@ map <leader>sr :source ~/.vim/.session<cr>
 
 " Don't have YouCompleteMe ignore any files
 " (especially not Markdown!)
-let g:ycm_filetypes_to_completely_ignore = {}
-let g:ycm_complete_in_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
+"let g:ycm_filetypes_to_completely_ignore = {}
+"let g:ycm_complete_in_comments_and_strings = 1
+"let g:ycm_collect_identifiers_from_comments_and_strings = 1
 "let g:ycm_semantic_triggers =  {
 "  \   'c' : ['->', '.'],
 "  \   'objc' : ['->', '.'],
