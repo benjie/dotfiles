@@ -105,7 +105,7 @@ if has("gui_running") || 1 > 0
   " Databases access in Vim!
   "Bundle 'vim-scripts/dbext.vim'
 
-  Bundle 'Valloric/YouCompleteMe'
+  "Bundle 'Valloric/YouCompleteMe'
 
   Bundle 'majutsushi/tagbar'
   nmap <F8> :TagbarToggle<CR>
