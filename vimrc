@@ -45,7 +45,6 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'wgibbs/vim-irblack'
 "Bundle 'vim-scripts/vim-stylus'
 Bundle 'wavded/vim-stylus'
-autocmd filetype stylus setl suffixesadd=.styl
 "Bundle 'airblade/vim-gitgutter'
 
 
@@ -58,9 +57,8 @@ autocmd filetype stylus setl suffixesadd=.styl
 "Bundle 'ap/vim-css-color'
 "Bundle 'mileszs/ack.vim'
 Bundle 'digitaltoad/vim-jade'
-autocmd filetype jade setl suffixesadd=.jade
 " mustache and handlebars vim mode
-"Bundle 'mustache/vim-mode'
+Bundle 'mustache/vim-mode'
 Bundle 'sjl/vitality.vim'
 
 " Automatically close things
@@ -160,6 +158,11 @@ if has("autocmd")
     \| exe "normal g'\"" | endif
 endif
 
+autocmd filetype jade setl suffixesadd=.jade
+autocmd filetype stylus setl suffixesadd=.styl
+autocmd filetype javascript setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
+autocmd filetype coffee setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
+
 " CTags
 map <Leader>rt :!/usr/local/bin/ctags --extra=+f -R *<CR><CR>
 map <C-\> :tnext<CR>
@@ -251,7 +254,7 @@ autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.r
 " Autocomplete Fabricator gem
 autocmd User Rails Rnavcommand decorator app/decorators -suffix=_decorator.rb -default=model()
 
-set foldmethod=syntax
+set foldmethod=manual
 
 let g:Powerline_symbols = 'fancy'
 set t_Co=256
@@ -274,7 +277,7 @@ let g:tagbar_type_coffee = {
 autocmd filetype svn,*commit* set spell
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|LOCAL$|nanoc[\/]output$',
+  \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|LOCAL$|nanoc[\/]output$|Timecounts-Frontend[\/]timecounts-api$|tmp$',
   \ 'file': '\v\.exe$|\.so$|\.dll|nanoc[\/]content[\/].*\.yaml$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
@@ -527,3 +530,4 @@ noremap <C-n> :call g:ToggleNuMode()<cr>
 " Syntax syncing
 nnoremap <F5> <Esc>:syntax sync fromstart<CR>
 inoremap <F5> <C-o>:syntax sync fromstart<CR>
+nnoremap <F6> <Esc>:!touch index.coffee<CR><CR>
