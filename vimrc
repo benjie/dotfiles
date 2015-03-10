@@ -32,7 +32,9 @@ nnoremap <leader>A :argdel %<cr>
 "Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-ragtag'
+let g:ragtag_global_maps = 1
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'mtscout6/vim-cjsx'
 "Bundle 'mattn/gist-vim'
 Bundle 'kien/ctrlp.vim'
 "Bundle 'juvenn/mustache.vim'
@@ -85,6 +87,8 @@ if has("gui_running") || 1 > 0
   Bundle 'nathanaelkane/vim-indent-guides'
   "Bundle 'vim-scripts/Align'
   Bundle 'scrooloose/syntastic'
+  let g:syntastic_coffee_checkers = ['coffeelint']
+  let g:syntastic_javascript_checkers = ['jsxhint']
   " Disabled in favour of vim-commentary:
   "Bundle 'scrooloose/nerdcommenter'
 
