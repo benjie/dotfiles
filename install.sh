@@ -12,6 +12,7 @@ ln -s "`pwd`"/gitignore ../.gitignore
 ln -s "`pwd`"/agignore ../.agignore
 ln -s "`pwd`"/npmrc ../.npmrc
 mkdir -p ~/.vim/plugin/after/
-ln -s vim/plugin/after/* ~/.vim/plugin/after/
+ln -s "`pwd`"/vim/plugin/after/* ~/.vim/plugin/after/
+ln -s "`pwd`"/vim/UltiSnips ../.vim/UltiSnips
 vim +BundleInstall +qall
 cd ~/.vim/bundle/YouCompleteMe && ./install.sh; cd -
