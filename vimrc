@@ -34,7 +34,11 @@ nnoremap <leader>A :argdel %<cr>
 "Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-ragtag'
 let g:ragtag_global_maps = 1
+
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'mintplant/vim-literate-coffeescript'
+autocmd FileType litcoffee runtime ftplugin/coffee.vim
+
 Bundle 'mtscout6/vim-cjsx'
 "Bundle 'mattn/gist-vim'
 Bundle 'kien/ctrlp.vim'
