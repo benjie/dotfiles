@@ -32,6 +32,8 @@ alias zpr='zeus parallel_rspec'
 alias migrate='zeus rake db:migrate'
 alias rollback='zeus rake db:rollback'
 
+alias rshl='pkill -f "devserver.coffee hotloader"'
+
 function gpr {
   # `git pull --rebase` with automatic stash and attempt to restore
   MOD_COUNT=$(git status --porcelain --untracked-files=no | wc -l)
