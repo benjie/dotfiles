@@ -543,4 +543,9 @@ noremap <C-n> :call g:ToggleNuMode()<cr>
 " Syntax syncing
 nnoremap <F5> <Esc>:syntax sync fromstart<CR>
 inoremap <F5> <C-o>:syntax sync fromstart<CR>
+
+" Trigger restarting server
 nnoremap <F6> <Esc>:!touch index.coffee<CR><CR>
+
+" Maximize current pane
+nnoremap <C-w>a <C-w>\|<C-w>_
