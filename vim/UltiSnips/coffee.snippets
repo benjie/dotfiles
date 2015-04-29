@@ -9,7 +9,7 @@ module.exports = `!v expand("%:t:r")` = React.createClass
 	displayName: "`!v expand("%:t:r")`"
 
 	render: ->
-		${1:<div className={ "`!v expand("%:t:r")` #{@props.className} "}>
+		${1:<div className={ "`!v expand("%:t:r")` #{@props.className ? ""} "}>
 			${2}
 		</div>}
 endsnippet
