@@ -5,6 +5,8 @@ ln -s "`pwd`"/vimrc ../.vimrc
 ln -s "`pwd`"/zshrc ../.zshrc
 ln -s "`pwd`"/profile_common ../.profile_common
 ln -s "`pwd`"/tmux.conf ../.tmux.conf
+ln -s "`pwd`"/starttmux.sh ../.starttmux.sh
+ln -s "`pwd`"/tmux-general.sh ../.tmux-general.sh
 ln -s "`pwd`"/gitconfig ../.gitconfig
 ln -s "`pwd`"/ackrc ../.ackrc
 ln -s "`pwd`"/ctags ../.ctags
