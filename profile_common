@@ -33,6 +33,7 @@ alias migrate='zeus rake db:migrate'
 alias rollback='zeus rake db:rollback'
 
 alias rshl='pkill -f "devserver.coffee hotloader"'
+alias ghpr='git pull-request'
 
 function gpr {
   # `git pull --rebase` with automatic stash and attempt to restore
