@@ -35,6 +35,12 @@ alias rollback='zeus rake db:rollback'
 alias rshl='pkill -f "devserver.coffee hotloader"'
 alias ghpr='git pull-request'
 
+function fixupstream {
+  BRANCH="$(git symbolic-ref HEAD)" || return 1
+  BRANCH=${BRANCH##refs/heads/}
+  git branch --set-upstream-to="origin/${BRANCH}" "${BRANCH}"
+}
+
 function gpr {
   # `git pull --rebase` with automatic stash and attempt to restore
   MOD_COUNT=$(git status --porcelain --untracked-files=no | wc -l)
