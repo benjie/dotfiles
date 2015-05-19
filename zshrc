@@ -48,15 +48,23 @@ vcs_info_wrapper() {
   fi
 }
 
+last_command_status() {
+  if [ "$?" == "0" ]; then
+    echo "%{$fg_bold[green]%}➜"
+  else
+    echo "%{$fg_bold[red]%}➜"
+  fi
+}
+
 
 # Theme
 function collapse_pwd {
     echo $(pwd | sed -e "s,^$HOME,~,")
 }
 if [ "$(hostname)" = "imac" ]; then
-  PS1='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
+  PS1='$(last_command_status) %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
 elif [ "$(hostname)" =~ "^[bB]enjie" ]; then
-  PS1='%{$fg_bold[blue]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
+  PS1='$(last_command_status) %{$fg[green]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
 else
   prompt walters
 fi
