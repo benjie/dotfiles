@@ -33,7 +33,7 @@
   dump = cat-file -p
   lg = log --graph --pretty=format:'%Cgreen%h%Creset -%Creset %s%C(yellow)%d %Cblue(%aN, %cr)%Creset' --abbrev-commit --date=relative
   heir = log --all --graph --decorate --oneline --simplify-by-decoration
-  ghurl =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
+  ghurl =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\(\\.git\\)?$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
   shipit = push origin origin/master:production
 
 [core]
