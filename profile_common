@@ -76,3 +76,10 @@ ulimit -n 4096
 
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# Colours
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# hub / GitHub
+eval "$(hub alias -s)"
