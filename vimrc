@@ -476,7 +476,7 @@ map <leader>sr :source ~/.vim/.session<cr>
 "  \   'erlang' : [':'],
 "  \ }
 
-set guifont=Menlo\ for\ Powerline
+set guifont=Meslo\ LG\ S\ for\ Powerline
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_clear_cache_on_exit=0
