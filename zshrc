@@ -64,7 +64,7 @@ function collapse_pwd {
 if [ "$(hostname)" = "imac" ]; then
   PS1='$(last_command_status) %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
 elif [ "$(hostname)" =~ "^[bB]enjie" ]; then
-  PS1='$(last_command_status) %{$fg[green]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
+  PS1='$(last_command_status) %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
 else
   prompt walters
 fi
