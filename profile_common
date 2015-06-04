@@ -43,6 +43,12 @@ function fixupstream {
   git branch --set-upstream-to="origin/${BRANCH}" "${BRANCH}"
 }
 
+#function gpu {
+#  BRANCH="$(git symbolic-ref HEAD)" || return 1
+#  BRANCH=${BRANCH##refs/heads/}
+#  git push -u origin "${BRANCH}"
+#}
+
 function gpr {
   # `git pull --rebase` with automatic stash and attempt to restore
   MOD_COUNT=$(git status --porcelain --untracked-files=no | wc -l)
