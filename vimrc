@@ -30,6 +30,12 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-unimpaired'
 nnoremap <leader>a :argadd %<cr>
 nnoremap <leader>A :argdel %<cr>
+nmap <silent> tt :tabnew<CR>
+nmap <silent> [g :tabprevious<CR>
+nmap <silent> ]g :tabnext<CR>
+nmap <silent> [G :tabrewind<CR>
+nmap <silent> ]G :tablast<CR>
+
 "Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-ragtag'
@@ -42,6 +48,8 @@ autocmd FileType litcoffee runtime ftplugin/coffee.vim
 Bundle 'mtscout6/vim-cjsx'
 "Bundle 'mattn/gist-vim'
 Bundle 'kien/ctrlp.vim'
+" Don't jump to other tabs
+let g:ctrlp_switch_buffer=''
 "Bundle 'juvenn/mustache.vim'
 "Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-commentary'
@@ -549,3 +557,6 @@ nnoremap <F6> <Esc>:!touch index.coffee<CR><CR>
 
 " Maximize current pane
 nnoremap <C-w>a <C-w>\|<C-w>_
+
+set fillchars+=vert:│
+set mouse=a
