@@ -91,3 +91,6 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # hub / GitHub
 eval "$(hub alias -s)"
+
+# npm autocomplete
+. <(npm completion)
