@@ -5,6 +5,6 @@ if [ "$?" == "0" ]; then
 else
   echo "Creating new tmux server"
   ~/.tmux-general.sh
-  ~/Documents/Timecounts-Frontend/tmux.sh
+  ~/Documents/timecounts-frontend/tmux.sh
 fi
 $TMUX attach-session -t General
