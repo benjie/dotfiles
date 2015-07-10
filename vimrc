@@ -103,6 +103,7 @@ if has("gui_running") || 1 > 0
   let g:UltiSnipsEditSplit="vertical"
 
   Bundle 'rking/ag.vim'
+  Bundle 'gabesoft/vim-ags'
   Bundle 'nathanaelkane/vim-indent-guides'
   "Bundle 'vim-scripts/Align'
   Bundle 'scrooloose/syntastic'
