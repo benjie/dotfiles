@@ -77,6 +77,8 @@ source ~/.dotfiles/marks
 export SHELL=/bin/zsh
 . ~/.profile_common
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 ########## NOTES ##########
 #
 # james147 recommends http://git.grml.org/?p=grml-etc-core.git;a=blob_plain;f=etc/zsh/zshrc;hb=HEAD
