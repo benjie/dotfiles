@@ -298,7 +298,7 @@ let g:tagbar_type_coffee = {
 autocmd filetype svn,*commit* set spell
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|LOCAL$|nanoc[\/]output$|Timecounts-Frontend[\/]timecounts-api$|tmp$',
+  \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|_LOCAL$|nanoc[\/]output$|Timecounts-Frontend[\/]timecounts-api$|tmp$',
   \ 'file': '\v\.exe$|\.so$|\.dll|nanoc[\/]content[\/].*\.yaml$',
   \ 'link': 'some_bad_symbolic_links',
   \ }

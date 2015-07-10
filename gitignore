@@ -51,7 +51,7 @@ project.xcworkspace
 
 # Benjie
 .DS_Store
-LOCAL
+_LOCAL
 node_modules
 tags
 tmux.sh
