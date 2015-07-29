@@ -61,7 +61,7 @@ last_command_status() {
 function collapse_pwd {
     echo $(pwd | sed -e "s,^$HOME,~,")
 }
-if [ "$(hostname)" = "imac" ]; then
+if [ "$(hostname)" =~ "^i[mM]ac" ]; then
   PS1='$(last_command_status) %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
 elif [ "$(hostname)" =~ "^[bB]enjie" ]; then
   PS1='$(last_command_status) %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
