@@ -334,6 +334,11 @@ nmap <silent> <leader>md :!mkdir -p %:h<CR><CR>
 " Reload vimrc; install bundle
 nmap <silent> <leader>rc :so ~/.vimrc \| BundleInstall<CR>
 
+" Sort all items in the current indent level
+nmap <silent> <leader>si vii:sort<CR>
+" Sort all items in the current block ({})
+nmap <silent> <leader>sb {eV}k:sort<CR>
+
 " Map the arrow keys to be based on display lines, not physical lines
 map <Down> gj
 map <Up> gk
