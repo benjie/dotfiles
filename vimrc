@@ -335,9 +335,12 @@ nmap <silent> <leader>md :!mkdir -p %:h<CR><CR>
 nmap <silent> <leader>rc :so ~/.vimrc \| BundleInstall<CR>
 
 " Sort all items in the current indent level
-nmap <silent> <leader>si vii:sort<CR>
+nmap <silent> <leader>si vii:sort /\v[^=:]+/ r<CR>
 " Sort all items in the current block ({})
-nmap <silent> <leader>sb {eV}k:sort<CR>
+nmap <silent> <leader>sb {eV}k:sort /\v[^=:]+/ r<CR>
+" Sort current visual selection
+vmap <silent> <leader>s :sort /\v[^=:]+/ r<CR>
+vmap <silent> <leader>sv :sort /\v[^=:]+/ r<CR>
 
 " Map the arrow keys to be based on display lines, not physical lines
 map <Down> gj
