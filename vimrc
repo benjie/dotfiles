@@ -207,8 +207,8 @@ autocmd filetype javascript setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,
 autocmd filetype coffee setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
 
 " CTags
-map <Leader>rt :!/usr/local/bin/ctags --extra=+f -R *<CR><CR>
-map <C-\> :tnext<CR>
+nmap <Leader>rt :!/usr/local/bin/ctags --extra=+f -R *<CR><CR>
+nmap <C-\> :tnext<CR>
 
 function! s:setupWrapping()
   setlocal wrap
@@ -340,11 +340,10 @@ nmap <silent> <leader>si vii:sort /\v[^=:]+/ r<CR>
 nmap <silent> <leader>sb {eV}k:sort /\v[^=:]+/ r<CR>
 " Sort current visual selection
 vmap <silent> <leader>s :sort /\v[^=:]+/ r<CR>
-vmap <silent> <leader>sv :sort /\v[^=:]+/ r<CR>
 
 " Map the arrow keys to be based on display lines, not physical lines
-map <Down> gj
-map <Up> gk
+nmap <Down> gj
+nmap <Up> gk
 
 if has("gui_macvim") && has("gui_running")
   set guioptions=egmrt
@@ -495,8 +494,8 @@ set hidden
 "*****************************************************************************
 " ignore 'options' because of latex-suite (would be pointless to save that!)
 set sessionoptions=blank,curdir,folds,help,resize,tabpages,winsize
-map <leader>ss :mksession! ~/.vim/.session<cr>
-map <leader>sr :source ~/.vim/.session<cr>
+nmap <leader>ss :mksession! ~/.vim/.session<cr>
+nmap <leader>sr :source ~/.vim/.session<cr>
 
 " Don't have YouCompleteMe ignore any files
 " (especially not Markdown!)
