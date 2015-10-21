@@ -23,6 +23,15 @@ alias ghurl='git ghurl'
 alias gpu='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpupr='git push -u origin $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1'
 
+if [ "$SHELL" == "$(which zsh)" ]; then
+  compdef _git go="git-checkout"
+  compdef _git ga="git-add"
+  compdef _git gr="git-rebase"
+  alias __git-checkout_main=_git_checkout
+  alias __git-add_main=_git_add
+  alias __git-rebase_main=_git_rebase
+fi
+
 alias got='git '
 alias get='git '
 alias MacVim="open -a MacVim.app"
