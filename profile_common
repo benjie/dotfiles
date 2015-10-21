@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH="/usr/local/bin:/usr/local/share/npm/bin:$PATH:/Users/benjiegillam/.apportable/SDK/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$PATH:/Users/benjiegillam/.apportable/SDK/bin"
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export NEWRELIC_AGENT_ENABLED=false
 
