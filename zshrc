@@ -82,3 +82,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 ########## NOTES ##########
 #
 # james147 recommends http://git.grml.org/?p=grml-etc-core.git;a=blob_plain;f=etc/zsh/zshrc;hb=HEAD
+
+export NVM_DIR="/Users/benjiegillam/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
