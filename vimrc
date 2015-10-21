@@ -108,7 +108,7 @@ if has("gui_running") || 1 > 0
   "Bundle 'vim-scripts/Align'
   Bundle 'scrooloose/syntastic'
   let g:syntastic_coffee_checkers = ['coffeelint']
-  let g:syntastic_javascript_checkers = ['jsxhint']
+  let g:syntastic_javascript_checkers = ['eslint']
   " Disabled in favour of vim-commentary:
   "Bundle 'scrooloose/nerdcommenter'
 
@@ -140,6 +140,13 @@ if has("gui_running") || 1 > 0
   Bundle 'terryma/vim-multiple-cursors'
   let g:multi_cursor_exit_from_visual_mode = 0
   let g:multi_cursor_exit_from_insert_mode = 0
+  let g:multi_cursor_insert_maps={ "\<C-r>": 1 }
+
+
+
+
+
+
   " Called once right before you start selecting multiple cursors
   function! Multiple_cursors_before()
     if exists(':NeoCompleteLock')==2
