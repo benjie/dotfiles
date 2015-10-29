@@ -172,6 +172,9 @@ set autoread " Automatically reload changes if detected
 set ruler
 set encoding=utf8
 
+" :e blah<tab><tab>
+set wildmenu
+
 " Whitespace stuff
 set nowrap
 set tabstop=2
@@ -331,6 +334,9 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.exe$|\.so$|\.dll|nanoc[\/]content[\/].*\.yaml$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+
+" This disables ctrlp_custom_ignore; but `ag` does it for us
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " cd to the directory containing the file in the buffer
 nmap <silent> <leader>cd :lcd %:h<CR>
@@ -523,7 +529,7 @@ nmap <leader>sr :source ~/.vim/.session<cr>
 set guifont=Meslo\ LG\ S\ for\ Powerline
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
-let g:ctrlp_clear_cache_on_exit=0
+"let g:ctrlp_clear_cache_on_exit=1
 " Have CtrlP use Vim's cwd not it's smarty pants stuff.
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_cmd='CtrlPCurWD'
