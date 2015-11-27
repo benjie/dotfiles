@@ -42,7 +42,7 @@ Bundle 'tpope/vim-ragtag'
 let g:ragtag_global_maps = 1
 
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'mintplant/vim-literate-coffeescript'
+"Bundle 'mintplant/vim-literate-coffeescript'
 autocmd FileType litcoffee runtime ftplugin/coffee.vim
 
 Bundle 'mtscout6/vim-cjsx'
@@ -121,8 +121,10 @@ if has("gui_running") || 1 > 0
   " Commented in favour of YCM
   "Bundle 'Rip-Rip/clang_complete'
 
-  set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-  Bundle 'Lokaltog/powerline'
+  "set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+  "Bundle 'Lokaltog/powerline'
+  Bundle 'bling/vim-airline'
+  let g:airline_powerline_fonts = 1
 
   "Bundle 'mattn/webapi-vim'
 
@@ -170,7 +172,9 @@ set number
 syntax on
 set autoread " Automatically reload changes if detected
 set ruler
-set encoding=utf8
+if !has('nvim')
+  set encoding=utf8
+end
 
 " :e blah<tab><tab>
 set wildmenu
