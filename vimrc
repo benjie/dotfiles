@@ -46,6 +46,7 @@ Bundle 'kchmck/vim-coffee-script'
 autocmd FileType litcoffee runtime ftplugin/coffee.vim
 
 Bundle 'mtscout6/vim-cjsx'
+Bundle 'mxw/vim-jsx'
 "Bundle 'mattn/gist-vim'
 Bundle 'kien/ctrlp.vim'
 " Don't jump to other tabs
@@ -106,6 +107,7 @@ if has("gui_running") || 1 > 0
   Bundle 'gabesoft/vim-ags'
   Bundle 'nathanaelkane/vim-indent-guides'
   "Bundle 'vim-scripts/Align'
+  Bundle 'mtscout6/syntastic-local-eslint.vim'
   Bundle 'scrooloose/syntastic'
   let g:syntastic_coffee_checkers = ['coffeelint']
   let g:syntastic_javascript_checkers = ['eslint']
