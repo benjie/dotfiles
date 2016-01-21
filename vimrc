@@ -7,6 +7,10 @@ let mapleader = "\<Space>"
 
 let g:syntastic_ruby_exec = system("/bin/echo -n '~/.rbenv/versions/'`cat ~/.rbenv/version`'/bin/ruby'")
 let g:syntastic_always_populate_loc_list = 1
+" Open the loc list if there are errors, close if there arent.
+" If this becomes annoying, switch back to `2`
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 set rtp+=~/.vim/bundle/vundle/
