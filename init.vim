@@ -93,12 +93,8 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
-" TODO:
-" - JavaScript
-" - iTerm cursor
-" - Ag
-
 "Plug 'sjl/vitality.vim'
+Plug 'kassio/neoterm'
 
 Plug 'michaeljsmith/vim-indent-object'
 
@@ -201,6 +197,19 @@ call plug#end()
 
 " Don't unload buffers when switching (preserves undo history):
 set hidden
+
+" Make vim wait less time for <Esc> codes.
+set ttimeoutlen=-1
+" Seems to be required to fix neovim?
+set nottimeout
+
+" Whitespace stuff
+set nowrap
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set list listchars=tab:\ \ ,trail:·
 
 " Space is useless, make it useful (don't lose comma functionality!)
 let mapleader = "\<Space>"
