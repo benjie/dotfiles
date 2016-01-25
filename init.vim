@@ -188,6 +188,8 @@ Plug 'moll/vim-node'
 
 Plug 'Olical/vim-enmasse'
 
+Plug 'PeterRincker/vim-argumentative'
+
 
 " The Graveyard
 "Plug 'tpope/vim-bundler'
