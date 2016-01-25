@@ -116,6 +116,12 @@ Plug 'benekastah/neomake'
 "let g:neomake_javascript_eslint_exe = '/Users/benjiegillam/Documents/timecounts-frontend/node_modules/.bin/eslint'
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
+autocmd! BufWritePost *.js,*.jsx silent NeomakeFile
+autocmd! BufWinEnter *.js,*.jsx silent NeomakeFile
+let g:neomake_coffee_enabled_makers = ['coffeelint']
+let g:neomake_cjsx_enabled_makers = ['coffeelint']
+autocmd! BufWritePost *.coffee,*.cjsx silent NeomakeFile
+autocmd! BufWinEnter *.coffee,*.cjsx silent NeomakeFile
 let g:neomake_list_height = 5
 
 
