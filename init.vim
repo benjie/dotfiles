@@ -83,15 +83,18 @@ endfunction
 
 Plug 'tomtom/tcomment_vim'
 
+Plug 'kassio/neoterm'
 Plug 'janko-m/vim-test'
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+let test#strategy = 'neoterm'
+let g:test#ruby#rspec#executable = 'zeus rspec'
+
 
 "Plug 'sjl/vitality.vim'
-Plug 'kassio/neoterm'
 
 Plug 'michaeljsmith/vim-indent-object'
 
