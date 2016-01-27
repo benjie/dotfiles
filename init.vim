@@ -47,9 +47,6 @@ nnoremap <silent> <leader>p :<c-u>CtrlPBuffer<cr>
 " C-HJKL to change vim panes and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
-"Plug 'Shougo/deoplete.nvim'
-"let g:deoplete#enable_at_startup = 1
-
 Plug 'bling/vim-airline'
 let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
@@ -188,7 +185,19 @@ Plug 'moll/vim-node'
 
 Plug 'Olical/vim-enmasse'
 
+"Plug 'Shougo/deoplete.nvim'
+"let g:deoplete#enable_at_startup = 1
+
 Plug 'PeterRincker/vim-argumentative'
+
+Plug 'haya14busa/incsearch.vim'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+Plug 'haya14busa/incsearch-fuzzy.vim'
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
 
 
 " The Graveyard
