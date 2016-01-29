@@ -83,6 +83,7 @@ endfunction
 
 Plug 'tomtom/tcomment_vim'
 
+let g:neoterm_automap_keys=" tt"
 Plug 'kassio/neoterm'
 Plug 'janko-m/vim-test'
 nmap <silent> <leader>t :TestNearest<CR>
