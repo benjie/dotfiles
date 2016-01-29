@@ -1,3 +1,7 @@
+" Space is useless, make it useful (don't lose comma functionality!)
+" Need to do this before plugins load!
+let mapleader = "\<Space>"
+
 " termcap issue on OSX requires:
 "   $ infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 "   $ tic $TERM.ti
@@ -81,15 +85,17 @@ endfunction
 
 Plug 'tomtom/tcomment_vim'
 
-let g:neoterm_automap_keys=" tt"
-Plug 'kassio/neoterm'
+if has('nvim')
+  let g:neoterm_automap_keys=" tt"
+  Plug 'kassio/neoterm'
+  let test#strategy = 'neoterm'
+end
 Plug 'janko-m/vim-test'
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
-let test#strategy = 'neoterm'
 let g:test#ruby#rspec#executable = 'zeus rspec'
 
 
@@ -230,8 +236,6 @@ set softtabstop=2
 set expandtab
 set list listchars=tab:\ \ ,trail:·
 
-" Space is useless, make it useful (don't lose comma functionality!)
-let mapleader = "\<Space>"
 " Map the arrow keys to be based on display lines, not physical lines
 nmap <Down> gj
 nmap <Up> gk
