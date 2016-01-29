@@ -49,9 +49,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'bling/vim-airline'
 let g:airline_theme='powerlineish'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_section_z=''
+"let g:airline_section_z=''
 let g:airline_powerline_fonts = 1
 
 "Plug 'rking/ag.vim'
