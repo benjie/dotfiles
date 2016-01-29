@@ -127,6 +127,9 @@ let g:neomake_coffee_enabled_makers = ['coffeelint']
 let g:neomake_cjsx_enabled_makers = ['coffeelint']
 autocmd! BufWritePost *.coffee,*.cjsx silent NeomakeFile
 autocmd! BufWinEnter *.coffee,*.cjsx silent NeomakeFile
+let g:neomake_ruby_enabled_makers = ['rubocop']
+autocmd! BufWritePost *.rb silent NeomakeFile
+autocmd! BufWinEnter *.rb silent NeomakeFile
 let g:neomake_list_height = 5
 
 
