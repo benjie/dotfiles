@@ -308,6 +308,8 @@ autocmd filetype jade setl suffixesadd=.jade
 autocmd filetype stylus setl suffixesadd=.styl
 autocmd filetype javascript setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
 autocmd filetype coffee setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
+autocmd filetype javascript setl path+=src
+autocmd filetype coffee setl path+=src
 
 " No save backup by .swp
 set nowb
