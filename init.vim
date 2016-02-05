@@ -34,7 +34,7 @@ nmap <silent> ]g :tabnext<CR>
 nmap <silent> [G :tabrewind<CR>
 nmap <silent> ]G :tablast<CR>
 
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " Don't jump to other tabs
 let g:ctrlp_switch_buffer=''
 "let g:ctrlp_custom_ignore = {
