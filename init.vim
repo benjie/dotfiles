@@ -233,6 +233,10 @@ function! ExpandJS()
 endfunc
 autocmd! BufWinEnter *.js,*.jsx call ExpandJS()
 
+Plug 'embear/vim-localvimrc'
+" Persist capital-letter choices
+"let g:localvimrc_persistent=1
+
 " The Graveyard
 "Plug 'tpope/vim-bundler'
 "Plug 'tpope/vim-commentary'
