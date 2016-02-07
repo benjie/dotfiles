@@ -164,6 +164,7 @@ Plug 'mtscout6/vim-cjsx'
 " The "for" is required so the syntax registers on filetype, otherwise
 " yajs has trouble overriding the default js syntax due to runtime order
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 
 " ----------------------------------------
 " Syntax Addons
@@ -211,6 +212,26 @@ map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 map zg/ <Plug>(incsearch-fuzzy-stay)
 
+Plug 'junegunn/vim-easy-align'
+
+Plug 'airblade/vim-gitgutter'
+" [c ]c to move between hunks
+" <Leader>hs to stage hunk
+
+Plug 'Raimondi/delimitMate'
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
+
+Plug 'Wolfy87/vim-syntax-expand'
+function! ExpandJS()
+  inoremap <silent> @ <C-r>=syntax_expand#expand("@", "this.")<CR>
+  inoremap <silent> @@ <C-r>=syntax_expand#expand("@@", "this.props.")<CR>
+  inoremap <silent> @@s <C-r>=syntax_expand#expand("@@s", "this.state.")<CR>
+  inoremap <silent> @@S <C-r>=syntax_expand#expand("@@S", "this.setState({")<CR>
+  inoremap <silent> @@. <C-r>=syntax_expand#expand("@@.", "this.styles.")<CR>
+  inoremap <silent> # <C-r>=syntax_expand#expand("#", ".prototype.")<CR>
+endfunc
+autocmd! BufWinEnter *.js,*.jsx call ExpandJS()
 
 " The Graveyard
 "Plug 'tpope/vim-bundler'
