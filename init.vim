@@ -295,6 +295,9 @@ nnoremap <leader>ml mLya]Go: <Esc>0P`L
 " Copies the link spec to bottom and populates with system clipboard
 nnoremap <leader>mL mLya]Go: <Esc>"*p0P`L
 
+" Search for the word under the cursor across the project
+nnoremap <leader>* g*:Ag <C-r>/<cr>
+
 " Open current line on github
 " Credit: http://felixge.de/2013/08/08/vim-trick-open-current-line-on-github.html
 nnoremap <leader>o :!echo `git ghurl`/blob/`git rev-parse --abbrev-ref HEAD`/`git ls-tree --full-name --name-only HEAD %`\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
