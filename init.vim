@@ -51,7 +51,8 @@ nnoremap <silent> <leader>p :<c-u>CtrlPBuffer<cr>
 " C-HJKL to change vim panes and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='powerlineish'
 "let g:airline_section_z=''
 let g:airline_powerline_fonts = 1
