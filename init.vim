@@ -347,3 +347,7 @@ autocmd filetype coffee setl path+=src
 set nowb
 set noswapfile
 set noar
+
+" Persistent undo
+set undodir=expand('$HOME/.vimundo')
+set undofile
