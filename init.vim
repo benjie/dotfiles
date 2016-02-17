@@ -238,6 +238,9 @@ Plug 'embear/vim-localvimrc'
 " Persist capital-letter choices
 let g:localvimrc_persistent=1
 
+Plug 'exu/pgsql.vim'
+let g:sql_type_default = 'pgsql'
+
 " The Graveyard
 "Plug 'tpope/vim-bundler'
 "Plug 'tpope/vim-commentary'
