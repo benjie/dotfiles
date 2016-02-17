@@ -349,5 +349,5 @@ set noswapfile
 set noar
 
 " Persistent undo
-set undodir=expand('$HOME/.vimundo')
+let &undodir=expand('$HOME/.vimundo')
 set undofile
