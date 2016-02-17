@@ -3,8 +3,8 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$PATH:/User
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export NEWRELIC_AGENT_ENABLED=false
 
-alias vim="mvim -v"
-export EDITOR="vim"
+alias vim="nvim"
+export EDITOR="nvim"
 alias TextWrangler="open -a TextWrangler"
 alias gs='git status '
 alias ga='git add '
@@ -35,7 +35,6 @@ fi
 alias got='git '
 alias get='git '
 alias MacVim="open -a MacVim.app"
-alias vim='mvim -v'
 
 alias z='zeus'
 alias zr='zeus rspec'
