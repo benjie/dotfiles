@@ -358,3 +358,6 @@ function! AddComponent(name)
 endfunction
 
 command! -nargs=1 AddComponent call AddComponent(<f-args>)
+
+" Don't syntax highlight long lines
+set synmaxcol=120
