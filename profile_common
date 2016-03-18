@@ -100,7 +100,9 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 # hub / GitHub
-eval "$(hub alias -s)"
+if [ -x hub ]; then
+  eval "$(hub alias -s)"
+fi
 
 # npm autocomplete
 . <(npm completion)

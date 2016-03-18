@@ -39,7 +39,7 @@
 [core]
   excludesfile = /Users/benjiegillam/.gitignore
   whitespace = tab-in-indent
-  editor = mvim -v
+  editor = nvim
 
 [instaweb]
   httpd=webrick

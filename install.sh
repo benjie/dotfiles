@@ -1,7 +1,12 @@
 #!/bin/bash
 mkdir -p ~/.vim/bundle
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+mkdir -p ~/.config/nvim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -s "`pwd`"/vimrc ../.vimrc
+ln -s "`pwd`"/vimrc ../.config/nvim/init.vim
 ln -s "`pwd`"/zshrc ../.zshrc
 ln -s "`pwd`"/profile_common ../.profile_common
 ln -s "`pwd`"/tmux.conf ../.tmux.conf
