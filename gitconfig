@@ -34,7 +34,9 @@
   lg = log --graph --pretty=format:'%Cgreen%h%Creset -%Creset %s%C(yellow)%d %Cblue(%aN, %cr)%Creset' --abbrev-commit --date=relative
   heir = log --all --graph --decorate --oneline --simplify-by-decoration
   ghurl =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g" | sed "s/\\.git$//"'
-  shipit = push origin origin/master:production
+  shipit = push origin HEAD:production
+  changed = "!git fetch -p >&2 && git log --format=\"%cr%x09%s%x09%b\" --merges origin/production...master | grep -v \"Merge branch 'production'\" | sed -Ee s'/Merge pull request (#[0-9]+) from [^ '$'\\t'']+/\\1/' | column -s $'\\t' -t"
+  releasenotes = "!git fetch -p >&2 && git log --format=\"%s%x09%b\" --merges origin/production...master | grep -v \"Merge branch 'production'\" | sed -Ee s'/Merge pull request (#[0-9]+) from [^ '$'\\t'']+/\\1/' | column -s $'\\t' -t"
 
 [core]
   excludesfile = /Users/benjiegillam/.gitignore
