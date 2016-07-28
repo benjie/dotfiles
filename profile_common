@@ -24,6 +24,8 @@ alias gx='gitx --all'
 alias ghurl='git ghurl'
 alias gpu='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpupr='git push -u origin $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1'
+alias gpuppr='git push -u origin $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/production...$(git rev-parse --abbrev-ref HEAD)?expand=1'
+alias feature_flag_changes='git diff "master@{8 days ago}..master" config/default.yml'
 
 if [ "$SHELL" == "$(which zsh)" ]; then
   compdef _git go="git-checkout"
