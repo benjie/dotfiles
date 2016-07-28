@@ -6,6 +6,11 @@ promptinit
 # Colours (obviously)
 colors
 
+# C-x C-e for editing the command line
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
 # Auto-complete command line switches for aliases
 setopt completealiases
 
