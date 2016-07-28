@@ -213,9 +213,12 @@ Plug 'airblade/vim-gitgutter'
 " [c ]c to move between hunks
 " <Leader>hs to stage hunk
 
-Plug 'Raimondi/delimitMate'
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
+" Tried this out for a few months, but it annoyed me too much (too many
+" parenthesis being swallowed when I type them, having to delete automatically
+" inserted parenthesis when I want to wrap something in brackets, etc)
+"Plug 'Raimondi/delimitMate'
+"let delimitMate_expand_cr = 1
+"let delimitMate_expand_space = 1
 
 Plug 'Wolfy87/vim-syntax-expand'
 function! ExpandJS()
