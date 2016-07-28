@@ -238,6 +238,26 @@ let g:localvimrc_persistent=1
 Plug 'exu/pgsql.vim'
 let g:sql_type_default = 'pgsql'
 
+Plug 'keith/tmux.vim'
+
+" Colorscheme (dark, colourful)
+Plug 'nanotech/jellybeans.vim'
+
+" Like vim's `f` motion, but for two characters
+nmap \ <Plug>Sneak_s
+nmap <bar> <Plug>Sneak_S
+xmap \ <Plug>Sneak_s
+xmap <bar> <Plug>Sneak_S
+Plug 'justinmk/vim-sneak'
+
+Plug 'floobits/floobits-neovim'
+
+" Use gS and gJ to split and join lines of text (e.g. HTML tags/attributes, postfix-if's
+" in ruby, etc)
+Plug 'AndrewRadev/splitjoin.vim'
+
+Plug 'ryanoasis/vim-devicons'
+
 " The Graveyard
 "Plug 'tpope/vim-bundler'
 "Plug 'tpope/vim-commentary'
@@ -363,3 +383,7 @@ set synmaxcol=120
 if exists(':tnoremap')
   tnoremap <Esc> <C-\><C-n>
 endif
+
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
