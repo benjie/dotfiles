@@ -220,16 +220,16 @@ Plug 'airblade/vim-gitgutter'
 "let delimitMate_expand_cr = 1
 "let delimitMate_expand_space = 1
 
-Plug 'Wolfy87/vim-syntax-expand'
-function! ExpandJS()
-  inoremap <silent> @ <C-r>=syntax_expand#expand("@", "this.")<CR>
-  inoremap <silent> @@ <C-r>=syntax_expand#expand("@@", "this.props.")<CR>
-  inoremap <silent> @@s <C-r>=syntax_expand#expand("@@s", "this.state.")<CR>
-  inoremap <silent> @@S <C-r>=syntax_expand#expand("@@S", "this.setState({")<CR>
-  inoremap <silent> @@. <C-r>=syntax_expand#expand("@@.", "this.styles.")<CR>
-  inoremap <silent> # <C-r>=syntax_expand#expand("#", ".prototype.")<CR>
-endfunc
-autocmd! BufWinEnter *.js,*.jsx call ExpandJS()
+"Plug 'Wolfy87/vim-syntax-expand'
+"function! ExpandJS()
+"  inoremap <buffer><silent> @ <C-r>=syntax_expand#expand("@", "this.")<CR>
+"  inoremap <buffer><silent> @@ <C-r>=syntax_expand#expand("@@", "this.props.")<CR>
+"  inoremap <buffer><silent> @@s <C-r>=syntax_expand#expand("@@s", "this.state.")<CR>
+"  inoremap <buffer><silent> @@S <C-r>=syntax_expand#expand("@@S", "this.setState({")<CR>
+"  inoremap <buffer><silent> @@. <C-r>=syntax_expand#expand("@@.", "this.styles.")<CR>
+"  inoremap <buffer><silent> # <C-r>=syntax_expand#expand("#", ".prototype.")<CR>
+"endfunc
+"autocmd! BufWinEnter *.js,*.jsx call ExpandJS()
 
 Plug 'embear/vim-localvimrc'
 " Persist capital-letter choices
