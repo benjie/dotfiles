@@ -361,3 +361,8 @@ command! -nargs=1 AddComponent call AddComponent(<f-args>)
 
 " Don't syntax highlight long lines
 set synmaxcol=120
+
+" Exit terminal mode with Escape press
+if exists(':tnoremap')
+  tnoremap <Esc> <C-\><C-n>
+endif
