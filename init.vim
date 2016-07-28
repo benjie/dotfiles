@@ -250,7 +250,7 @@ xmap \ <Plug>Sneak_s
 xmap <bar> <Plug>Sneak_S
 Plug 'justinmk/vim-sneak'
 
-Plug 'floobits/floobits-neovim'
+"Plug 'floobits/floobits-neovim'
 
 " Use gS and gJ to split and join lines of text (e.g. HTML tags/attributes, postfix-if's
 " in ruby, etc)
