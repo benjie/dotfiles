@@ -37,15 +37,21 @@ nmap <silent> ]G :tablast<CR>
 Plug 'ctrlpvim/ctrlp.vim'
 " Don't jump to other tabs
 let g:ctrlp_switch_buffer=''
-"let g:ctrlp_custom_ignore = {
-"  \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|_LOCAL$|nanoc[\/]output$|Timecounts-Frontend[\/]timecounts-api$|tmp$',
-"  \ 'file': '\v\.exe$|\.so$|\.dll|nanoc[\/]content[\/].*\.yaml$',
-"  \ 'link': 'some_bad_symbolic_links',
-"  \ }
-" This disables ctrlp_custom_ignore; but `ag` does it for us
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 1
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_cmd='CtrlPCurWD'
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|_LOCAL$|nanoc[\/]output$|Timecounts-Frontend[\/]timecounts-api$|tmp$',
+    \ 'file': '\v\.exe$|\.so$|\.dll|nanoc[\/]content[\/].*\.yaml$',
+    \ 'link': 'some_bad_symbolic_links',
+    \ }
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+endif
+" Above from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 nnoremap <silent> <leader>p :<c-u>CtrlPBuffer<cr>
 
 " C-HJKL to change vim panes and tmux panes
@@ -104,18 +110,6 @@ let g:test#ruby#rspec#executable = 'zeus rspec'
 
 Plug 'michaeljsmith/vim-indent-object'
 
-let g:ctrlp_use_caching = 0
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
-endif
-" Above from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 
 Plug 'benjie/neomake-local-eslint.vim'
 Plug 'benekastah/neomake'
