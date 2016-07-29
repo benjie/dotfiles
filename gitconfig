@@ -37,6 +37,7 @@
   shipit = push origin HEAD:production
   changed = "!git fetch -p >&2 && git log --format=\"%cr%x09%s%x09%b\" --merges origin/production...master | grep -v \"Merge branch 'production'\" | sed -Ee s'/Merge pull request (#[0-9]+) from [^ '$'\\t'']+/\\1/' | column -s $'\\t' -t"
   releasenotes = "!git fetch -p >&2 && git log --format=\"%s%x09%b\" --merges origin/production...master | grep -v \"Merge branch 'production'\" | sed -Ee s'/Merge pull request (#[0-9]+) from [^ '$'\\t'']+/\\1/' | column -s $'\\t' -t"
+  tidyup = "! git fetch -p; git log --decorate --oneline --simplify-by-decoration | sed -Ee 's/^[a-z0-9]{7} \\(([^\\)]+)\\).*$/\\1/' -e 'tx' -e 'd' -e ':x' | sed -e $'s/, /\\\\\\n/g' | grep -Ev '[ /]|HEAD|master|production' | while read branch; do git branch -d $branch; done"
 
 [core]
   excludesfile = /Users/benjiegillam/.gitignore
