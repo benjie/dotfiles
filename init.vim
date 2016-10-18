@@ -158,8 +158,8 @@ Plug 'mtscout6/vim-cjsx'
 
 " The "for" is required so the syntax registers on filetype, otherwise
 " yajs has trouble overriding the default js syntax due to runtime order
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " ----------------------------------------
 " Syntax Addons
@@ -170,7 +170,7 @@ Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 "'jiangmiao/simple-javascript-indenter'   " Alternative js indent
 "'jason0x43/vim-js-indent'                " Use HTML's indenter with
 				    " TypeScript support
-Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
+Plug 'gavocanov/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
 
 " es.next support
 "Plug 'othree/es.next.syntax.vim'
@@ -321,7 +321,7 @@ nnoremap <leader>* g*:Ag <C-r>/<cr>
 " Open current line on github
 " Credit: http://felixge.de/2013/08/08/vim-trick-open-current-line-on-github.html
 nnoremap <leader>o :!echo `git ghurl`/blob/`git rev-parse --abbrev-ref HEAD`/`git ls-tree --full-name --name-only HEAD %`\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
-vnoremap <leader>o <Esc>:!echo `git ghurl`/blob/`git rev-parse --abbrev-ref HEAD`/`git ls-tree --full-name --name-only HEAD %`\#L<C-R>=line("'<")<CR>-<C-R>=line("'>")<CR> \| xargs open<CR><CR>gv
+vnoremap <leader>o <Esc>:!echo `git ghurl`/blob/`git rev-parse --abbrev-ref HEAD`/`git ls-tree --full-name --name-only HEAD %`\#L<C-R>=line("'<")<CR>-L<C-R>=line("'>")<CR> \| xargs open<CR><CR>gv
 
 " Deletes current buffer
 nnoremap <leader>bd :b#<bar>bd#<CR>
@@ -377,7 +377,7 @@ endfunction
 command! -nargs=1 AddComponent call AddComponent(<f-args>)
 
 " Don't syntax highlight long lines
-set synmaxcol=120
+set synmaxcol=200
 
 " Exit terminal mode with Escape press
 if exists(':tnoremap')
