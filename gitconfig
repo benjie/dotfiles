@@ -70,3 +70,7 @@
   log = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
 [merge]
 	tool = vimdiff
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
