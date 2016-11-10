@@ -27,6 +27,7 @@ alias gpuf='git push -u origin $(git rev-parse --abbrev-ref HEAD) --force-with-l
 alias gpupr='git push -u origin $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1'
 alias gpuppr='git releasenotes | pbcopy; git push -u origin $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/production...$(git rev-parse --abbrev-ref HEAD)?expand=1'
 alias feature_flag_changes='git diff "master@{8 days ago}..master" config/default.yml'
+alias lsofgroup="lsof  | awk '{print \$1}' | sort | uniq -c | sort -n"
 
 if [ "$SHELL" == "$(which zsh)" ]; then
   compdef _git go="git-checkout"
