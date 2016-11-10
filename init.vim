@@ -45,11 +45,11 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|_LOCAL$|nanoc[\/]output$|Timecounts-Frontend[\/]timecounts-api$|tmp$',
+    \ 'dir':  '\v\.git$|\.hg$|\.svn$|doc$|node_modules$|migrate$|_LOCAL$|nanoc[\/]output$|Timecounts-Frontend[\/]timecounts-api$|tmp$|assets$',
     \ 'file': '\v\.exe$|\.so$|\.dll|nanoc[\/]content[\/].*\.yaml$',
     \ 'link': 'some_bad_symbolic_links',
     \ }
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 " Above from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 nnoremap <silent> <leader>p :<c-u>CtrlPBuffer<cr>
@@ -180,6 +180,9 @@ Plug 'othree/javascript-libraries-syntax.vim'
 
 " After syntax, ftplugin, indent for JSX
 Plug 'mxw/vim-jsx'
+
+" TypeScript (for postgraphql)
+Plug 'leafgarland/typescript-vim'
 
 " ----------------------------------------
 " Features
