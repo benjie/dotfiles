@@ -114,8 +114,8 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'benjie/neomake-local-eslint.vim'
 Plug 'benekastah/neomake'
 "let g:neomake_javascript_eslint_exe = '/Users/benjiegillam/Documents/timecounts-frontend/node_modules/.bin/eslint'
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
+let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 autocmd! BufWritePost *.js,*.jsx silent NeomakeFile
 autocmd! BufWinEnter *.js,*.jsx silent NeomakeFile
 let g:neomake_coffee_enabled_makers = ['coffeelint']
@@ -158,8 +158,10 @@ Plug 'mtscout6/vim-cjsx'
 
 " The "for" is required so the syntax registers on filetype, otherwise
 " yajs has trouble overriding the default js syntax due to runtime order
-Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+let g:javascript_plugin_flow = 1
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " ----------------------------------------
 " Syntax Addons
