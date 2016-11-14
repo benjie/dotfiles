@@ -375,8 +375,10 @@ let &undodir=expand('$HOME/.vimundo')
 set undofile
 
 function! AddComponent(name)
-  exe "!./add_component ".shellescape(a:name)
-  exe "split src/components/".a:name.".jsx"
+  exe "!./scripts/add_component.js ".shellescape(a:name)
+  exe "edit src/components/".a:name.".js"
+  exe "split src/components/".a:name.".scss"
+  exe "vsplit src/components/__stories__/".a:name.".stories.js"
 endfunction
 
 command! -nargs=1 AddComponent call AddComponent(<f-args>)
