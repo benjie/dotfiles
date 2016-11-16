@@ -29,6 +29,8 @@ alias gpuppr='git releasenotes | pbcopy; git push -u origin $(git rev-parse --ab
 alias feature_flag_changes='git diff "master@{8 days ago}..master" config/default.yml'
 alias lsofgroup="lsof  | awk '{print \$1}' | sort | uniq -c | sort -n"
 
+alias nr='npm_config_loglevel=silent npm run'
+
 if [ "$SHELL" == "$(which zsh)" ]; then
   compdef _git go="git-checkout"
   compdef _git ga="git-add"
