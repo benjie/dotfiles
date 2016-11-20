@@ -374,14 +374,15 @@ set noar
 let &undodir=expand('$HOME/.vimundo')
 set undofile
 
-function! AddComponent(name)
-  exe "!./scripts/add_component.js ".shellescape(a:name)
-  exe "edit src/components/".a:name.".js"
-  exe "split src/components/".a:name.".scss"
-  exe "vsplit src/components/__stories__/".a:name.".stories.js"
+function! AddComponent(name, ...)
+  let subpath = (a:0 >= 2) ? a:2 : ""
+  exe "!./scripts/add_component.js ".shellescape(a:name)." ".shellescape(subpath)
+  exe "edit src/components/".subpath."/".a:name.".js"
+  exe "split src/components/".subpath."/".a:name.".scss"
+  exe "vsplit src/components/".subpath."/__stories__/".a:name.".stories.js"
 endfunction
 
-command! -nargs=1 AddComponent call AddComponent(<f-args>)
+command! -nargs=+ AddComponent call AddComponent(<f-args>)
 
 " Don't syntax highlight long lines
 set synmaxcol=200
