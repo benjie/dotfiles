@@ -113,4 +113,4 @@ if [ -x hub ]; then
 fi
 
 # npm autocomplete
-. <(npm completion)
+. <(npm --silent completion 2>/dev/null)
