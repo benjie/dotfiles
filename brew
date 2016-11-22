@@ -1,0 +1,6 @@
+brew tap neovim/neovim
+brew tap caskroom/cask
+brew update
+brew install git neovim postgresql python python3 tmux reattach-to-user-namespace
+brew cask install slack skype spectacle 1password alfred iterm2
+pip install neovim powerline-status
