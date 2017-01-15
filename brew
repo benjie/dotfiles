@@ -1,7 +1,7 @@
 brew tap neovim/neovim
 brew tap caskroom/cask
 brew update
-brew install git neovim postgresql python python3 tmux reattach-to-user-namespace parallel homebrew/versions/v8-315 redis graphicsmagick tig
+brew install git neovim postgresql python python3 tmux reattach-to-user-namespace parallel homebrew/versions/v8-315 redis graphicsmagick tig the_silver_searcher
 brew cask install slack skype spectacle 1password alfred iterm2 google-chrome dropbox dash ngrok
 brew services start redis
 brew services start postgresql
