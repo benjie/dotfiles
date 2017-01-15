@@ -5,5 +5,5 @@ brew install git neovim postgresql python python3 tmux reattach-to-user-namespac
 brew cask install slack skype spectacle 1password alfred iterm2 google-chrome dropbox dash
 brew services start redis
 brew services start postgresql
-pip install neovim powerline-status pgxnclient
+pip install neovim powerline-status pgxnclient psutil
 LIBRARY_PATH="/usr/local/opt/v8-315/lib" CPATH="/usr/local/opt/v8-315/include" pgxnclient install plv8=1.4.3
