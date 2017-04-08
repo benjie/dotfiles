@@ -113,7 +113,6 @@ Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'benjie/neomake-local-eslint.vim'
 Plug 'benekastah/neomake'
-"let g:neomake_javascript_eslint_exe = '/Users/benjiegillam/Documents/timecounts-frontend/node_modules/.bin/eslint'
 let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
 let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 autocmd! BufWritePost *.js,*.jsx silent NeomakeFile
