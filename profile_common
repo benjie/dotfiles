@@ -47,8 +47,8 @@ alias MacVim="open -a MacVim.app"
 alias z='zeus'
 alias zr='zeus rspec'
 alias zpr='zeus parallel_rspec'
-alias migrate='zeus rake db:migrate'
-alias rollback='zeus rake db:rollback'
+alias migrate='nr db:migrate:dev'
+alias rollback='nr db:rollback:dev'
 
 alias rshl='pkill -f "devserver.coffee hotloader"'
 alias ghpr='git pull-request'

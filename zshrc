@@ -68,7 +68,7 @@ function collapse_pwd {
 }
 if [ "$(hostname)" =~ "^i[mM]ac" ]; then
   PS1='$(last_command_status) %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
-elif [ "$(hostname)" =~ "^[bB]enjie" ]; then
+elif [ "$(hostname)" =~ "^[bB][eE][nN][jJ][iI][eE]" ]; then
   PS1='$(last_command_status) %{$fg[cyan]%}$(collapse_pwd) %{$fg_bold[blue]%}$(vcs_info_wrapper)%{$fg_bold[blue]%} % %{$reset_color%}'
 else
   echo "Hostname not recognized, falling back to walters"
