@@ -171,16 +171,18 @@ Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 "'jiangmiao/simple-javascript-indenter'   " Alternative js indent
 "'jason0x43/vim-js-indent'                " Use HTML's indenter with
 				    " TypeScript support
-Plug 'gavocanov/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'gavocanov/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'jason0x43/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
+
+" After syntax, ftplugin, indent for JSX
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+let g:jsx_ext_required = 0
 
 " es.next support
 "Plug 'othree/es.next.syntax.vim'
 
 " extends syntax for with jQuery,backbone,etc.
 Plug 'othree/javascript-libraries-syntax.vim'
-
-" After syntax, ftplugin, indent for JSX
-Plug 'mxw/vim-jsx'
 
 " TypeScript (for postgraphql)
 Plug 'leafgarland/typescript-vim'
