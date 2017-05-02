@@ -90,7 +90,8 @@ function! Multiple_cursors_after()
   endif
 endfunction
 
-Plug 'tomtom/tcomment_vim'
+" Disabled because I don't use it (it clashes with `vic` from gitgutter which I prefer)
+"Plug 'tomtom/tcomment_vim'
 
 if has('nvim')
   let g:neoterm_automap_keys=" tt"
