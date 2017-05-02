@@ -26,6 +26,13 @@ setopt histignorealldups
 # line is a space
 setopt histignorespace
 
+# History tweaks
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+setopt extended_history
+setopt inc_append_history
+
 # try to avoid the 'zsh: no matches found...'
 setopt nonomatch
 

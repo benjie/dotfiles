@@ -1,6 +1,7 @@
 #!/bin/bash
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$PATH:/Users/benjiegillam/.apportable/SDK/bin"
 export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/benjiegillam/go/bin
+export PATH=$PATH:$HOME/Library/Python/2.7/bin
 export GOPATH="/Users/benjiegillam/go"
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export NEWRELIC_AGENT_ENABLED=false
@@ -29,12 +30,21 @@ alias gpuppr='git releasenotes | pbcopy; git push -u origin $(git rev-parse --ab
 alias feature_flag_changes='git diff "master@{8 days ago}..master" config/default.yml'
 alias lsofgroup="lsof  | awk '{print \$1}' | sort | uniq -c | sort -n"
 
+function gou {
+  git fetch
+  git checkout "$1"
+  git rebase origin/"$1"
+}
+
 alias nr='npm_config_loglevel=silent npm run'
 
 if [ "$SHELL" == "$(which zsh)" ]; then
   compdef _git go="git-checkout"
+  compdef _git gou="git-checkout"
   compdef _git ga="git-add"
   compdef _git gr="git-rebase"
+  compdef _git gd="git-diff"
+  compdef _git gds="git-diff"
   alias __git-checkout_main=_git_checkout
   alias __git-add_main=_git_add
   alias __git-rebase_main=_git_rebase

@@ -160,6 +160,7 @@ Plug 'mtscout6/vim-cjsx'
 " yajs has trouble overriding the default js syntax due to runtime order
 "Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 let g:javascript_plugin_flow = 1
+let g:jsx_ext_required = 0
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 "Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
@@ -187,6 +188,11 @@ Plug 'othree/javascript-libraries-syntax.vim'
 
 " TypeScript (for postgraphql)
 Plug 'leafgarland/typescript-vim'
+
+" Flow type
+"Plug 'flowtype/vim-flow'
+"let g:flow#autoclose = 1
+"let g:flow#omnifunc = 1
 
 " ----------------------------------------
 " Features
@@ -264,6 +270,10 @@ Plug 'justinmk/vim-sneak'
 Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'ryanoasis/vim-devicons'
+
+" Time tracking
+
+Plug 'wakatime/vim-wakatime'
 
 " The Graveyard
 "Plug 'tpope/vim-bundler'
@@ -367,6 +377,9 @@ autocmd filetype coffee setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
 autocmd filetype javascript setl path+=src
 autocmd filetype coffee setl path+=src
 
+" Use `prettier` for JavaScript formatting
+autocmd FileType javascript set formatprg=prettier\ --stdin
+
 " No save backup by .swp
 set nowb
 set noswapfile
@@ -387,7 +400,7 @@ endfunction
 command! -nargs=+ AddComponent call AddComponent(<f-args>)
 
 " Don't syntax highlight long lines
-set synmaxcol=200
+set synmaxcol=500
 
 " Exit terminal mode with Escape press
 if exists(':tnoremap')
