@@ -53,3 +53,5 @@ _LOCAL
 node_modules
 tags
 tmux.sh
+.tmux.sh
+sess.vim
