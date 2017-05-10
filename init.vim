@@ -142,7 +142,7 @@ Plug 'kchmck/vim-coffee-script'
 "Plug 'mintplant/vim-literate-coffeescript'
 autocmd FileType litcoffee runtime ftplugin/coffee.vim
 
-Plug 'mtscout6/vim-cjsx'
+"Plug 'mtscout6/vim-cjsx'
 
 " ----------------------------------------
 " Syntax
