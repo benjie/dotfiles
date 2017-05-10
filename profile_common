@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$PATH:/Users/benjiegillam/.apportable/SDK/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$PATH:/Users/benjiegillam/.apportable/SDK/bin:/Users/benjiegillam/Library/Python/2.7/bin"
 export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/benjiegillam/go/bin
 export PATH=$PATH:$HOME/Library/Python/2.7/bin
 export GOPATH="/Users/benjiegillam/go"
