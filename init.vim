@@ -130,6 +130,13 @@ autocmd! BufWritePost *.rb silent NeomakeFile
 autocmd! BufWinEnter *.rb silent NeomakeFile
 let g:neomake_list_height = 5
 
+Plug 'sbdchd/neoformat'
+let g:neoformat_enabled_javascript = ['prettier']
+augroup neoformat_group
+  autocmd!
+  autocmd BufWritePre *.js,*.jsx silent Neoformat
+augroup END
+
 
 " ========================================================================
 " Language: JavaScript / CoffeeScript / JSON
