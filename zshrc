@@ -60,6 +60,11 @@ vcs_info_wrapper() {
   fi
 }
 
+# completion menu
+zstyle ':completion:*' menu select
+# colours for this
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
+
 last_command_status() {
   if [ "$?" == "0" ]; then
     echo "%{$fg_bold[green]%}➜"
