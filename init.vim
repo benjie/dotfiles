@@ -2,6 +2,10 @@
 " Need to do this before plugins load!
 let mapleader = "\<Space>"
 
+" Neovim turned this off in 0.2 (apparently it was buggy?) it's not buggy for
+" me: re-enable!
+set mouse=a
+
 " termcap issue on OSX requires:
 "   $ infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 "   $ tic $TERM.ti
