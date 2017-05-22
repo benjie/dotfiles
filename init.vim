@@ -118,19 +118,24 @@ Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'benjie/neomake-local-eslint.vim'
 Plug 'benekastah/neomake'
-let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
-let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
-autocmd! BufWritePost *.js,*.jsx silent NeomakeFile
-autocmd! BufWinEnter *.js,*.jsx silent NeomakeFile
-let g:neomake_coffee_enabled_makers = ['coffeelint']
-let g:neomake_cjsx_enabled_makers = ['coffeelint']
-autocmd! BufWritePost *.coffee,*.cjsx silent NeomakeFile
-autocmd! BufWinEnter *.coffee,*.cjsx silent NeomakeFile
-let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-D']
-let g:neomake_ruby_enabled_makers = ['rubocop']
-autocmd! BufWritePost *.rb silent NeomakeFile
-autocmd! BufWinEnter *.rb silent NeomakeFile
-let g:neomake_list_height = 5
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+
+augroup neomake_group
+  autocmd!
+  autocmd BufWritePost *.js,*.jsx silent NeomakeFile
+  autocmd BufWinEnter *.js,*.jsx silent NeomakeFile
+  let g:neomake_coffee_enabled_makers = ['coffeelint']
+  let g:neomake_cjsx_enabled_makers = ['coffeelint']
+  autocmd BufWritePost *.coffee,*.cjsx silent NeomakeFile
+  autocmd BufWinEnter *.coffee,*.cjsx silent NeomakeFile
+  let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-D']
+  let g:neomake_ruby_enabled_makers = ['rubocop']
+  autocmd BufWritePost *.rb silent NeomakeFile
+  autocmd BufWinEnter *.rb silent NeomakeFile
+  let g:neomake_list_height = 5
+augroup END
 
 Plug 'sbdchd/neoformat'
 let g:neoformat_enabled_javascript = ['prettier']
@@ -138,7 +143,6 @@ augroup neoformat_group
   autocmd!
   autocmd BufWritePre *.js,*.jsx silent Neoformat
 augroup END
-
 
 " ========================================================================
 " Language: JavaScript / CoffeeScript / JSON
