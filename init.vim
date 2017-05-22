@@ -67,11 +67,13 @@ let g:airline_powerline_fonts = 1
 
 "Plug 'rking/ag.vim'
 Plug 'mhinz/vim-grepper'
+let g:grepper = {}
+let g:grepper.ag = { 'grepprf': 'ag --vimgrep --' }
 " Takes a motion and greps for it
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 " Set up :Ag command
-command! -nargs=* -complete=file Ag Grepper -tool ag  -query <args>
+command! -nargs=* -complete=file Ag GrepperAg <args>
 
 Plug 'nathanaelkane/vim-indent-guides'
 
