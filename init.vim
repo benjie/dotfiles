@@ -22,7 +22,8 @@ Plug 'tpope/vim-ragtag'
 " ragtag in all your files
 let g:ragtag_global_maps = 1
 
-Plug 'tpope/vim-rails'
+" Not developing rails any more
+" Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
