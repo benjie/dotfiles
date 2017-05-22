@@ -138,7 +138,7 @@ augroup neomake_group
 augroup END
 
 Plug 'sbdchd/neoformat'
-let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_enabled_javascript = ['eslint_d']
 augroup neoformat_group
   autocmd!
   autocmd BufWritePre *.js,*.jsx silent Neoformat
