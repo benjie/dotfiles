@@ -379,10 +379,7 @@ vmap <silent> <leader>s :sort /\v[^=:]+/ r<CR>
 """""""""" /SORTING
 
 " Remember last location in file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal g'\"" | endif
-endif
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
 " So you can jump to files without extensions
 autocmd filetype jade setl suffixesadd=.jade
