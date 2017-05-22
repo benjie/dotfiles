@@ -393,9 +393,6 @@ autocmd filetype coffee setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
 autocmd filetype javascript setl path+=src
 autocmd filetype coffee setl path+=src
 
-" Use `prettier` for JavaScript formatting
-autocmd FileType javascript set formatprg=prettier\ --stdin
-
 " No save backup by .swp
 set nowb
 set noswapfile
