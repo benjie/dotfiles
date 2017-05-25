@@ -115,23 +115,26 @@ let g:test#ruby#rspec#executable = 'zeus rspec'
 
 Plug 'michaeljsmith/vim-indent-object'
 
+Plug 'jparise/vim-graphql'
+
 
 Plug 'benjie/neomake-local-eslint.vim'
 Plug 'benekastah/neomake'
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_graphql_enabled_makers = ['eslint']
+let g:neomake_coffee_enabled_makers = ['coffeelint']
+let g:neomake_cjsx_enabled_makers = ['coffeelint']
+let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-D']
+let g:neomake_ruby_enabled_makers = ['rubocop']
 
 augroup neomake_group
   autocmd!
-  autocmd BufWritePost *.js,*.jsx silent NeomakeFile
-  autocmd BufWinEnter *.js,*.jsx silent NeomakeFile
-  let g:neomake_coffee_enabled_makers = ['coffeelint']
-  let g:neomake_cjsx_enabled_makers = ['coffeelint']
+  autocmd BufWritePost *.js,*.jsx,*.graphql silent NeomakeFile
+  autocmd BufWinEnter *.js,*.jsx,*.graphql silent NeomakeFile
   autocmd BufWritePost *.coffee,*.cjsx silent NeomakeFile
   autocmd BufWinEnter *.coffee,*.cjsx silent NeomakeFile
-  let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-D']
-  let g:neomake_ruby_enabled_makers = ['rubocop']
   autocmd BufWritePost *.rb silent NeomakeFile
   autocmd BufWinEnter *.rb silent NeomakeFile
   let g:neomake_list_height = 5
