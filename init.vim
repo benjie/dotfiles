@@ -2,6 +2,10 @@
 " Need to do this before plugins load!
 let mapleader = "\<Space>"
 
+" More natural split locations
+set splitbelow
+set splitright
+
 " Neovim turned this off in 0.2 (apparently it was buggy?) it's not buggy for
 " me: re-enable!
 set mouse=a
