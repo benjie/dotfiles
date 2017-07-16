@@ -123,8 +123,21 @@ Plug 'jparise/vim-graphql'
 
 
 Plug 'benjie/neomake-local-eslint.vim'
-Plug 'benekastah/neomake'
 
+"Plug 'benekastah/neomake' " DISABLED in favour of vim-ale
+
+"""" " Because flow is a directory maker, we'll make a fake directory maker for
+"""" " eslint too.
+"""" let g:neomake_eslint_d_maker = {
+""""         \ 'exe': 'eslint_d',
+""""         \ 'args': ['%', '-f', 'compact'],
+""""         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+""""         \ '%W%f: line %l\, col %c\, Warning - %m'
+""""         \ }
+"""" autocmd! BufWritePost *.js,*.jsx silent Neomake! flow eslint_d
+"""" autocmd! BufWinEnter *.js,*.jsx silent Neomake! flow eslint_d
+"""" let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
+"""" let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_graphql_enabled_makers = ['eslint']
@@ -133,16 +146,16 @@ let g:neomake_cjsx_enabled_makers = ['coffeelint']
 let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-D']
 let g:neomake_ruby_enabled_makers = ['rubocop']
 
-augroup neomake_group
-  autocmd!
-  autocmd BufWritePost *.js,*.jsx,*.graphql silent NeomakeFile
-  autocmd BufWinEnter *.js,*.jsx,*.graphql silent NeomakeFile
-  autocmd BufWritePost *.coffee,*.cjsx silent NeomakeFile
-  autocmd BufWinEnter *.coffee,*.cjsx silent NeomakeFile
-  autocmd BufWritePost *.rb silent NeomakeFile
-  autocmd BufWinEnter *.rb silent NeomakeFile
-  let g:neomake_list_height = 5
-augroup END
+"augroup neomake_group
+"  autocmd!
+"  autocmd BufWritePost *.js,*.jsx,*.graphql silent NeomakeFile
+"  autocmd BufWinEnter *.js,*.jsx,*.graphql silent NeomakeFile
+"  autocmd BufWritePost *.coffee,*.cjsx silent NeomakeFile
+"  autocmd BufWinEnter *.coffee,*.cjsx silent NeomakeFile
+"  autocmd BufWritePost *.rb silent NeomakeFile
+"  autocmd BufWinEnter *.rb silent NeomakeFile
+"  let g:neomake_list_height = 5
+"augroup END
 
 Plug 'sbdchd/neoformat'
 let g:neoformat_enabled_javascript = ['eslint_d']
@@ -150,6 +163,25 @@ augroup neoformat_group
   autocmd!
   autocmd BufWritePre *.js,*.jsx silent Neoformat
 augroup END
+
+" Asynchronous Lint Engine (ALE)
+Plug 'w0rp/ale'
+" Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
+" Limit linters used for JavaScript.
+let g:ale_linters = {
+\  'javascript': ['flow']
+\}
+highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_sign_error = '🔥' " could use emoji
+let g:ale_sign_warning = '💭' " could use emoji
+let g:ale_statusline_format = ['🔥 %d', '💭 %d', '']
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter% says %s'
+" Map keys to navigate between lines with errors and warnings.
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 " ========================================================================
 " Language: JavaScript / CoffeeScript / JSON
