@@ -1,9 +1,11 @@
 #!/bin/bash
+export GOPATH="$HOME/go"
+export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$PATH:/Users/benjiegillam/.apportable/SDK/bin:/Users/benjiegillam/Library/Python/2.7/bin"
 export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/benjiegillam/go/bin
 export PATH=$PATH:$HOME/Library/Python/2.7/bin
-export GOPATH="/Users/benjiegillam/go"
-export ANDROID_HOME=/usr/local/opt/android-sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 export NEWRELIC_AGENT_ENABLED=false
 
 alias vim="nvim"
