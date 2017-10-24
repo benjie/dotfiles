@@ -169,13 +169,13 @@ Plug 'w0rp/ale'
 " Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
 " Limit linters used for JavaScript.
 let g:ale_linters = {
-\  'javascript': ['flow']
+\  'javascript': ['flow', 'eslint']
 \}
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
-let g:ale_sign_error = '🔥' " could use emoji
-let g:ale_sign_warning = '💭' " could use emoji
-let g:ale_statusline_format = ['🔥 %d', '💭 %d', '']
+let g:ale_sign_error = 'E' " could use emoji
+let g:ale_sign_warning = 'W' " could use emoji
+let g:ale_statusline_format = ['E %d', 'W %d', '']
 " %linter% is the name of the linter that provided the message
 " %s is the error or warning message
 let g:ale_echo_msg_format = '%linter% says %s'
@@ -216,6 +216,7 @@ autocmd FileType litcoffee runtime ftplugin/coffee.vim
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+let g:javascript_plugin_flow = 1
 "Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " ----------------------------------------
@@ -306,7 +307,7 @@ Plug 'embear/vim-localvimrc'
 " Persist capital-letter choices
 let g:localvimrc_persistent=1
 
-Plug 'exu/pgsql.vim'
+Plug 'benjie/pgsql.vim'
 let g:sql_type_default = 'pgsql'
 
 Plug 'keith/tmux.vim'
