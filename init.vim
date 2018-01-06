@@ -159,6 +159,8 @@ let g:neomake_ruby_enabled_makers = ['rubocop']
 
 Plug 'sbdchd/neoformat'
 let g:neoformat_enabled_javascript = ['eslint_d']
+let g:neoformat_enabled_css = ['prettier']
+let g:neoformat_enabled_graphql = ['prettier']
 augroup neoformat_group
   autocmd!
   autocmd BufWritePre *.js,*.jsx silent Neoformat
