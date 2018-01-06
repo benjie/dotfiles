@@ -185,6 +185,10 @@ let g:ale_echo_msg_format = '%linter% says %s'
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
+
+Plug 'flowtype/vim-flow'
+
+
 " ========================================================================
 " Language: JavaScript / CoffeeScript / JSON
 " ========================================================================
