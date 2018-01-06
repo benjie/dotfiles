@@ -164,6 +164,8 @@ let g:neoformat_enabled_graphql = ['prettier']
 augroup neoformat_group
   autocmd!
   autocmd BufWritePre *.js,*.jsx silent Neoformat
+  autocmd BufWritePre *.css silent Neoformat
+  autocmd BufWritePre *.graphql silent Neoformat
 augroup END
 
 " Asynchronous Lint Engine (ALE)
