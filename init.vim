@@ -439,6 +439,11 @@ autocmd filetype coffee setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
 autocmd filetype javascript setl path+=src
 autocmd filetype coffee setl path+=src
 
+" Spell checking
+autocmd filetype markdown setl spl=en spell
+hi clear SpellBad
+hi SpellBad cterm=underline
+
 " No save backup by .swp
 set nowb
 set noswapfile
