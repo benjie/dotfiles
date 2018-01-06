@@ -466,9 +466,16 @@ command! -nargs=+ AddComponent call AddComponent(<f-args>)
 " Don't syntax highlight long lines
 set synmaxcol=500
 
-" Exit terminal mode with Escape press
 if exists(':tnoremap')
-  tnoremap <Esc> <C-\><C-n>
+  " DISABLED because it's annoying in case you need to vim in the terminal
+  "" Exit terminal mode with Escape press
+  "tnoremap <Esc> <C-\><C-n>
+
+  " Allow window navigation out of terminal
+  tnoremap <C-h> <C-\><C-n><C-w><C-h>
+  tnoremap <C-j> <C-\><C-n><C-w><C-j>
+  tnoremap <C-k> <C-\><C-n><C-w><C-k>
+  tnoremap <C-l> <C-\><C-n><C-w><C-l>
 endif
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
