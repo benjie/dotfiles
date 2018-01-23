@@ -66,11 +66,21 @@ nnoremap <silent> <leader>p :<c-u>CtrlPBuffer<cr>
 " C-HJKL to change vim panes and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='powerlineish'
 "let g:airline_section_z=''
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#default#section_truncate_width = {
+    \ 'a': 50,
+    \ 'b': 79,
+    \ 'x': 60,
+    \ 'y': 88,
+    \ 'z': 45,
+    \ 'warning': 80,
+    \ 'error': 80,
+    \ }
+let g:airline_extensions = ['branch', 'ctrlp', 'hunks', 'quickfix', 'tabline']
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "Plug 'rking/ag.vim'
 Plug 'mhinz/vim-grepper'
