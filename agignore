@@ -1,7 +1,9 @@
 */LOCAL/
 */doc/
-*/node_modules/
+**/node_modules/
 */log/
 */sessions/
 compiledTemplates.js
 *.heapsnapshot
+_LOCAL
+lerna-debug.log
