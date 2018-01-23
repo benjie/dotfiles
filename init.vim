@@ -10,6 +10,9 @@ set splitright
 " me: re-enable!
 set mouse=a
 
+" Configure cursor shape
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175
+
 " termcap issue on OSX requires:
 "   $ infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 "   $ tic $TERM.ti

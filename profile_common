@@ -117,7 +117,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # Colours
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 # hub / GitHub
 if [ -x hub ]; then
