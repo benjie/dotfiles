@@ -172,6 +172,8 @@ let g:neomake_ruby_enabled_makers = ['rubocop']
 
 Plug 'sbdchd/neoformat'
 let g:neoformat_enabled_javascript = ['eslint_d']
+let g:neoformat_enabled_json = ['prettier']
+let g:neoformat_enabled_markdown = ['prettier']
 let g:neoformat_enabled_css = ['prettier']
 let g:neoformat_enabled_graphql = ['prettier']
 augroup neoformat_group
@@ -179,6 +181,8 @@ augroup neoformat_group
   autocmd BufWritePre *.js,*.jsx silent Neoformat
   autocmd BufWritePre *.css silent Neoformat
   autocmd BufWritePre *.graphql silent Neoformat
+  autocmd BufWritePre *.json silent Neoformat
+  autocmd BufWritePre *.md silent Neoformat
 augroup END
 
 " Asynchronous Lint Engine (ALE)
@@ -186,7 +190,8 @@ Plug 'w0rp/ale'
 " Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
 " Limit linters used for JavaScript.
 let g:ale_linters = {
-\  'javascript': ['flow', 'eslint']
+\  'javascript': ['flow', 'eslint'],
+\  'graphql': ['eslint']
 \}
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
