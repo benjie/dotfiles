@@ -7,6 +7,8 @@ export PATH=$PATH:$HOME/Library/Python/2.7/bin
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export NEWRELIC_AGENT_ENABLED=false
+export LLVM_ROOT="/usr/local/opt/emscripten/libexec/llvm/bin"
+export LLVM="/usr/local/opt/emscripten/libexec/llvm/bin"
 
 alias vim="nvim"
 export EDITOR="nvim"

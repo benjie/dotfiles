@@ -1,4 +1,5 @@
 #!/bin/bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.config/nvim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
