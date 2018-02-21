@@ -13,6 +13,9 @@ set mouse=a
 " Configure cursor shape
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175
 
+" Don't wrap around when searching
+set nowrapscan
+
 " termcap issue on OSX requires:
 "   $ infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 "   $ tic $TERM.ti
@@ -63,6 +66,13 @@ let g:ctrlp_user_command = 'cd %s && git ls-files . -co --exclude-standard'
 " Above from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 nnoremap <silent> <leader>p :<c-u>CtrlPBuffer<cr>
 
+" Add git modified files support to CtrlP
+" :CtrlPModified shows all files which have been modified since your last commit.
+" :CtrlPBranch shows all files modified on your current branch.
+Plug 'jasoncodes/ctrlp-modified.vim'
+map <Leader>m :CtrlPModified<CR>
+map <Leader>M :CtrlPBranch<CR>
+
 " C-HJKL to change vim panes and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -110,6 +120,10 @@ function! Multiple_cursors_after()
     exe 'NeoCompleteUnlock'
   endif
 endfunction
+
+" Search for the keyword using *; then Alt-j to turn search results into cursors
+nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
+vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
 
 " Disabled because I don't use it (it clashes with `vic` from gitgutter which I prefer)
 "Plug 'tomtom/tcomment_vim'
@@ -359,6 +373,11 @@ Plug 'ryanoasis/vim-devicons'
 " Time tracking
 
 Plug 'wakatime/vim-wakatime'
+
+" Adds debugging strings to your code
+" <Leader>ds adds a console.log line debug
+" <Leader>dS adds a console.log variable debug
+Plug 'bergercookie/vim-debugstring'
 
 " The Graveyard
 "Plug 'tpope/vim-bundler'
