@@ -221,7 +221,7 @@ nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 
-Plug 'flowtype/vim-flow'
+Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
 
 
 " ========================================================================
