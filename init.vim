@@ -203,9 +203,11 @@ augroup END
 Plug 'w0rp/ale'
 " Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
 " Limit linters used for JavaScript.
+" Disable linting in elixir so iex works
 let g:ale_linters = {
 \  'javascript': ['flow', 'eslint'],
-\  'graphql': ['eslint']
+\  'graphql': ['eslint'],
+\  'elixir': []
 \}
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
@@ -378,6 +380,9 @@ Plug 'wakatime/vim-wakatime'
 " <Leader>ds adds a console.log line debug
 " <Leader>dS adds a console.log variable debug
 Plug 'bergercookie/vim-debugstring'
+
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
 
 " The Graveyard
 "Plug 'tpope/vim-bundler'

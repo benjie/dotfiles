@@ -127,3 +127,6 @@ fi
 
 # npm autocomplete
 . <(npm --silent completion 2>/dev/null)
+
+# Elixir history
+export ERL_AFLAGS="-kernel shell_history enabled"
