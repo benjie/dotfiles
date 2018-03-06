@@ -148,8 +148,7 @@ Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'jparise/vim-graphql'
 
-
-Plug 'benjie/neomake-local-eslint.vim'
+Plug 'benjie/local-npm-bin.vim'
 
 "Plug 'benekastah/neomake' " DISABLED in favour of vim-ale
 
