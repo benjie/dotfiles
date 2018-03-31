@@ -1,9 +1,22 @@
+#!/bin/bash
+set -e -x
 brew tap neovim/neovim
 brew tap caskroom/cask
 brew update
-brew install git neovim postgresql python python3 tmux reattach-to-user-namespace parallel homebrew/versions/v8-315 redis graphicsmagick tig the_silver_searcher heroku
-brew cask install slack skype spectacle 1password alfred iterm2 google-chrome dropbox dash ngrok caffeine screenhero
+brew install git neovim postgresql python2 python3 tmux reattach-to-user-namespace parallel redis graphicsmagick tig the_silver_searcher heroku
+brew cask install slack skype spectacle 1password alfred iterm2 google-chrome dropbox dash ngrok caffeine
 brew services start redis
 brew services start postgresql
-pip install neovim powerline-status pgxnclient psutil
-LIBRARY_PATH="/usr/local/opt/v8-315/lib" CPATH="/usr/local/opt/v8-315/include" pgxnclient install plv8=1.4.3
+pip install neovim powerline-status psutil
+
+# PLv8 stuff:
+##pip install pgxnclient
+##brew install homebrew/versions/v8-315
+##LIBRARY_PATH="/usr/local/opt/v8-315/lib" CPATH="/usr/local/opt/v8-315/include" pgxnclient install plv8=1.4.3
+
+brew install v8
+curl -LO https://github.com/plv8/plv8/archive/v2.1.0.tar.gz
+tar -xf v2.1.0.tar.gz
+cd plv8-2.1.0
+make static
+make install
