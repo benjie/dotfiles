@@ -4,12 +4,26 @@ brew tap neovim/neovim
 brew tap caskroom/cask
 brew tap caskroom/fonts
 brew update
-brew install git neovim postgresql python2 python3 tmux reattach-to-user-namespace parallel redis graphicsmagick tig the_silver_searcher heroku
+brew install git neovim postgresql node python2 python3 tmux reattach-to-user-namespace parallel redis graphicsmagick tig the_silver_searcher heroku
 brew cask install slack skype spectacle 1password alfred iterm2 google-chrome dropbox dash ngrok caffeine rescuetime
 brew cask install font-meslo-nerd-font font-hack-nerd-font font-ubuntu-nerd-font-mono font-fira-code
 brew services start redis
 brew services start postgresql
 pip install neovim powerline-status psutil
+
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+nvm install node
+nvm install --lts
+nvm use --lts
+npm install -g yarn lerna eslint_d
+nvm use node
+npm install -g yarn lerna eslint_d
+nvm alias default node
+
 
 # PLv8 stuff:
 ##pip install pgxnclient
