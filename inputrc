@@ -1,0 +1,9 @@
+#set editing-mode vi
+#set keymap vi
+#set convert-meta on
+
+$if psql
+  set completion-ignore-case on
+  "q": "b\'f\'"
+  "Q": "b\"f\""
+$endif

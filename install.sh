@@ -20,6 +20,7 @@ ln -s "`pwd`"/gitignore ../.gitignore
 ln -s "`pwd`"/agignore ../.agignore
 ln -s "`pwd`"/npmrc ../.npmrc
 ln -s "`pwd`"/psqlrc ../.psqlrc
+ln -s "`pwd`"/inputrc ../.inputrc
 mkdir -p ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/plugin/after/* ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/UltiSnips ../.vim/UltiSnips
