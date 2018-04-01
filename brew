@@ -4,7 +4,7 @@ brew tap neovim/neovim
 brew tap caskroom/cask
 brew tap caskroom/fonts
 brew update
-brew install git neovim postgresql node python2 python3 tmux reattach-to-user-namespace parallel redis graphicsmagick tig the_silver_searcher heroku
+brew install git neovim postgresql node python2 python3 tmux reattach-to-user-namespace parallel redis graphicsmagick tig the_silver_searcher heroku htop
 brew cask install slack skype spectacle 1password alfred iterm2 google-chrome dropbox dash ngrok caffeine rescuetime
 brew cask install font-meslo-nerd-font font-hack-nerd-font font-ubuntu-nerd-font-mono font-fira-code
 brew services start redis
