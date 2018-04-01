@@ -1,0 +1,21 @@
+-- From http://www.craigkerstiens.com/2015/12/29/my-postgres-top-10-for-2016/
+
+\set QUIET 1
+\pset null '¤'
+
+-- Customize prompts
+\set PROMPT1 '%[%033[1m%][%/] # '
+\set PROMPT2 '... # '
+
+-- Show how long each query takes to execute
+\timing
+
+-- Use best available output format
+\x auto
+\set VERBOSITY verbose
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+\set COMP_KEYWORD_CASE upper
+\unset QUIET
+
+set search_path to app_public, app_hidden, app_private, app_jobs, app_utils, a, b, c, forum_example, forum_example_private, public;

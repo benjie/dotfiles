@@ -19,6 +19,7 @@ ln -s "`pwd`"/ctags ../.ctags
 ln -s "`pwd`"/gitignore ../.gitignore
 ln -s "`pwd`"/agignore ../.agignore
 ln -s "`pwd`"/npmrc ../.npmrc
+ln -s "`pwd`"/psqlrc ../.psqlrc
 mkdir -p ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/plugin/after/* ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/UltiSnips ../.vim/UltiSnips
