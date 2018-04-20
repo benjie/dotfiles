@@ -191,6 +191,7 @@ let g:neoformat_enabled_css = ['prettier']
 let g:neoformat_enabled_graphql = ['prettier']
 augroup neoformat_group
   autocmd!
+  autocmd FileType javascript exe "augroup neoformatauto | autocmd! BufWritePre <buffer> silent Neoformat | augroup END"
   autocmd BufWritePre *.js,*.jsx silent Neoformat
   autocmd BufWritePre *.css silent Neoformat
   autocmd BufWritePre *.graphql silent Neoformat
@@ -487,6 +488,9 @@ autocmd filetype markdown setl spl=en spell
 hi clear SpellBad
 hi SpellBad cterm=underline
 
+" Gosh-darn tabs go away!
+autocmd filetype markdown setl sw=2 ts=2 et
+
 " No save backup by .swp
 set nowb
 set noswapfile
@@ -524,3 +528,5 @@ endif
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+
+highlight Visual cterm=NONE ctermbg=Black ctermfg=White
