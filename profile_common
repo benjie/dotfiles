@@ -27,10 +27,11 @@ alias gri='git rebase -i '
 alias gk='gitk --all&'
 alias gx='gitx --all'
 alias ghurl='git ghurl'
-alias gpu='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
-alias gpuf='git push -u origin $(git rev-parse --abbrev-ref HEAD) --force-with-lease'
-alias gpupr='git push -u origin $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1'
-alias gpuppr='git releasenotes | pbcopy; git push -u origin $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/production...$(git rev-parse --abbrev-ref HEAD)?expand=1'
+alias gremote="git for-each-ref --format='%(if)%(upstream:remotename)%(then)%(upstream:remotename)%(else)origin%(end)' \$(git symbolic-ref -q HEAD)"
+alias gpu='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD)'
+alias gpuf='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) --force-with-lease'
+alias gpupr='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1'
+alias gpuppr='git releasenotes | pbcopy; git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/production...$(git rev-parse --abbrev-ref HEAD)?expand=1'
 alias feature_flag_changes='git diff "master@{8 days ago}..master" config/default.yml'
 alias lsofgroup="lsof  | awk '{print \$1}' | sort | uniq -c | sort -n"
 
