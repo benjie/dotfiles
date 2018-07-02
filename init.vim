@@ -43,11 +43,11 @@ Plug 'tpope/vim-unimpaired'
 nnoremap <leader>a :argadd %<cr>
 nnoremap <leader>A :argdel %<cr>
 " unimpaired-like tab navigation
-nmap <silent> tt :tabnew<CR>
-nmap <silent> [g :tabprevious<CR>
-nmap <silent> ]g :tabnext<CR>
-nmap <silent> [G :tabrewind<CR>
-nmap <silent> ]G :tablast<CR>
+nnoremap <silent> tt :tabnew<CR>
+nnoremap <silent> [g :tabprevious<CR>
+nnoremap <silent> ]g :tabnext<CR>
+nnoremap <silent> [G :tabrewind<CR>
+nnoremap <silent> ]G :tablast<CR>
 
 Plug 'ctrlpvim/ctrlp.vim'
 " Don't jump to other tabs
@@ -97,8 +97,8 @@ Plug 'mhinz/vim-grepper'
 let g:grepper = {}
 let g:grepper.ag = { 'grepprf': 'ag --vimgrep --' }
 " Takes a motion and greps for it
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
+nnoremap gs  <plug>(GrepperOperator)
+xnoremap gs  <plug>(GrepperOperator)
 " Set up :Ag command
 command! -nargs=* -complete=file Ag GrepperAg <args>
 
@@ -134,11 +134,11 @@ if has('nvim')
   let test#strategy = 'neoterm'
 end
 Plug 'janko-m/vim-test'
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+nnoremap <silent> <leader>t :TestNearest<CR>
+nnoremap <silent> <leader>T :TestFile<CR>
+nnoremap <silent> <leader>a :TestSuite<CR>
+nnoremap <silent> <leader>l :TestLast<CR>
+nnoremap <silent> <leader>g :TestVisit<CR>
 let g:test#ruby#rspec#executable = 'zeus rspec'
 
 
@@ -205,7 +205,7 @@ Plug 'w0rp/ale'
 " Limit linters used for JavaScript.
 " Disable linting in elixir so iex works
 let g:ale_linters = {
-\  'javascript': ['flow', 'eslint'],
+\  'javascript': ['eslint'],
 \  'graphql': ['eslint'],
 \  'elixir': []
 \}
@@ -236,7 +236,10 @@ Plug 'elzr/vim-json'
 " provides coffee ft
 Plug 'kchmck/vim-coffee-script'
 "Plug 'mintplant/vim-literate-coffeescript'
-autocmd FileType litcoffee runtime ftplugin/coffee.vim
+augroup litcoffee_coffee
+  autocmd!
+  autocmd FileType litcoffee runtime ftplugin/coffee.vim
+augroup END
 
 "Plug 'mtscout6/vim-cjsx'
 
@@ -352,7 +355,7 @@ let g:localvimrc_persistent=1
 Plug 'benjie/pgsql.vim'
 let g:sql_type_default = 'pgsql'
 
-Plug 'keith/tmux.vim'
+Plug 'ericpruitt/tmux.vim'
 
 " Colorscheme (dark, colourful)
 Plug 'nanotech/jellybeans.vim'
@@ -381,8 +384,9 @@ Plug 'wakatime/vim-wakatime'
 " <Leader>dS adds a console.log variable debug
 Plug 'bergercookie/vim-debugstring'
 
-Plug 'elixir-editors/vim-elixir'
-Plug 'slashmili/alchemist.vim'
+" Not using elixir right now...
+"Plug 'elixir-editors/vim-elixir'
+"Plug 'slashmili/alchemist.vim'
 
 " The Graveyard
 "Plug 'tpope/vim-bundler'
@@ -413,17 +417,17 @@ set expandtab
 set list listchars=tab:\ \ ,trail:·
 
 " Map the arrow keys to be based on display lines, not physical lines
-nmap <Down> gj
-nmap <Up> gk
+nnoremap <Down> gj
+nnoremap <Up> gk
 
 " re-source this file, install plugins
-nmap <silent> <leader>rc :so ~/.config/nvim/init.vim \| PlugInstall<CR>
+nnoremap <silent> <leader>rc :so ~/.config/nvim/init.vim \| PlugInstall<CR>
 
 " cd to the directory containing the file in the buffer
-nmap <silent> <leader>cd :lcd %:h<CR>
+nnoremap <silent> <leader>cd :lcd %:h<CR>
 
 " mkdir the folder for the current buffer
-nmap <silent> <leader>md :!mkdir -p %:h<CR><CR>
+nnoremap <silent> <leader>md :!mkdir -p %:h<CR><CR>
 
 " '  ' maps to clear highlights
 nnoremap <leader><space> :noh<cr>
@@ -465,31 +469,41 @@ set fillchars+=vert:│
 
 """""""""" SORTING
 " Sort all items in the current indent level
-nmap <silent> <leader>si vii:sort /\v[^=:]+/ r<CR>
+nnoremap <silent> <leader>si vii:sort /\v[^=:]+/ r<CR>
 " Sort all items in the current block ({})
-nmap <silent> <leader>sb {eV}k:sort /\v[^=:]+/ r<CR>
+nnoremap <silent> <leader>sb {eV}k:sort /\v[^=:]+/ r<CR>
 " Sort current visual selection
-vmap <silent> <leader>s :sort /\v[^=:]+/ r<CR>
+vnoremap <silent> <leader>s :sort /\v[^=:]+/ r<CR>
 """""""""" /SORTING
 
 " Remember last location in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
 " So you can jump to files without extensions
-autocmd filetype jade setl suffixesadd=.jade
-autocmd filetype stylus setl suffixesadd=.styl
-autocmd filetype javascript setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
-autocmd filetype coffee setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
-autocmd filetype javascript setl path+=src
-autocmd filetype coffee setl path+=src
+augroup suffixes
+  autocmd!
+  autocmd filetype jade setl suffixesadd=.jade
+  autocmd filetype stylus setl suffixesadd=.styl
+  autocmd filetype javascript setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
+  autocmd filetype coffee setl suffixesadd=.coffee,.litcoffee,.cjsx,.js,.json,.jsx
+  autocmd filetype javascript setl path+=src
+  autocmd filetype coffee setl path+=src
+  autocmd filetype coffee setl path+=src
+augroup END
 
 " Spell checking
-autocmd filetype markdown setl spl=en spell
+augroup md_spell
+  autocmd!
+  autocmd filetype markdown setl spl=en spell
+augroup END
 hi clear SpellBad
 hi SpellBad cterm=underline
 
 " Gosh-darn tabs go away!
-autocmd filetype markdown setl sw=2 ts=2 et
+augroup md_no_tabs
+  autocmd!
+  autocmd filetype markdown setl sw=2 ts=2 et
+augroup END
 
 " No save backup by .swp
 set nowb
