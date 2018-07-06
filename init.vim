@@ -23,6 +23,9 @@ set nowrapscan
 " -- https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 
 call plug#begin('~/.vim/plugged')
+if !exists('g:gui_oni')
+  "Plug 'tpope/vim-sensible'
+endif
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -35,7 +38,6 @@ let g:ragtag_global_maps = 1
 " Not developing rails any more
 " Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-unimpaired'
@@ -537,6 +539,16 @@ if exists(':tnoremap')
   tnoremap <C-j> <C-\><C-n><C-w><C-j>
   tnoremap <C-k> <C-\><C-n><C-w><C-k>
   tnoremap <C-l> <C-\><C-n><C-w><C-l>
+
+  " jumping into a terminal split should automatically go into insert mode
+  augroup terminal
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd TermOpen * startinsert
+    autocmd FocusGained,BufEnter,BufWinEnter,WinEnter term://* startinsert
+    "autocmd BufLeave term://* stopinsert
+  augroup END
+
 endif
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -544,3 +556,15 @@ hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=whi
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
 highlight Visual cterm=NONE ctermbg=Black ctermfg=White
+
+" Oni has some annoying defaults, lets undo them
+if exists('g:gui_oni')
+  set nonumber norelativenumber
+  set shell=zsh
+
+  " If using Oni's externalized statusline, hide vim's native statusline, 
+  set noshowmode
+  set noruler
+  set laststatus=0
+  set noshowcmd
+endif
