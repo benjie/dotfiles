@@ -110,6 +110,8 @@ Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 let g:multi_cursor_insert_maps={ "\<C-r>": 1 }
+highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+highlight link multiple_cursors_visual Visual
 " Called once right before you start selecting multiple cursors
 function! Multiple_cursors_before()
   if exists(':NeoCompleteLock')==2
@@ -576,11 +578,14 @@ if exists('g:gui_oni')
   set nonumber norelativenumber
   set shell=zsh
 
-  " If using Oni's externalized statusline, hide vim's native statusline, 
+  " If using Oni's externalized statusline, hide vim's native statusline
   set noshowmode
   set noruler
   set laststatus=0
   set noshowcmd
+
+  " Oni outputs '2;2u' if you do shift-space in terminal; this fixes that.
+  tnoremap <s-space> <space>
 endif
 
 colorscheme onedark
