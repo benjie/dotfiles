@@ -185,8 +185,9 @@ let g:neomake_ruby_enabled_makers = ['rubocop']
 "  let g:neomake_list_height = 5
 "augroup END
 
-Plug 'sbdchd/neoformat'
+Plug 'benjie/neoformat'
 let g:neoformat_enabled_javascript = ['eslint_d']
+let g:neoformat_enabled_typescript = ['prettier']
 "let g:neoformat_enabled_json = ['prettier']
 let g:neoformat_enabled_markdown = ['prettier']
 let g:neoformat_enabled_css = ['prettier']
@@ -195,6 +196,7 @@ augroup neoformat_group
   autocmd!
   autocmd FileType javascript exe "augroup neoformatauto | autocmd! BufWritePre <buffer> silent Neoformat | augroup END"
   autocmd BufWritePre *.js,*.jsx silent Neoformat
+  autocmd BufWritePre *.ts,*.tsx silent Neoformat
   autocmd BufWritePre *.css silent Neoformat
   autocmd BufWritePre *.graphql silent Neoformat
   autocmd BufWritePre *.json silent Neoformat
@@ -208,6 +210,7 @@ Plug 'w0rp/ale'
 " Disable linting in elixir so iex works
 let g:ale_linters = {
 \  'javascript': ['eslint'],
+\  'typescript': ['tslint', 'prettier'],
 \  'graphql': ['eslint'],
 \  'elixir': []
 \}
@@ -288,8 +291,18 @@ let g:jsx_ext_required = 0
 " extends syntax for with jQuery,backbone,etc.
 Plug 'othree/javascript-libraries-syntax.vim'
 
-" TypeScript (for postgraphql)
-Plug 'leafgarland/typescript-vim'
+
+" TypeScript
+"Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" For async completion
+Plug 'Shougo/deoplete.nvim'
+" For Denite features
+Plug 'Shougo/denite.nvim'
+" Enable deoplete at startup
+let g:deoplete#enable_at_startup = 1
+
 
 " Flow type
 "Plug 'flowtype/vim-flow'
@@ -359,8 +372,9 @@ let g:sql_type_default = 'pgsql'
 
 Plug 'ericpruitt/tmux.vim'
 
-" Colorscheme (dark, colourful)
-Plug 'nanotech/jellybeans.vim'
+" Colorscheme
+"Plug 'nanotech/jellybeans.vim'
+Plug 'joshdick/onedark.vim'
 
 " Like vim's `f` motion, but for two characters
 nmap \ <Plug>Sneak_s
@@ -568,3 +582,5 @@ if exists('g:gui_oni')
   set laststatus=0
   set noshowcmd
 endif
+
+colorscheme onedark
