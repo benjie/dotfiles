@@ -54,7 +54,7 @@ nnoremap <silent> ]G :tablast<CR>
 Plug 'ctrlpvim/ctrlp.vim'
 " Don't jump to other tabs
 let g:ctrlp_switch_buffer=''
-let g:ctrlp_use_caching = 1
+"let g:ctrlp_use_caching = 1
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_cmd='CtrlPCurWD'
 let g:ctrlp_custom_ignore = {
