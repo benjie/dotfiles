@@ -41,6 +41,23 @@ alias lsofgroup="lsof  | awk '{print \$1}' | sort | uniq -c | sort -n"
 # https://www.npmjs.com/package/git-delete-squashed
 alias git-delete-squashed='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 
+# Use ctrl-o to open the file in VS Code
+# export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+
+# Src: https://remysharp.com/2018/08/23/cli-improved
+alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
+# entr for watching files
+function watch {
+  FILE=shift
+  # -r starts immediately; on change it waits for process to exit before restarting
+  # -c clears the terminal
+  echo "$FILE" | entr -rc "$@" /_
+}
+
+alias watchpsql="entr -rc psql -1Xv ON_ERROR_STOP=1 -f /_"
+
 function gou {
   git fetch
   git checkout "$1"
