@@ -55,6 +55,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Don't jump to other tabs
 let g:ctrlp_switch_buffer=''
 "let g:ctrlp_use_caching = 1
+let g:ctrlp_use_caching = 0
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_cmd='CtrlPCurWD'
 let g:ctrlp_custom_ignore = {
@@ -78,21 +79,34 @@ map <Leader>M :CtrlPBranch<CR>
 " C-HJKL to change vim panes and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
-let g:airline_theme='powerlineish'
+"let g:airline_theme='powerlineish'
+let g:airline_theme='onedark'
 "let g:airline_section_z=''
 let g:airline_powerline_fonts = 1
+
+
+" A      displays the mode + additional flags like crypt/spell/paste (INSERT)
+" B      VCS information (branch, hunk summary) (master)
+" C      filename + read-only flag (~/.vim/vimrc RO)
+" X      filetype  (vim)
+" Y      file encoding[fileformat] (utf-8[unix])
+" Z      current position in the file
+" My opinion on importance: C, A, Z, Y, X, B
+let g:airline_skip_empty_sections = 1
 let g:airline#extensions#default#section_truncate_width = {
-    \ 'a': 50,
-    \ 'b': 79,
-    \ 'x': 60,
-    \ 'y': 88,
-    \ 'z': 45,
+    \ 'a': 60,
+    \ 'b': 150,
+    \ 'x': 130,
+    \ 'y': 110,
+    \ 'z': 90,
     \ 'warning': 80,
     \ 'error': 80,
     \ }
 let g:airline_extensions = ['branch', 'ctrlp', 'hunks', 'quickfix', 'tabline']
+
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Make it so you can read the filenames when inactive
+"Plug 'vim-airline/vim-airline-themes'
 
 "Plug 'rking/ag.vim'
 Plug 'mhinz/vim-grepper'
@@ -110,10 +124,12 @@ Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 let g:multi_cursor_insert_maps={ "\<C-r>": 1 }
-highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
-highlight link multiple_cursors_visual Visual
 " Called once right before you start selecting multiple cursors
 function! Multiple_cursors_before()
+  " For some reason the highlights weren't working in Oni; so this enforces
+  " the highlight rules any time multiple cursors is engaged.
+  highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+  highlight link multiple_cursors_visual Visual
   if exists(':NeoCompleteLock')==2
     exe 'NeoCompleteLock'
   endif
@@ -170,6 +186,7 @@ Plug 'benjie/local-npm-bin.vim'
 """" let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
 let g:neomake_graphql_enabled_makers = ['eslint']
 let g:neomake_coffee_enabled_makers = ['coffeelint']
 let g:neomake_cjsx_enabled_makers = ['coffeelint']
@@ -216,6 +233,7 @@ let g:ale_linters = {
 \  'graphql': ['eslint'],
 \  'elixir': []
 \}
+"  'typescript': ['tslint', 'tsserver', 'prettier'],
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
 let g:ale_sign_error = 'E' " could use emoji
@@ -293,18 +311,30 @@ let g:jsx_ext_required = 0
 " extends syntax for with jQuery,backbone,etc.
 Plug 'othree/javascript-libraries-syntax.vim'
 
+" TypeScript (only if not using oni)
+if !exists('g:gui_oni')
+  "Plug 'leafgarland/typescript-vim'
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+  " For async completion
+  Plug 'Shougo/deoplete.nvim'
+  " For Denite features
+  Plug 'Shougo/denite.nvim'
+  " Enable deoplete at startup
+  let g:deoplete#enable_at_startup = 1
 
-" TypeScript
-"Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-" For async completion
-Plug 'Shougo/deoplete.nvim'
-" For Denite features
-Plug 'Shougo/denite.nvim'
-" Enable deoplete at startup
-let g:deoplete#enable_at_startup = 1
-
+  augroup typescript
+    autocmd!
+    " Output the type
+    autocmd filetype typescript nnoremap TT :TSType<cr>
+    " Add import to top of file
+    autocmd filetype typescript nnoremap TI :TSImport<cr>
+    " Jump to definition
+    autocmd filetype typescript nnoremap TJ :TSTypeDef<cr>
+    " Rename the symbol
+    autocmd filetype typescript nnoremap TR :TSRename 
+  augroup END
+endif
 
 " Flow type
 "Plug 'flowtype/vim-flow'
@@ -375,7 +405,7 @@ let g:sql_type_default = 'pgsql'
 Plug 'ericpruitt/tmux.vim'
 
 " Colorscheme
-"Plug 'nanotech/jellybeans.vim'
+Plug 'nanotech/jellybeans.vim'
 Plug 'joshdick/onedark.vim'
 
 " Like vim's `f` motion, but for two characters
@@ -556,13 +586,36 @@ if exists(':tnoremap')
   tnoremap <C-k> <C-\><C-n><C-w><C-k>
   tnoremap <C-l> <C-\><C-n><C-w><C-l>
 
+  " Enable some unlikely terminal sequences to quickly escape through to vim
+  tnoremap <C-w>\| <C-\><C-n><C-w>\|i
+  tnoremap <C-w>= <C-\><C-n><C-w>=i
+  tnoremap <C-w>- <C-\><C-n><C-w>-i
+
+  " These are for my muscle memory for terminal splits in tmux
+  tnoremap <C-s>% <C-\><C-n>:vsp<cr><C-\><C-n>:terminal<cr>
+  tnoremap <C-s>" <C-\><C-n>:sp<cr><C-\><C-n>:terminal<cr>
+  " Ctrl-s should exit terminal mode, instead of sleeping the terminal
+  tnoremap <C-s> <C-\><C-n>
+
   " jumping into a terminal split should automatically go into insert mode
   augroup terminal
     autocmd!
+
+    " No line numbers in my terminal thanks!
     autocmd TermOpen * setlocal nonumber norelativenumber
+
+    " Jump into insert mode whenever switching into a terminal (no matter how
+    " it be)
     autocmd TermOpen * startinsert
     autocmd FocusGained,BufEnter,BufWinEnter,WinEnter term://* startinsert
     "autocmd BufLeave term://* stopinsert
+
+    " If you exit a terminal with <C-s> for example, then <C-c> should put you
+    " back into the terminal insert mode. This is because of my muscle memory
+    " for page up/down with tmux :D
+    autocmd TermOpen * nnoremap <buffer> <C-c> i
+    " Same for enter
+    autocmd TermOpen * nnoremap <buffer> <cr> i
   augroup END
 
 endif
@@ -571,7 +624,9 @@ hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=whi
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
+" Make search/visual highlights easier to read
 highlight Visual cterm=NONE ctermbg=Black ctermfg=White
+highlight Search cterm=NONE ctermbg=darkblue ctermfg=white
 
 " Oni has some annoying defaults, lets undo them
 if exists('g:gui_oni')
@@ -588,4 +643,8 @@ if exists('g:gui_oni')
   tnoremap <s-space> <space>
 endif
 
-colorscheme onedark
+"colorscheme jellybeans
+"colorscheme onedark
+
+" fzf
+set rtp+=/usr/local/opt/fzf

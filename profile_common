@@ -1,11 +1,13 @@
 #!/bin/bash
 export GOPATH="$HOME/go"
-export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:/Users/benjiegillam/.apportable/SDK/bin:/Users/benjiegillam/Library/Python/2.7/bin"
-export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/benjiegillam/go/bin
-export PATH=$PATH:$HOME/Library/Python/2.7/bin
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH="$PATH:/usr/local/opt/go/libexec/bin:/Users/benjiegillam/go/bin"
+export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+export PATH="$PATH:/usr/local/opt/mysql-client/bin"
+export PATH="$PATH:/usr/local/sbin"
 export NEWRELIC_AGENT_ENABLED=false
 export LLVM_ROOT="/usr/local/opt/emscripten/libexec/llvm/bin"
 export LLVM="/usr/local/opt/emscripten/libexec/llvm/bin"
@@ -28,6 +30,7 @@ alias gk='gitk --all&'
 alias gx='gitx --all'
 alias ghurl='git ghurl'
 alias gremote="git for-each-ref --format='%(if)%(upstream:remotename)%(then)%(upstream:remotename)%(else)origin%(end)' \$(git symbolic-ref -q HEAD)"
+alias gpr='git pull --rebase --autostash'
 alias gpu='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD)'
 alias gpuf='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) --force-with-lease'
 alias gpupr='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1'
@@ -83,22 +86,6 @@ function fixupstream {
 #  git push -u origin "${BRANCH}"
 #}
 
-function gpr {
-  # `git pull --rebase` with automatic stash and attempt to restore
-  MOD_COUNT=$(git status --porcelain --untracked-files=no | wc -l)
-  if [ $MOD_COUNT -gt 0 ]; then
-    if git stash save "git pull --rebase stash" && git pull --rebase && git stash apply && git stash drop; then
-      echo "Success";
-    else
-      echo
-      echo
-      echo "WARNING: Something failed! Read the above!"
-    fi
-  else
-    git pull --rebase
-  fi
-}
-
 # jemjie's s3cmd
 alias s3cmd_jemjie="s3cmd --config=/Users/benjiegillam/.s3cfg_jemjie --bucket-location=EU"
 alias js3cmd=s3cmd_jemjie
@@ -129,8 +116,10 @@ if [ -x hub ]; then
   eval "$(hub alias -s)"
 fi
 
-# npm autocomplete
-. <(npm --silent completion 2>/dev/null)
+## Disabled this because it's really slow (0.3s added to zsh startup)
+##
+## # npm autocomplete
+## . <(npm --silent completion 2>/dev/null)
 
 # Elixir history
 export ERL_AFLAGS="-kernel shell_history enabled"

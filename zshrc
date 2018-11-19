@@ -102,7 +102,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 export NVM_DIR="/Users/benjiegillam/.nvm"
 # HACK! nvm complains if /usr/local/bin is infront of it due to globally installed npm
-export PATH="/Users/benjiegillam/.nvm/versions/node/v9.10.1/bin:$PATH"
+export PATH="/Users/benjiegillam/.nvm/versions/node/v9.10.1/bin:/usr/local/bin:$PATH"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 autoload -U add-zsh-hook
@@ -125,3 +125,4 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

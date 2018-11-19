@@ -18,4 +18,5 @@
 \set COMP_KEYWORD_CASE upper
 \unset QUIET
 
-set search_path to app_public, app_hidden, app_private, app_jobs, app_utils, a, b, c, forum_example, forum_example_private, public;
+--set search_path to hookhaven_data, hookhaven_utils, public;
+set search_path to public, mindtree_public, mindtree_hidden, mindtree_utils, mindtree_jobs, jemsgraphs_utils, jemsgraphs_public, app_public, app_private, app_hidden, app_jobs, app_utils, app_jobs, a, b, c, d, forum_example, lookups;
