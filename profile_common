@@ -95,6 +95,7 @@ alias zr='zeus rspec'
 alias zpr='zeus parallel_rspec'
 alias migrate='nr db:migrate:dev'
 alias rollback='nr db:rollback:dev'
+alias mrm='nr db:mrm:dev'
 
 alias rshl='pkill -f "devserver.coffee hotloader"'
 alias ghpr='git pull-request'
