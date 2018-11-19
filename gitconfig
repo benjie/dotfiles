@@ -64,10 +64,14 @@
   user = Benjie
 
 [pager]
-  # Src: http://blogs.atlassian.com/2013/06/git-diff/
-  diff = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
-  show = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
-  log = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
+  ## Src: http://blogs.atlassian.com/2013/06/git-diff/
+  #diff = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
+  #show = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
+  #log = "/usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less -FRSX"
+
+  # Src: https://remysharp.com/2018/08/23/cli-improved
+  diff = diff-so-fancy | less --tabs=1,5 -FRFX
+  show = diff-so-fancy | less --tabs=1,5 -FRFX
 [merge]
 	tool = vimdiff
 [filter "lfs"]
