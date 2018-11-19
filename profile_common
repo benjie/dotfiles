@@ -66,6 +66,14 @@ function gou {
 
 alias nr='npm_config_loglevel=silent npm run'
 
+function graphql {
+  if [ "$JWT_TOKEN" == "" ]; then
+    curl -i -X POST -d "$1" -H 'Accept: application/json' -H 'Content-Type: application/graphql' http://localhost:5000/graphql
+  else
+    curl -i -X POST -d "$1" -H 'Accept: application/json' -H 'Content-Type: application/graphql' -H "Authorization: Bearer ${JWT_TOKEN}" http://localhost:5000/graphql
+  fi;
+}
+
 if [ "$SHELL" == "$(which zsh)" ]; then
   compdef _git go="git-checkout"
   compdef _git gou="git-checkout"
