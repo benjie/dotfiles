@@ -195,7 +195,7 @@ Plug 'benjie/local-npm-bin.vim'
 """" let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
-let g:neomake_typescript_enabled_makers = ['tslint', 'tsc']
+let g:neomake_typescript_enabled_makers = ['eslint', 'tsc']
 let g:neomake_graphql_enabled_makers = ['eslint']
 let g:neomake_coffee_enabled_makers = ['coffeelint']
 let g:neomake_cjsx_enabled_makers = ['coffeelint']
@@ -215,7 +215,7 @@ let g:neomake_ruby_enabled_makers = ['rubocop']
 
 Plug 'benjie/neoformat'
 let g:neoformat_enabled_javascript = ['eslint_d']
-let g:neoformat_enabled_typescript = ['prettier']
+let g:neoformat_enabled_typescript = ['eslint_d']
 "let g:neoformat_enabled_json = ['prettier']
 let g:neoformat_enabled_markdown = ['prettier']
 let g:neoformat_enabled_css = ['prettier']
@@ -232,16 +232,20 @@ augroup neoformat_group
 augroup END
 
 " Asynchronous Lint Engine (ALE)
+" Disable auto completion because it's provided by nvim-typescript
+let g:ale_completion_enabled = 0
 Plug 'w0rp/ale'
 " Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
 " Limit linters used for JavaScript.
 " Disable linting in elixir so iex works
 let g:ale_linters = {
 \  'javascript': ['eslint'],
-\  'typescript': ['tslint', 'prettier'],
+\  'typescript': ['eslint', 'tsserver'],
 \  'graphql': ['eslint'],
 \  'elixir': []
 \}
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_typescript_eslint_executable = 'eslint_d'
 "  'typescript': ['tslint', 'tsserver', 'prettier'],
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
@@ -329,8 +333,15 @@ if !exists('g:gui_oni')
   Plug 'Shougo/deoplete.nvim'
   " For Denite features
   Plug 'Shougo/denite.nvim'
+  " For function signatures in echo area
+  Plug 'Shougo/echodoc.vim'
   " Enable deoplete at startup
   let g:deoplete#enable_at_startup = 1
+  " Display type info for symbol under cursor (0 because echodoc)
+  let g:nvim_typescript#type_info_on_hold = 1
+  " Leave ale to display errors
+  let g:nvim_typescript#diagnostics_enable = 0
+
 
   augroup typescript
     autocmd!
@@ -342,6 +353,8 @@ if !exists('g:gui_oni')
     autocmd filetype typescript nnoremap TJ :TSTypeDef<cr>
     " Rename the symbol
     autocmd filetype typescript nnoremap TR :TSRename 
+    " Force sign column to remain open
+    autocmd filetype typescript setl signcolumn=yes
   augroup END
 endif
 
