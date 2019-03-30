@@ -21,7 +21,8 @@ brew install \
   heroku \
   htop \
   colordiff \
-  ripgrep
+  ripgrep \
+  watchman
 brew cask install \
   slack \
   skype \
