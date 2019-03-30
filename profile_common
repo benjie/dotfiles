@@ -37,6 +37,7 @@ alias gpupr='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && open $
 alias gpuppr='git releasenotes | pbcopy; git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/production...$(git rev-parse --abbrev-ref HEAD)?expand=1'
 alias feature_flag_changes='git diff "master@{8 days ago}..master" config/default.yml'
 alias lsofgroup="lsof  | awk '{print \$1}' | sort | uniq -c | sort -n"
+alias psqll="psql -Xv ON_ERROR_STOP=1 -v VERBOSITY=verbose"
 
 # https://www.npmjs.com/package/git-delete-squashed
 #alias git-delete-squashed='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
@@ -57,7 +58,7 @@ function watch {
   echo "$FILE" | entr -rc "$@" /_
 }
 
-alias watchpsql="entr -rc psql -1Xv ON_ERROR_STOP=1 -f /_"
+alias watchpsql="entr -rc psql -Xv ON_ERROR_STOP=1 -f /_"
 
 function gou {
   git fetch
