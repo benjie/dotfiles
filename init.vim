@@ -667,6 +667,11 @@ endif
 
 "colorscheme jellybeans
 "colorscheme onedark
+"colorscheme desert
+colorscheme morning
 
 " fzf
 set rtp+=/usr/local/opt/fzf
+
+" Keep the sign column open always
+set signcolumn=yes
