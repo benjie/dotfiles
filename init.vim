@@ -379,26 +379,29 @@ if !exists('g:gui_oni') && !exists('g:vscode')
   " For function signatures in echo area
   Plug 'Shougo/echodoc.vim'
   " Enable deoplete at startup
-  "let g:deoplete#enable_at_startup = 1
+  if has('nvim')
+    let g:deoplete#enable_at_startup = 1
+  else
+    let g:deoplete#enable_at_startup = 0
+  end
   " Display type info for symbol under cursor (0 because echodoc)
   "let g:nvim_typescript#type_info_on_hold = 1
   " Leave ale to display errors
-  "let g:nvim_typescript#diagnostics_enable = 0
+  let g:nvim_typescript#diagnostics_enable = 0
 
-
-  "augroup typescript
-  "  autocmd!
-  "  " Output the type
-  "  autocmd filetype typescript nnoremap TT :TSType<cr>
-  "  " Add import to top of file
-  "  autocmd filetype typescript nnoremap TI :TSGetCodeFix<cr>
-  "  " Jump to definition
-  "  autocmd filetype typescript nnoremap TJ :TSTypeDef<cr>
-  "  " Rename the symbol
-  "  autocmd filetype typescript nnoremap TR :TSRename 
-  "  " Force sign column to remain open
-  "  autocmd filetype typescript setl signcolumn=yes
-  "augroup END
+  augroup typescript
+    autocmd!
+    " Output the type
+    autocmd filetype typescript nnoremap TT :TSType<cr>
+    " Add import to top of file
+    autocmd filetype typescript nnoremap TI :TSImport<cr>
+    " Jump to definition
+    autocmd filetype typescript nnoremap TJ :TSTypeDef<cr>
+    " Rename the symbol
+    autocmd filetype typescript nnoremap TR :TSRename 
+    " Force sign column to remain open
+    autocmd filetype typescript setl signcolumn=yes
+  augroup END
 endif
 
 " Flow type
