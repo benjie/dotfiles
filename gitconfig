@@ -55,6 +55,7 @@
 [diff]
   renames = copies
   mnemonicprefix = true
+  algorithm = patience
 
 [url "mbp:/Users/benjiegillam/Documents/"]
   insteadOf = mbp:
