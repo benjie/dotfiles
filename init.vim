@@ -353,7 +353,7 @@ if !exists('g:gui_oni')
     " Output the type
     autocmd filetype typescript nnoremap TT :TSType<cr>
     " Add import to top of file
-    autocmd filetype typescript nnoremap TI :TSImport<cr>
+    autocmd filetype typescript nnoremap TI :TSGetCodeFix<cr>
     " Jump to definition
     autocmd filetype typescript nnoremap TJ :TSTypeDef<cr>
     " Rename the symbol
@@ -551,6 +551,9 @@ nnoremap <silent> <leader>sb {eV}k:sort /\v[^=:]+/ r<CR>
 vnoremap <silent> <leader>s :sort /\v[^=:]+/ r<CR>
 """""""""" /SORTING
 
+" Insert the current file name (except extension)
+inoremap <leader><leader>fn <C-R>=expand("%:t:r")<CR>
+
 " Remember last location in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
@@ -674,6 +677,8 @@ endif
 "colorscheme onedark
 "colorscheme desert
 colorscheme morning
+highlight Normal ctermfg=black ctermbg=white
+
 
 " fzf
 set rtp+=/usr/local/opt/fzf
