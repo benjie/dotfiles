@@ -1,3 +1,8 @@
+" I do not use modelines, and they open you up to security vulnerabilities, so
+" disable them!
+set modelines=0
+set nomodeline
+
 " Space is useless, make it useful (don't lose comma functionality!)
 " Need to do this before plugins load!
 let mapleader = "\<Space>"
