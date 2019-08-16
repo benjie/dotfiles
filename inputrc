@@ -7,3 +7,8 @@ $if psql
   "q": "b\'f\'"
   "Q": "b\"f\""
 $endif
+
+## arrow up
+"\e[A":history-search-backward
+## arrow down
+"\e[B":history-search-forward
