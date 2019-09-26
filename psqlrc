@@ -1,22 +1,35 @@
--- From http://www.craigkerstiens.com/2015/12/29/my-postgres-top-10-for-2016/
-
 \set QUIET 1
-\pset null '¤'
 
+-- History settings
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTSIZE 100000
+-- 'ignoreboth' ignores both lines starting with a space and duplicates
+\set HISTCONTROL ignoreboth
+
+-- Auto-complete in UPPERCASE
+\set COMP_KEYWORD_CASE upper
+
+-- Output layout
+\pset null '¤'
+\pset border 2
+\pset linestyle unicode
+\pset pager on
+\setenv PAGER 'pspg -bX --vertical-cursor'
 -- Customize prompts
 \set PROMPT1 '%[%033[1m%][%/] # '
 \set PROMPT2 '... # '
+-- Verbose errors
+\set VERBOSITY verbose
+-- Use best available output format
+\x auto
+
+-- Wraps all commands issued interactively in SAVEPOINTs so we can try again
+-- without having to restart the transaction
+\set ON_ERROR_ROLLBACK interactive
+
+set search_path to public, app_public, app_hidden, app_private, graphile_worker, graphile_migrate, app_jobs, app_utils, mindtree_public, mindtree_hidden, mindtree_utils, mindtree_jobs, jemsgraphs_utils, jemsgraphs_public, graphile_worker, a, b, c, d, forum_example, lookups;
 
 -- Show how long each query takes to execute
 \timing
 
--- Use best available output format
-\x auto
-\set VERBOSITY verbose
-\set HISTFILE ~/.psql_history- :DBNAME
-\set HISTCONTROL ignoredups
-\set COMP_KEYWORD_CASE upper
 \unset QUIET
-
---set search_path to hookhaven_data, hookhaven_utils, public;
-set search_path to public, mindtree_public, mindtree_hidden, mindtree_utils, mindtree_jobs, jemsgraphs_utils, jemsgraphs_public, app_public, app_private, app_hidden, app_jobs, app_utils, graphile_worker, a, b, c, d, forum_example, lookups;
