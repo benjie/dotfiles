@@ -14,7 +14,6 @@ export LLVM="/usr/local/opt/emscripten/libexec/llvm/bin"
 
 alias vim="nvim"
 export EDITOR="nvim"
-alias TextWrangler="open -a TextWrangler"
 alias gs='git status '
 alias ga='git add '
 alias gb='git branch '
@@ -53,7 +52,8 @@ alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 # entr for watching files
 function watch {
-  FILE=shift
+  FILE="$1"
+  shift
   # -r starts immediately; on change it waits for process to exit before restarting
   # -c clears the terminal
   echo "$FILE" | entr -rc "$@" /_
