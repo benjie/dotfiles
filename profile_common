@@ -152,3 +152,8 @@ fi
 
 # Elixir history
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+function docker_reset {
+  docker kill $(docker ps -q)
+  docker rm $(docker ps -a -q)
+}
