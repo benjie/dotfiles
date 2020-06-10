@@ -20,8 +20,10 @@
 \set PROMPT2 '... # '
 -- Verbose errors
 \set VERBOSITY verbose
--- Use best available output format
-\x auto
+-- -- Use best available output format
+-- \x auto
+-- Because of fancy pager, never use \x
+\x off
 
 -- Wraps all commands issued interactively in SAVEPOINTs so we can try again
 -- without having to restart the transaction
