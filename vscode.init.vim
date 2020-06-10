@@ -14,6 +14,8 @@ set splitright
 " Don't wrap around when searching
 set nowrapscan
 
+call plug#begin('~/.vim/plugged')
+
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-ragtag'
 " ragtag in all your files
@@ -40,6 +42,8 @@ Plug 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""
 "         BENJIE STUFF
