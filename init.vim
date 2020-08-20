@@ -59,8 +59,8 @@ nnoremap <silent> ]g :tabnext<CR>
 nnoremap <silent> [G :tabrewind<CR>
 nnoremap <silent> ]G :tablast<CR>
 " 'r' for 'error' (from ALE lint)
-nnoremap <silent> [r <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]r <Plug>(coc-diagnostic-next)
+"nnoremap <silent> [r <Plug>(coc-diagnostic-prev)
+"nnoremap <silent> ]r <Plug>(coc-diagnostic-next)
 
 Plug 'ctrlpvim/ctrlp.vim'
 " Don't jump to other tabs
@@ -113,8 +113,8 @@ let g:airline#extensions#default#section_truncate_width = {
     \ 'warning': 80,
     \ 'error': 80,
     \ }
-let g:airline_extensions = ['branch', 'ctrlp', 'hunks', 'quickfix', 'tabline', 'ale']
-let g:airline#extensions#ale#enabled = 1
+let g:airline_extensions = ['branch', 'ctrlp', 'hunks', 'quickfix', 'tabline', 'coc']
+let g:airline#extensions#coc#enabled = 1
 
 Plug 'vim-airline/vim-airline'
 " Make it so you can read the filenames when inactive
@@ -191,7 +191,7 @@ Plug 'jparise/vim-graphql'
 
 Plug 'benjie/local-npm-bin.vim'
 
-"Plug 'benekastah/neomake' " DISABLED in favour of vim-ale
+"Plug 'benekastah/neomake' " DISABLED in favour of vim-ale / coc.nvim
 
 """" " Because flow is a directory maker, we'll make a fake directory maker for
 """" " eslint too.
@@ -253,53 +253,53 @@ Plug 'tpope/vim-dadbod'
 Plug 'neoclide/jsonc.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Asynchronous Lint Engine (ALE)
-" Disable auto completion because it's provided by nvim-typescript
-let g:ale_completion_enabled = 0
-" Disable ALS LSP because it's provided by coc.nvim
-let g:ale_disable_lsp = 1
-" Use the loclist, open on errors
-let g:ale_set_quickfix = 0
-let g:ale_set_loclist = 1
-let g:ale_open_list = 0
-let g:ale_keep_list_window_open = 0
-Plug 'w0rp/ale'
-" Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
-" Limit linters used for JavaScript.
-" Disable linting in elixir so iex works
-let g:ale_linters = {
-\  'javascript': ['eslint'],
-\  'javascriptreact': ['eslint'],
-\  'typescript': ['eslint'],
-\  'typescriptreact': ['eslint'],
-\  'graphql': ['eslint'],
-\  'elixir': []
-\}
-let g:ale_fixers = {
-\  'javascript': ['eslint'],
-\  'javascriptreact': ['eslint'],
-\  'typescript': ['eslint'],
-\  'typescriptreact': ['eslint'],
-\  'graphql': ['eslint'],
-\  'elixir': []
-\}
-let g:ale_fix_on_save = 1
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:ale_javascriptreact_eslint_executable = 'eslint_d'
-let g:ale_typescript_eslint_executable = 'eslint_d'
-let g:ale_typescriptreact_eslint_executable = 'eslint_d'
-"  'typescript': ['tslint', 'tsserver', 'prettier'],
-highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
-highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
-let g:ale_sign_error = 'E' " could use emoji
-let g:ale_sign_warning = 'W' " could use emoji
-let g:ale_statusline_format = ['E %d', 'W %d', '']
-" %linter% is the name of the linter that provided the message
-" %s is the error or warning message
-let g:ale_echo_msg_format = '%linter% says %s'
-" Map keys to navigate between lines with errors and warnings.
-nnoremap <leader>an :ALENextWrap<cr>
-nnoremap <leader>ap :ALEPreviousWrap<cr>
+"" Asynchronous Lint Engine (ALE)
+"" Disable auto completion because it's provided by nvim-typescript
+"let g:ale_completion_enabled = 0
+"" Disable ALS LSP because it's provided by coc.nvim
+"let g:ale_disable_lsp = 1
+"" Use the loclist, open on errors
+"let g:ale_set_quickfix = 0
+"let g:ale_set_loclist = 1
+"let g:ale_open_list = 0
+"let g:ale_keep_list_window_open = 0
+"Plug 'w0rp/ale'
+"" Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
+"" Limit linters used for JavaScript.
+"" Disable linting in elixir so iex works
+"let g:ale_linters = {
+"\  'javascript': ['eslint'],
+"\  'javascriptreact': ['eslint'],
+"\  'typescript': ['eslint'],
+"\  'typescriptreact': ['eslint'],
+"\  'graphql': ['eslint'],
+"\  'elixir': []
+"\}
+"let g:ale_fixers = {
+"\  'javascript': ['eslint'],
+"\  'javascriptreact': ['eslint'],
+"\  'typescript': ['eslint'],
+"\  'typescriptreact': ['eslint'],
+"\  'graphql': ['eslint'],
+"\  'elixir': []
+"\}
+"let g:ale_fix_on_save = 1
+"let g:ale_javascript_eslint_executable = 'eslint_d'
+"let g:ale_javascriptreact_eslint_executable = 'eslint_d'
+"let g:ale_typescript_eslint_executable = 'eslint_d'
+"let g:ale_typescriptreact_eslint_executable = 'eslint_d'
+""  'typescript': ['tslint', 'tsserver', 'prettier'],
+"highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+"highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+"let g:ale_sign_error = 'E' " could use emoji
+"let g:ale_sign_warning = 'W' " could use emoji
+"let g:ale_statusline_format = ['E %d', 'W %d', '']
+"" %linter% is the name of the linter that provided the message
+"" %s is the error or warning message
+"let g:ale_echo_msg_format = '%linter% says %s'
+"" Map keys to navigate between lines with errors and warnings.
+"nnoremap <leader>an :ALENextWrap<cr>
+"nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 
 Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
@@ -731,7 +731,7 @@ set signcolumn=yes
 "-------------------------------------------------------------------------------
 " coc.nvim config
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=3
 " Default 4s is slooooow
 set updatetime=300
 
@@ -777,10 +777,10 @@ else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-" Use `[h` and `]h` to navigate diagnostics
+" Use `[r` and `]r` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [h <Plug>(coc-diagnostic-prev)
-nmap <silent> ]h <Plug>(coc-diagnostic-next)
+nmap <silent> [r <Plug>(coc-diagnostic-prev)
+nmap <silent> ]r <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -812,7 +812,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType javascript,javascriptreact,typescript,typescriptreact,json,jsonc setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
