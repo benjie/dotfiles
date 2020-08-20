@@ -253,50 +253,50 @@ Plug 'tpope/vim-dadbod'
 Plug 'neoclide/jsonc.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"" Asynchronous Lint Engine (ALE)
-"" Disable auto completion because it's provided by nvim-typescript
-"let g:ale_completion_enabled = 0
-"" Disable ALS LSP because it's provided by coc.nvim
-"let g:ale_disable_lsp = 1
-"" Use the loclist, open on errors
-"let g:ale_set_quickfix = 0
-"let g:ale_set_loclist = 1
-"let g:ale_open_list = 0
-"let g:ale_keep_list_window_open = 0
-"Plug 'w0rp/ale'
-"" Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
-"" Limit linters used for JavaScript.
-"" Disable linting in elixir so iex works
-"let g:ale_linters = {
-"\  'javascript': ['eslint'],
-"\  'javascriptreact': ['eslint'],
-"\  'typescript': ['eslint'],
-"\  'typescriptreact': ['eslint'],
-"\  'graphql': ['eslint'],
-"\  'elixir': []
-"\}
-"let g:ale_fixers = {
-"\  'javascript': ['eslint'],
-"\  'javascriptreact': ['eslint'],
-"\  'typescript': ['eslint'],
-"\  'typescriptreact': ['eslint'],
-"\  'graphql': ['eslint'],
-"\  'elixir': []
-"\}
+" Asynchronous Lint Engine (ALE)
+" Disable auto completion because it's provided by nvim-typescript
+let g:ale_completion_enabled = 0
+" Disable ALS LSP because it's provided by coc.nvim
+let g:ale_disable_lsp = 1
+" Use the loclist, open on errors
+let g:ale_set_quickfix = 0
+let g:ale_set_loclist = 1
+let g:ale_open_list = 0
+let g:ale_keep_list_window_open = 0
+Plug 'w0rp/ale'
+" Based on recommended settings from Flow team: https://flow.org/en/docs/editors/vim/
+" Limit linters used for JavaScript.
+" Disable linting in elixir so iex works
+let g:ale_linters = {
+\  'javascript': ['eslint'],
+\  'javascriptreact': ['eslint'],
+\  'typescript': ['eslint'],
+\  'typescriptreact': ['eslint'],
+\  'graphql': ['eslint'],
+\  'elixir': []
+\}
+let g:ale_fixers = {
+\  'javascript': ['eslint'],
+\  'javascriptreact': ['eslint'],
+\  'typescript': ['eslint'],
+\  'typescriptreact': ['eslint'],
+\  'graphql': ['eslint'],
+\  'elixir': []
+\}
 "let g:ale_fix_on_save = 1
-"let g:ale_javascript_eslint_executable = 'eslint_d'
-"let g:ale_javascriptreact_eslint_executable = 'eslint_d'
-"let g:ale_typescript_eslint_executable = 'eslint_d'
-"let g:ale_typescriptreact_eslint_executable = 'eslint_d'
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_javascriptreact_eslint_executable = 'eslint_d'
+let g:ale_typescript_eslint_executable = 'eslint_d'
+let g:ale_typescriptreact_eslint_executable = 'eslint_d'
 ""  'typescript': ['tslint', 'tsserver', 'prettier'],
-"highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
-"highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
-"let g:ale_sign_error = 'E' " could use emoji
-"let g:ale_sign_warning = 'W' " could use emoji
-"let g:ale_statusline_format = ['E %d', 'W %d', '']
-"" %linter% is the name of the linter that provided the message
-"" %s is the error or warning message
-"let g:ale_echo_msg_format = '%linter% says %s'
+highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_sign_error = 'E' " could use emoji
+let g:ale_sign_warning = 'W' " could use emoji
+let g:ale_statusline_format = ['E %d', 'W %d', '']
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter% says %s'
 "" Map keys to navigate between lines with errors and warnings.
 "nnoremap <leader>an :ALENextWrap<cr>
 "nnoremap <leader>ap :ALEPreviousWrap<cr>
