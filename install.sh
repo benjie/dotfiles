@@ -8,6 +8,7 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -s "`pwd`"/vimrc ../.vimrc
 ln -s "`pwd`"/init.vim ../.config/nvim/init.vim
+ln -s "`pwd`"/coc-settings.json ../.config/nvim/coc-settings.json
 ln -s "`pwd`"/vscode.init.vim ../.config/nvim/vscode.init.vim
 ln -s "`pwd`"/zshrc ../.zshrc
 ln -s "`pwd`"/profile_common ../.profile_common
