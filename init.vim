@@ -30,6 +30,17 @@ set nowrapscan
 " in order for <c-h> to work as expected
 " -- https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 
+" Disable banner
+let g:netrw_banner = 0
+" Use vertical rather than horizontal split for preview
+let g:netrw_preview   = 1
+" Use tree view in netrw
+let g:netrw_liststyle = 3
+" Only use 20% of width when opening split/preview
+let g:netrw_winsize   = 20
+" Browse in vertical split
+let g:netrw_browse_split = 2
+
 call plug#begin('~/.vim/plugged')
 if !exists('g:gui_oni') && !exists('g:vscode')
   "Plug 'tpope/vim-sensible'
