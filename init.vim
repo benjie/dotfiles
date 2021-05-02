@@ -202,7 +202,8 @@ Plug 'jparise/vim-graphql'
 
 Plug 'benjie/local-npm-bin.vim'
 
-"Plug 'benekastah/neomake' " DISABLED in favour of vim-ale / coc.nvim
+" For project-level build results; e.g. working through errors from `tsc`
+Plug 'benekastah/neomake'
 
 """" " Because flow is a directory maker, we'll make a fake directory maker for
 """" " eslint too.
@@ -216,14 +217,16 @@ Plug 'benjie/local-npm-bin.vim'
 """" autocmd! BufWinEnter *.js,*.jsx silent Neomake! flow eslint_d
 """" let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
 """" let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_jsx_enabled_makers = ['eslint']
-let g:neomake_typescript_enabled_makers = ['eslint', 'tsc']
-let g:neomake_graphql_enabled_makers = ['eslint']
-let g:neomake_coffee_enabled_makers = ['coffeelint']
-let g:neomake_cjsx_enabled_makers = ['coffeelint']
-let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-D']
-let g:neomake_ruby_enabled_makers = ['rubocop']
+let g:neomake_javascript_enabled_makers = []
+let g:neomake_javascriptreact_enabled_makers = []
+let g:neomake_jsx_enabled_makers = []
+let g:neomake_typescript_enabled_makers = ['tsc']
+let g:neomake_typescriptreact_enabled_makers = ['tsc']
+let g:neomake_graphql_enabled_makers = []
+"let g:neomake_coffee_enabled_makers = ['coffeelint']
+"let g:neomake_cjsx_enabled_makers = ['coffeelint']
+"let g:neomake_ruby_rubocop_args = ['--format', 'emacs', '-D']
+"let g:neomake_ruby_enabled_makers = ['rubocop']
 
 "augroup neomake_group
 "  autocmd!
@@ -294,7 +297,7 @@ let g:ale_fixers = {
 \  'graphql': ['eslint'],
 \  'elixir': []
 \}
-"let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_javascriptreact_eslint_executable = 'eslint_d'
 let g:ale_typescript_eslint_executable = 'eslint_d'
@@ -307,7 +310,7 @@ let g:ale_sign_warning = 'W' " could use emoji
 let g:ale_statusline_format = ['E %d', 'W %d', '']
 " %linter% is the name of the linter that provided the message
 " %s is the error or warning message
-let g:ale_echo_msg_format = '%linter% says %s'
+let g:ale_echo_msg_format = '%code: %%s (%linter%)'
 "" Map keys to navigate between lines with errors and warnings.
 "nnoremap <leader>an :ALENextWrap<cr>
 "nnoremap <leader>ap :ALEPreviousWrap<cr>
@@ -603,7 +606,8 @@ vnoremap <silent> <leader>s :sort /\v[^=:]+/ r<CR>
 """""""""" /SORTING
 
 " Insert the current file name (except extension)
-inoremap <leader><leader>fn <C-R>=expand("%:t:r")<CR>
+" Disabled because it causes a pause after pressing space whilst editing.
+"inoremap <leader><leader>fn <C-R>=expand("%:t:r")<CR>
 
 " Remember last location in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
@@ -742,7 +746,7 @@ set signcolumn=yes
 "-------------------------------------------------------------------------------
 " coc.nvim config
 " Give more space for displaying messages.
-set cmdheight=3
+"set cmdheight=1
 " Default 4s is slooooow
 set updatetime=300
 
@@ -823,7 +827,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType javascript,javascriptreact,typescript,typescriptreact,json,jsonc setl formatexpr=CocAction('formatSelected')
+  "autocmd FileType javascript,javascriptreact,typescript,typescriptreact,json,jsonc setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -870,21 +874,21 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 " End of coc.nvim setup
 "-------------------------------------------------------------------------------
 
