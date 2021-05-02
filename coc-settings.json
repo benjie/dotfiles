@@ -7,6 +7,7 @@
   "diagnostic.infoSign": "👀",
   "diagnostic.hintSign": "💡",
   "coc.preferences.colorSupport": true,
+  "tsserver.maxTsServerMemory": 0,
   "languageserver": {
     "graphql": {
       "command": "graphql-lsp",
