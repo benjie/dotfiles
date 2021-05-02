@@ -1,6 +1,9 @@
 #!/bin/bash
+export UID
 export GOPATH="$HOME/go"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
+export DENO_INSTALL="/home/benjie/.deno"
+export PATH="$PATH:$DENO_INSTALL/bin"
 export PATH="$PATH:/Users/benjiegillam/.apportable/SDK/bin:/Users/benjiegillam/Library/Python/2.7/bin"
 export PATH="$PATH:/usr/local/opt/go/libexec/bin:/Users/benjiegillam/go/bin"
 export PATH="$PATH:$HOME/Library/Python/2.7/bin"
@@ -8,24 +11,51 @@ export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH="$PATH:/usr/local/opt/mysql-client/bin"
 export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:~/swift/swift-DEVELOPMENT-SNAPSHOT-2020-08-04-a-ubuntu18.04/usr/bin"
+
 export NEWRELIC_AGENT_ENABLED=false
 export LLVM_ROOT="/usr/local/opt/emscripten/libexec/llvm/bin"
 export LLVM="/usr/local/opt/emscripten/libexec/llvm/bin"
 
 alias vim="nvim"
 export EDITOR="nvim"
+
+source /usr/share/bash-completion/completions/git
 alias gs='git status '
+__git_complete gs _git_status
+
 alias ga='git add '
+__git_complete ga _git_add
+
 alias gb='git branch '
+__git_complete gb _git _branch
+
 alias gc='git commit'
+__git_complete gc _git_commit
+
 alias gd='git diff'
+__git_complete gd _git_diff
+
 alias gds='git diff --staged'
+__git_complete gd _git_diff
+
 alias gdp='git diff -w  --word-diff-regex=[^[:space:]]'
+__git_complete gdp _git_diff
+
 alias go='git checkout '
+__git_complete go _git_checkout
+
 #alias gr='git reset '
+
 alias gt='git tag '
+__git_complete gt _git_tag
+
 alias gr='git rebase '
+__git_complete gr _git_rebase
+
 alias gri='git rebase -i '
+__git_complete gr _git_rebase
+
 alias gk='gitk --all&'
 alias gx='gitx --all'
 alias ghurl='git ghurl'
@@ -33,8 +63,8 @@ alias gremote="git for-each-ref --format='%(if)%(upstream:remotename)%(then)%(up
 alias gpr='git pull --rebase --autostash'
 alias gpu='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD)'
 alias gpuf='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) --force-with-lease'
-alias gpupr='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1'
-alias gpuppr='git releasenotes | pbcopy; git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && open $(ghurl)/compare/production...$(git rev-parse --abbrev-ref HEAD)?expand=1'
+alias gpupr='git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && xdg-open $(ghurl)/compare/$(git rev-parse --abbrev-ref HEAD)?expand=1'
+alias gpuppr='git releasenotes | pbcopy; git push -u $(gremote) $(git rev-parse --abbrev-ref HEAD) && xdg-open $(ghurl)/compare/production...$(git rev-parse --abbrev-ref HEAD)?expand=1'
 alias feature_flag_changes='git diff "master@{8 days ago}..master" config/default.yml'
 alias lsofgroup="lsof  | awk '{print \$1}' | sort | uniq -c | sort -n"
 alias psqll="psql -Xv ON_ERROR_STOP=1 -v VERBOSITY=verbose"
@@ -91,7 +121,6 @@ fi
 
 alias got='git '
 alias get='git '
-alias MacVim="open -a MacVim.app"
 
 alias z='zeus'
 alias zr='zeus rspec'
@@ -118,7 +147,6 @@ function fixupstream {
 # jemjie's s3cmd
 alias s3cmd_jemjie="s3cmd --config=/Users/benjiegillam/.s3cfg_jemjie --bucket-location=EU"
 alias js3cmd=s3cmd_jemjie
-alias chrome="open -a 'Google Chrome'"
 
 # tig pull - for doing a git pull and then having `tig` show you the changes.
 alias 'tigpull'='RANGE=$(git -c color.ui=always pull | tee /dev/tty | grep "^Updating .*\.\." | sed "s/Updating //"); if [ "$RANGE" != "" ]; then tig $RANGE; fi'
@@ -131,7 +159,7 @@ alias 'mocha-bg'='./node_modules/.bin/mocha --reporter spec --compilers coffee:c
 
 # I want to be able to open more than a couple files, OSX, please
 # I needed to increase this even more because of all the file watching I do
-ulimit -n 10240
+#ulimit -n 10240
 
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -153,7 +181,18 @@ fi
 # Elixir history
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -o"
+alias open="xdg-open"
+
 function docker_reset {
   docker kill $(docker ps -q)
   docker rm $(docker ps -a -q)
 }
+
+function docker_wipe_everything_everywhere {
+  docker_reset
+  docker volume prune
+}
+
+. ~/.profile_common.local
