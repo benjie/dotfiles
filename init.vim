@@ -143,6 +143,18 @@ command! -nargs=* -complete=file Ag GrepperAg <args>
 
 Plug 'nathanaelkane/vim-indent-guides'
 
+" Entering multiselect:
+"   Ctrl-N to multiselect current word
+"   Ctrl up/down to add vertical cursors
+"   Shift-arrows to start selecting pattern to multiselect
+" Once in multiselect:
+"   Two modes, switch with <tab>
+"   n/N to get next/prev occurrance
+"   [/] to jump to next/prev cursor
+"   q to skip current cursor and find next
+"   Q to remove current cursor and go back to previous
+"   Regular vim (i,a,I,A,r,R,c,...)
+" :help visual-multi
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " The following was for the previous multiple cursors plugin:
