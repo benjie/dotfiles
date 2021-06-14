@@ -26,4 +26,4 @@ ln -s "`pwd`"/inputrc ../.inputrc
 mkdir -p ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/plugin/after/* ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/UltiSnips ../.vim/UltiSnips
-nvim +PlugInstall +qall
+nvim +PlugInstall +"CocInstall coc-tsserver" +qall
