@@ -143,39 +143,13 @@ command! -nargs=* -complete=file Ag GrepperAg <args>
 
 Plug 'nathanaelkane/vim-indent-guides'
 
-Plug 'terryma/vim-multiple-cursors'
-let g:multi_cursor_exit_from_visual_mode = 0
-let g:multi_cursor_exit_from_insert_mode = 0
-let g:multi_cursor_insert_maps={ "\<C-r>": 1 }
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  " For some reason the highlights weren't working in Oni; so this enforces
-  " the highlight rules any time multiple cursors is engaged.
-  highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
-  highlight link multiple_cursors_visual Visual
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-  "if deoplete#is_enabled()
-  "  call deoplete#disable()
-  "  let g:deoplete_is_enable_before_multi_cursors = 1
-  "else
-  "  let g:deoplete_is_enable_before_multi_cursors = 0
-  "endif
-endfunction
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-  "if g:deoplete_is_enable_before_multi_cursors
-  "  call deoplete#enable()
-  "endif
-endfunction
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-" Search for the keyword using *; then Alt-j to turn search results into cursors
-nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
-vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
+" The following was for the previous multiple cursors plugin:
+"Plug 'terryma/vim-multiple-cursors'
+"" Search for the keyword using *; then Alt-j to turn search results into cursors
+"nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
+"vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
 
 " Disabled because I don't use it (it clashes with `vic` from gitgutter which I prefer)
 "Plug 'tomtom/tcomment_vim'
