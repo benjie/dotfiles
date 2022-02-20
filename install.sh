@@ -1,4 +1,17 @@
 #!/bin/bash
+echo <<HERE
+
+Don't forget to:
+
+- install neovim (from PPA)
+- install diff-so-fancy (from PPA)
+- sudo apt install powerline neovim python3-neovim python3-pip
+- pip3 install powerline-status
+
+Press enter to continue
+
+HERE
+read
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.config/nvim
