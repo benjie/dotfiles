@@ -5,7 +5,9 @@ Don't forget to:
 
 - install neovim (from PPA)
 - install diff-so-fancy (from PPA)
-- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential
+- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag
+- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+- nvm install 16
 - pip3 install powerline-status
 
 Press enter to continue
