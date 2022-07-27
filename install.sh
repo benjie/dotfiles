@@ -5,7 +5,7 @@ Don't forget to:
 
 - install neovim (from PPA)
 - install diff-so-fancy (from PPA)
-- sudo apt install powerline neovim python3-neovim python3-pip
+- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential
 - pip3 install powerline-status
 
 Press enter to continue
