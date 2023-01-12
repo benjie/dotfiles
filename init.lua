@@ -60,6 +60,37 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+  -- Benjie's selection of plugins
+  use 'christoomey/vim-tmux-navigator'
+  use 'tpope/vim-abolish'
+  use 'tpope/vim-eunuch'
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-git'
+
+  use 'tpope/vim-ragtag'
+  use 'tpope/vim-repeat'
+  use 'tpope/vim-surround'
+
+  use 'tpope/vim-unimpaired'
+  -- Plug 'nathanaelkane/vim-indent-guides'
+  -- Entering multiselect:
+  --   Ctrl-N to multiselect current word
+  --   Ctrl up/down to add vertical cursors
+  --   Shift-arrows to start selecting pattern to multiselect
+  -- Once in multiselect:
+  --   Two modes, switch with <tab>
+  --   n/N to get next/prev occurrance
+  --   [/] to jump to next/prev cursor
+  --   q to skip current cursor and find next
+  --   Q to remove current cursor and go back to previous
+  --   Regular vim (i,a,I,A,r,R,c,...)
+  -- :help visual-multi
+  use 'mg979/vim-visual-multi' --, {'branch': 'master'}
+  use 'michaeljsmith/vim-indent-object'
+  use 'tpope/vim-dotenv'
+  -- use 'tpope/vim-dadbod'
+  use 'sbdchd/neoformat'
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -202,7 +233,8 @@ pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader><space>', ':noh<cr>', { desc = '[ ] Clear highlights' })
+vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = 'Find existing [b]uffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -211,6 +243,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
+vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -341,7 +374,7 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
 
   sumneko_lua = {
     Lua = {
@@ -424,5 +457,105 @@ cmp.setup {
   },
 }
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+vim.o.hlsearch = true
+-- Benjie's old configuration options, copied over
+vim.o.modelines = 0
+vim.o.modeline = false
+-- vim.o.termguicolors = true
+vim.o.splitbelow = true
+vim.o.splitright = true
+--vim.o.mouse = 'a'
+-- vim.o.guicursor="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
+vim.o.wrapscan = false
+
+-- Disable banner
+vim.g.netrw_banner = 0
+-- Use vertical rather than horizontal split for preview
+vim.g.netrw_preview   = 1
+-- Use tree view in netrw
+vim.g.netrw_liststyle = 3
+-- Only use 20% of width when opening split/preview
+vim.g.netrw_winsize   = 20
+-- Browse in vertical split
+vim.g.netrw_browse_split = 2
+
+
+-- ragtag in all your files
+vim.g.ragtag_global_maps = 1
+-- Add/remove current file to arguments list, for use with [a & ]a
+vim.keymap.set('n', '<leader>a', ':argadd %<cr>')
+vim.keymap.set('n', '<leader>A', ':argdel %<cr>')
+-- unimpaired-like tab navigation
+vim.keymap.set('n', 'tt', ':tabnew<CR>', { silent = true })
+vim.keymap.set('n', '[g', ':tabprevious<CR>', { silent = true })
+vim.keymap.set('n', ']g', ':tabnext<CR>', { silent = true })
+vim.keymap.set('n', '[G', ':tabrewind<CR>', { silent = true })
+vim.keymap.set('n', ']G', ':tablast<CR>', { silent = true })
+-- 'r' for 'error' (from ALE lint)
+--nnoremap <silent> [r <Plug>(coc-diagnostic-prev)
+--nnoremap <silent> ]r <Plug>(coc-diagnostic-next)
+
+-- To solve issues with DB timeouts when lots of tables/columns
+vim.g.vim_dadbod_completion_force_context = 1
+
+
+-- Don't unload buffers when switching (preserves undo history):
+vim.o.hidden = true
+
+-- Make vim wait less time for <Esc> codes.
+vim.o.ttimeoutlen=-1
+-- Seems to be required to fix neovim?
+vim.o.ttimeout = false
+
+-- Whitespace stuff
+vim.o.wrap = false
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.o.list = true
+vim.o.listchars="tab:  ,trail:·"
+
+-- Maximize current pane
+--nnoremap <C-w>a <C-w>\|<C-w>_
+vim.keymap.set('n', '<C-w>a', '<C-w>|<C-w>_')
+
+-- Remember last location in file
+-- au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+vim.api.nvim_create_autocmd('BufReadPost', {
+  pattern = '*',
+  callback = function()
+    if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
+      vim.api.nvim_command("normal g'\"")
+    end
+  end
+})
+
+-- No save backup by .swp
+vim.o.wb = false
+vim.o.swapfile = false
+vim.o.ar = false
+
+-- Persistent undo
+vim.o.undodir = vim.fn.expand('$HOME/.vimundo')
+vim.o.undofile = true
+
+vim.g.neoformat_enabled_javascript = {'prettier', 'eslint_d'}
+vim.g.neoformat_enabled_javascriptreact = {'prettier', 'eslint_d'}
+vim.g.neoformat_enabled_typescript = {'prettier', 'eslint_d'}
+vim.g.neoformat_enabled_typescriptreact = {'prettier', 'eslint_d'}
+ -- let g:neoformat_enabled_json = {'prettier'}
+vim.g.neoformat_enabled_markdown = {'prettier'}
+vim.g.neoformat_enabled_css = {'prettier'}
+vim.g.neoformat_enabled_graphql = {'prettier'}
+local neoformat_group = vim.api.nvim_create_augroup('Neoformat', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = neoformat_group,
+  pattern = 'javascript',
+  command = 'augroup neoformatauto | autocmd! BufWritePre <buffer> silent Neoformat | augroup END',
+})
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = neoformat_group,
+  pattern = '*.js,*.jsx,*.ts,*.tsx,*.css,*.graphql,*.json,*.md',
+  command = 'silent Neoformat',
+})
