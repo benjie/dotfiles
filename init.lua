@@ -50,7 +50,7 @@ require('packer').startup(function(use)
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
+  -- use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
@@ -64,11 +64,11 @@ require('packer').startup(function(use)
   use 'christoomey/vim-tmux-navigator'
   use 'tpope/vim-abolish'
   use 'tpope/vim-eunuch'
-  use 'tpope/vim-fugitive'
+  --use 'tpope/vim-fugitive'
   use 'tpope/vim-git'
 
   use 'tpope/vim-ragtag'
-  use 'tpope/vim-repeat'
+  --use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
 
   use 'tpope/vim-unimpaired'
@@ -90,6 +90,29 @@ require('packer').startup(function(use)
   use 'tpope/vim-dotenv'
   -- use 'tpope/vim-dadbod'
   use 'sbdchd/neoformat'
+
+  use {
+  "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -151,7 +174,11 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
+-- vim.cmd [[colorscheme onedark]]
+require('onedark').setup {
+    style = 'darker'
+}
+require('onedark').load()
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -186,11 +213,31 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help lualine.txt`
 require('lualine').setup {
   options = {
-    icons_enabled = false,
+    icons_enabled = true,
     theme = 'onedark',
     component_separators = '|',
     section_separators = '',
   },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {{'filename', path = 1, shorting_target = 40}},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {{'filename', path = 1, shorting_target = 40}},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
 }
 
 -- Enable Comment.nvim
@@ -198,10 +245,10 @@ require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
-}
+-- require('indent_blankline').setup {
+--   char = '┊',
+--   show_trailing_blankline_indent = false,
+-- }
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
@@ -234,6 +281,11 @@ pcall(require('telescope').load_extension, 'fzf')
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', ':noh<cr>', { desc = '[ ] Clear highlights' })
+-- cd to the directory containing the file in the buffer
+vim.keymap.set('n', '<leader>cd', ':lcd %:h<cr>', { desc = '[C]hange [D]irectory', silent = true })
+
+-- mkdir the folder for the current buffer
+vim.keymap.set('n', '<leader>md', ':!mkdir -p %:h<cr><cr>', { desc = '[M]ake [D]irectory', silent = true })
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = 'Find existing [b]uffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -457,6 +509,8 @@ cmp.setup {
   },
 }
 
+vim.o.ignorecase = false
+vim.o.smartcase = false
 vim.o.hlsearch = true
 -- Benjie's old configuration options, copied over
 vim.o.modelines = 0
@@ -513,8 +567,8 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.expandtab = true
-vim.o.list = true
-vim.o.listchars="tab:  ,trail:·"
+--vim.o.list = true
+--vim.o.listchars="tab:  ,trail:·"
 
 -- Maximize current pane
 --nnoremap <C-w>a <C-w>\|<C-w>_
@@ -559,3 +613,30 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.js,*.jsx,*.ts,*.tsx,*.css,*.graphql,*.json,*.md',
   command = 'silent Neoformat',
 })
+
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
+  {silent = true, noremap = true}
+)
