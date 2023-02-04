@@ -68,7 +68,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-git'
 
   use 'tpope/vim-ragtag'
-  --use 'tpope/vim-repeat'
+  use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
 
   use 'tpope/vim-unimpaired'
@@ -90,6 +90,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-dotenv'
   -- use 'tpope/vim-dadbod'
   use 'sbdchd/neoformat'
+  use 'Olical/vim-enmasse'
 
   use {
   "folke/trouble.nvim",
@@ -107,9 +108,9 @@ require('packer').startup(function(use)
     requires = "nvim-lua/plenary.nvim",
     config = function()
       require("todo-comments").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
+        keywords = {
+          ENHANCE = { icon = " ", color = "hint", alt = { "ENHANCEMENT", "IMPROVEMENT", "IMPROVE" } }
+        }
       }
     end
   }
@@ -400,7 +401,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<C-d>', vim.lsp.buf.signature_help, 'Signature [D]ocumentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -614,13 +615,21 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   command = 'silent Neoformat',
 })
 
-vim.keymap.set("n", "]t", function()
-  require("todo-comments").jump_next()
-end, { desc = "Next todo comment" })
+vim.keymap.set("n", "]r", function()
+    require("trouble").next({skip_groups = true, jump = true});
+end, { desc = "Next t[r]ouble item" })
 
-vim.keymap.set("n", "[t", function()
-  require("todo-comments").jump_prev()
-end, { desc = "Previous todo comment" })
+vim.keymap.set("n", "[r", function()
+  require("trouble").previous({skip_groups = true, jump = true});
+end, { desc = "Previous t[r]ouble item" })
+
+vim.keymap.set("n", "[R", function()
+  require("trouble").first({skip_groups = true, jump = true});
+end, { desc = "First t[r]ouble item" })
+
+vim.keymap.set("n", "]R", function()
+  require("trouble").last({skip_groups = true, jump = true});
+end, { desc = "Last t[r]ouble item" })
 
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
   {silent = true, noremap = true}
@@ -640,3 +649,9 @@ vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
 vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
   {silent = true, noremap = true}
 )
+
+vim.keymap.set("n", "<leader>rs", function()
+  vim.lsp.stop_client(vim.lsp.get_active_clients())
+  vim.api.nvim_command("e!")
+end, {desc = "[R]e[S]tart LSP"})
+
