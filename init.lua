@@ -115,6 +115,13 @@ require('packer').startup(function(use)
     end
   }
 
+  use 'benjie/local-npm-bin.vim'
+
+  -- Time tracking
+  use 'wakatime/vim-wakatime'
+
+  use 'mhinz/vim-grepper'
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -429,7 +436,7 @@ local servers = {
   -- rust_analyzer = {},
   tsserver = {},
 
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
