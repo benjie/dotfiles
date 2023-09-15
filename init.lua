@@ -124,6 +124,27 @@ require('packer').startup(function(use)
 
   use 'mhinz/vim-grepper'
 
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+  }
+
+  use {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
+
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -480,6 +501,23 @@ require('fidget').setup()
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+cmp.setup({
+  mapping = {
+    ["<Tab>"] = vim.schedule_wrap(function(fallback)
+      if cmp.visible() and has_words_before() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+      else
+        fallback()
+      end
+    end),
+  },
+})
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -492,11 +530,12 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
+    -- ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<Tab>'] = vim.schedule_wrap(function(fallback)
+      if cmp.visible() and has_words_before() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       else
@@ -514,10 +553,21 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
 }
+
+-- lspkind.lua
+-- local lspkind = require("lspkind")
+-- lspkind.init({
+--   symbol_map = {
+--     Copilot = "",
+--   },
+-- })
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 
 vim.o.ignorecase = false
 vim.o.smartcase = false
@@ -664,3 +714,6 @@ vim.keymap.set("n", "<leader>rs", function()
   vim.api.nvim_command("e!")
 end, {desc = "[R]e[S]tart LSP"})
 
+-- vim.keymap.set("i", "<C-X>c", 'copilot#Accept("<CR>")',
+--   {expr=true, silent=true, desc = "[X]omplete [C]opilot"})
+-- vim.g.copilot_no_tab_map = true
