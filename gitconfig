@@ -60,6 +60,7 @@
   renames = copies
   mnemonicprefix = true
   algorithm = patience
+  colorMoved = true
 
 [url "mbp:/Users/benjiegillam/Documents/"]
   insteadOf = mbp:
