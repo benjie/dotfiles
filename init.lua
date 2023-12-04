@@ -36,7 +36,7 @@ require('packer').startup(function(use)
   use { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     run = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
+      -- pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
   }
 
@@ -124,10 +124,12 @@ require('packer').startup(function(use)
 
   use 'mhinz/vim-grepper'
 
+  use 'onsails/lspkind.nvim'
+
   use {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     config = function()
       require("copilot").setup({
         suggestion = { enabled = false },
@@ -337,7 +339,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'bash', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'vim' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -474,28 +476,15 @@ require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Setup mason so it can manage external tooling
-require('mason').setup()
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
-  end,
-}
-
 -- Turn on lsp status information
 require('fidget').setup()
+
+local lspkind = require("lspkind")
+lspkind.init({
+  symbol_map = {
+    Copilot = "",
+  },
+})
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -506,23 +495,16 @@ local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
-cmp.setup({
-  mapping = {
-    ["<Tab>"] = vim.schedule_wrap(function(fallback)
-      if cmp.visible() and has_words_before() then
-        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-      else
-        fallback()
-      end
-    end),
-  },
-})
 
 cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
+  },
+  window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -552,20 +534,49 @@ cmp.setup {
       end
     end, { 'i', 's' }),
   },
-  sources = {
+  sources = cmp.config.sources({
     { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-  },
+  }, {
+    { name = 'buffer' }
+  }),
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+
+      -- -- The function below will be called before any actual modifications from lspkind
+      -- -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+      -- before = function (entry, vim_item)
+      --   ...
+      --   return vim_item
+      -- end
+    })
+  }
 }
 
--- lspkind.lua
--- local lspkind = require("lspkind")
--- lspkind.init({
---   symbol_map = {
---     Copilot = "",
---   },
--- })
+-- Setup mason so it can manage external tooling
+require('mason').setup()
+
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+
+mason_lspconfig.setup {
+  ensure_installed = vim.tbl_keys(servers),
+}
+
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require('lspconfig')[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers[server_name],
+    }
+  end,
+}
+
 
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 
@@ -670,7 +681,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = neoformat_group,
-  pattern = '*.js,*.jsx,*.ts,*.tsx,*.css,*.graphql,*.json,*.md',
+  pattern = '*.js,*.mjs,*.cjs,*.jsx,*.mjsx,*.cjsx,*.ts,*.mts,*.cts,*.tsx,*.mtsx,*.ctsx,*.css,*.graphql,*.json,*.md',
   command = 'silent Neoformat',
 })
 
@@ -717,3 +728,23 @@ end, {desc = "[R]e[S]tart LSP"})
 -- vim.keymap.set("i", "<C-X>c", 'copilot#Accept("<CR>")',
 --   {expr=true, silent=true, desc = "[X]omplete [C]opilot"})
 -- vim.g.copilot_no_tab_map = true
+
+--[[ Generate a uuid and place it at current cursor position --]]
+local insert_uuid = function()
+    -- Get row and column cursor,
+    -- use unpack because it's a tuple.
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local uuid = string.gsub(vim.fn.system('uuidgen -r') or "", '[\n]', '')
+    -- Notice the uuid is given as an array parameter, you can pass multiple strings.
+    -- Params 2-5 are for start and end of row and columns.
+    -- See earlier docs for param clarification or `:help nvim_buf_set_text.
+    vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, { uuid })
+    vim.api.nvim_win_set_cursor(0, { row, col + string.len(uuid) })
+end
+
+vim.keymap.set('i', '<C-u>', insert_uuid, { noremap = true, silent = true })
+
+-- endash
+vim.cmd('iabbrev .- –')
+-- emdash
+vim.cmd('iabbrev ..- —')
