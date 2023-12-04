@@ -1,11 +1,14 @@
 #!/bin/bash
-echo <<HERE
+cat <<HERE
 
 Don't forget to:
 
-- install neovim (from PPA)
-- install diff-so-fancy (from PPA)
-- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag
+- sudo add-apt-repository ppa:neovim-ppa/stable
+- sudo add-apt-repository ppa:aos1/diff-so-fancy
+- sudo apt update
+- Extract Fira Code Nerd Font to `~/.fonts`
+- fc-cache -fv
+- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy
 - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 - nvm install 16
 - pip3 install powerline-status
@@ -42,3 +45,5 @@ mkdir -p ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/plugin/after/* ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/UltiSnips ../.vim/UltiSnips
 nvim +PlugInstall +"CocInstall coc-tsserver" +qall
+
+echo "echo '. ~/.profile_common' >> ~/.bashrc"
