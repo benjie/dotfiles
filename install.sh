@@ -8,7 +8,7 @@ Don't forget to:
 - sudo apt update
 - Extract Fira Code Nerd Font to `~/.fonts`
 - fc-cache -fv
-- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy
+- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy ripgrep
 - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 - nvm install 16
 - pip3 install powerline-status
@@ -25,7 +25,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -s "`pwd`"/vimrc ../.vimrc
-ln -s "`pwd`"/init.vim ../.config/nvim/init.vim
+ln -s "`pwd`"/init.lua ../.config/nvim/init.lua
 ln -s "`pwd`"/coc-settings.json ../.config/nvim/coc-settings.json
 ln -s "`pwd`"/vscode.init.vim ../.config/nvim/vscode.init.vim
 ln -s "`pwd`"/zshrc ../.zshrc
@@ -44,6 +44,6 @@ ln -s "`pwd`"/inputrc ../.inputrc
 mkdir -p ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/plugin/after/* ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/UltiSnips ../.vim/UltiSnips
-nvim +PlugInstall +"CocInstall coc-tsserver" +qall
+#nvim +PlugInstall +"CocInstall coc-tsserver" +qall
 
 echo "echo '. ~/.profile_common' >> ~/.bashrc"
