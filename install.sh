@@ -3,7 +3,7 @@ cat <<HERE
 
 Don't forget to:
 
-- sudo add-apt-repository ppa:neovim-ppa/stable
+- sudo add-apt-repository ppa:neovim-ppa/unstable
 - sudo add-apt-repository ppa:aos1/diff-so-fancy
 - sudo apt update
 - Extract Fira Code Nerd Font to `~/.fonts`
@@ -46,4 +46,4 @@ ln -s "`pwd`"/vim/plugin/after/* ~/.vim/plugin/after/
 ln -s "`pwd`"/vim/UltiSnips ../.vim/UltiSnips
 #nvim +PlugInstall +"CocInstall coc-tsserver" +qall
 
-echo "echo '. ~/.profile_common' >> ~/.bashrc"
+echo '. ~/.profile_common' >> ~/.bashrc
