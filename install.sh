@@ -8,7 +8,7 @@ Don't forget to:
 - sudo apt update
 - Extract Fira Code Nerd Font to `~/.fonts`
 - fc-cache -fv
-- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy ripgrep pipx
+- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy ripgrep pipx colordiff
 - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 - nvm install 20
 - pipx install powerline-status
