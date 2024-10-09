@@ -1,5 +1,5 @@
 #!/bin/bash
-cat <<HERE
+cat <<'HERE'
 
 Don't forget to:
 
@@ -8,10 +8,10 @@ Don't forget to:
 - sudo apt update
 - Extract Fira Code Nerd Font to `~/.fonts`
 - fc-cache -fv
-- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy ripgrep
-- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-- nvm install 16
-- pip3 install powerline-status
+- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy ripgrep pipx
+- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+- nvm install 20
+- pipx install powerline-status
 
 Press enter to continue
 
@@ -47,3 +47,5 @@ ln -s "`pwd`"/vim/UltiSnips ../.vim/UltiSnips
 #nvim +PlugInstall +"CocInstall coc-tsserver" +qall
 
 echo '. ~/.profile_common' >> ~/.bashrc
+touch ~/.profile_common.local
+chmod +x ~/.profile_common.local
