@@ -21,10 +21,11 @@ require('packer').startup(function(use)
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      {'j-hui/fidget.nvim', tag = 'legacy'},
+      'j-hui/fidget.nvim',
 
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
+      -- TODO: move to 'folke/lazydev.nvim' instead of neodev.nvim
     },
   }
 
@@ -51,10 +52,10 @@ require('packer').startup(function(use)
     run = function()
       require'treesitter-context'.setup{
         enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        max_lines = 8, -- How many lines the window should span. Values <= 0 mean no limit.
         min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
         line_numbers = true,
-        multiline_threshold = 20, -- Maximum number of lines to show for a single context
+        multiline_threshold = 1, -- Maximum number of lines to show for a single context
         trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
         mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
         -- Separator between context and content. Should be a single character string, like '-'.
@@ -123,7 +124,6 @@ require('packer').startup(function(use)
   use 'michaeljsmith/vim-indent-object'
   use 'tpope/vim-dotenv'
   -- use 'tpope/vim-dadbod'
-  use 'sbdchd/neoformat'
   use 'Olical/vim-enmasse'
 
   use {
@@ -175,6 +175,36 @@ require('packer').startup(function(use)
     after = { "copilot.lua" },
     config = function ()
       require("copilot_cmp").setup()
+    end
+  }
+  use { 'sbdchd/neoformat',
+    after = { 'local-npm-bin.vim' },
+    config = function ()
+      vim.g.neoformat_enabled_javascript = {'prettier', 'eslint_d'}
+      vim.g.neoformat_enabled_javascriptreact = {'prettier', 'eslint_d'}
+      vim.g.neoformat_enabled_typescript = {'prettier', 'eslint_d'}
+      vim.g.neoformat_enabled_typescriptreact = {'prettier', 'eslint_d'}
+      vim.g.neoformat_enabled_json = {'prettier'}
+      vim.g.neoformat_enabled_jsonc = {'prettier'}
+      vim.g.neoformat_enabled_json5 = {'prettier'}
+      vim.g.neoformat_enabled_markdown = {'prettier'}
+      vim.g.neoformat_enabled_css = {'prettier'}
+      vim.g.neoformat_enabled_graphql = {'prettier'}
+      vim.g.neoformat_enabled_html = {'prettier'}
+      vim.g.neoformat_enabled_svg = {'prettier'}
+      -- Run both prettier _AND_ eslint_d!
+      vim.g.neoformat_run_all_formatters = 1
+      local neoformat_group = vim.api.nvim_create_augroup('Neoformat', { clear = true })
+      vim.api.nvim_create_autocmd('FileType', {
+        group = neoformat_group,
+        pattern = 'javascript',
+        command = 'augroup neoformatauto | autocmd! BufWritePre <buffer> silent Neoformat | augroup END',
+      })
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = neoformat_group,
+        pattern = '*.js,*.mjs,*.cjs,*.jsx,*.mjsx,*.cjsx,*.ts,*.mts,*.cts,*.tsx,*.mtsx,*.ctsx,*.css,*.graphql,*.json,*.md',
+        command = 'silent Neoformat',
+      })
     end
   }
 
@@ -284,17 +314,58 @@ require('lualine').setup {
     section_separators = '',
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {{'filename', path = 1, shorting_target = 40}},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_a = {
+      {
+        'mode',
+        cond = function()
+          return vim.api.nvim_get_mode().mode ~= 'n'
+        end
+      }
+    },
+    lualine_b = {
+      -- 'branch',
+      -- 'diff',
+      'diagnostics'
+    },
+    lualine_c = {
+      {
+        'filename',
+        path = 1,
+        shorten = false,
+        shorting_target = 25
+      }
+    },
+    lualine_x = {
+      {
+        'encoding',
+        cond = function()
+          return vim.bo.fileencoding ~= 'utf-8'
+        end
+      },
+      {
+        'fileformat',
+        cond = function()
+          return vim.bo.fileformat ~= 'unix'
+        end,
+        symbols = {
+          unix = '', -- e712
+          dos = '',  -- e70f
+          mac = '',  -- e711
+        }
+      },
+      -- TODO: make it so the filetype only displays if it is surprising
+      {
+        'filetype',
+        icon_only = true
+      },
+    },
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {{'filename', path = 1, shorting_target = 40}},
+    lualine_c = {{'filename', path = 1, shorting_target = 9}},
     lualine_x = {'location'},
     lualine_y = {},
     lualine_z = {}
@@ -509,6 +580,7 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  -- Use this to accept suggestions from LSP/TypeScript/etc
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
@@ -563,7 +635,7 @@ require('neodev').setup()
 --
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Turn on lsp status information
 require('fidget').setup()
@@ -652,19 +724,47 @@ require('mason').setup()
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
+-- vim.lsp.set_log_level("debug")
+
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
+    -- vim.print(server_name)
+    if (server_name == 'graphql') then
+      -- vim.print(server_name)
+      local lspconfig = require('lspconfig')
+      lspconfig.graphql.setup {
+        capabilities = capabilities,
+        -- on_attach = on_attach,
+        on_attach = function (client, bufnr)
+          print("GraphQL LSP attached")
+        end,
+        -- root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json"),
+        flags = {
+          debounce_text_changes = 150,
+        },
+        -- filetypes = { "graphql" },
+        --settings = {
+        --  graphql = {
+        --    schemaPath = './simple.graphqls',
+        --    documents = '*.graphql'
+        --  }
+        --}
+      }
+      -- vim.print('GraphQL setup called')
+    else
+      require('lspconfig')[server_name].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = servers[server_name],
+      }
+    end
   end,
 }
+
 
 
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
@@ -754,25 +854,6 @@ vim.o.ar = false
 vim.o.undodir = vim.fn.expand('$HOME/.vimundo')
 vim.o.undofile = true
 
-vim.g.neoformat_enabled_javascript = {'prettier', 'eslint_d'}
-vim.g.neoformat_enabled_javascriptreact = {'prettier', 'eslint_d'}
-vim.g.neoformat_enabled_typescript = {'prettier', 'eslint_d'}
-vim.g.neoformat_enabled_typescriptreact = {'prettier', 'eslint_d'}
- -- let g:neoformat_enabled_json = {'prettier'}
-vim.g.neoformat_enabled_markdown = {'prettier'}
-vim.g.neoformat_enabled_css = {'prettier'}
-vim.g.neoformat_enabled_graphql = {'prettier'}
-local neoformat_group = vim.api.nvim_create_augroup('Neoformat', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  group = neoformat_group,
-  pattern = 'javascript',
-  command = 'augroup neoformatauto | autocmd! BufWritePre <buffer> silent Neoformat | augroup END',
-})
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = neoformat_group,
-  pattern = '*.js,*.mjs,*.cjs,*.jsx,*.mjsx,*.cjsx,*.ts,*.mts,*.cts,*.tsx,*.mtsx,*.ctsx,*.css,*.graphql,*.json,*.md',
-  command = 'silent Neoformat',
-})
 
 vim.keymap.set("n", "]r", function()
     require("trouble").next({skip_groups = true, jump = true});
@@ -834,6 +915,6 @@ end
 vim.keymap.set('i', '<C-u>', insert_uuid, { noremap = true, silent = true })
 
 -- endash
-vim.cmd('iabbrev .- –')
+vim.cmd('iabbrev --! –')
 -- emdash
-vim.cmd('iabbrev ..- —')
+vim.cmd('iabbrev ---! —')
