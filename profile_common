@@ -157,6 +157,9 @@ alias 'selenium-server-standalone'='java -jar /usr/local/opt/selenium-server-sta
 # Mocha
 alias 'mocha-bg'='./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script'
 
+# `do_something && k` - notify when done
+alias k='kdialog --title "Finished" --passivepopup "Done" 10'
+
 # I want to be able to open more than a couple files, OSX, please
 # I needed to increase this even more because of all the file watching I do
 #ulimit -n 10240
