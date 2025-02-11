@@ -622,7 +622,14 @@ local servers = {
 
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = false },
+      workspace = {
+        checkThirdParty = false, -- Avoid unnecessary third-party plugin warnings
+        library = {
+          vim.env.VIMRUNTIME, -- Neovim runtime files
+          "${3rd}/luv/library",
+          unpack(vim.api.nvim_get_runtime_file("", true)),
+        },
+      },
       telemetry = { enable = false },
     },
   },
