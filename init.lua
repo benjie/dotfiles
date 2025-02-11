@@ -401,8 +401,40 @@ require('gitsigns').setup {
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 local lga_actions = require("telescope-live-grep-args.actions")
+local function load_telescope_excludes()
+  -- Lua Patterns - Special Characters That Require `%`
+  -- +-----------+-------------------------------+
+  -- | `%`       | Escape character itself       |
+  -- | `.`       | Matches any character         |
+  -- | `^`       | Anchors the start of a string |
+  -- | `$`       | Anchors the end of a string   |
+  -- | `(` `)`   | Capturing groups              |
+  -- | `[` `]`   | Character sets                |
+  -- | `*`       | Wildcard repetition           |
+  -- | `+`       | One or more                   |
+  -- | `-`       | Non-greedy repetition         |
+  -- | `?`       | Matches 0 or 1                |
+  -- +-----------+-------------------------------+
+  local path = vim.fn.getcwd()
+  local ignores = { "%.git/.*" }
+
+  while path ~= "/" do
+    local ignore_file = path .. "/.telescope_ignore"
+    if vim.fn.filereadable(ignore_file) == 1 then
+      for line in io.lines(ignore_file) do
+        if not line:match("^#") and line:match("%S") then -- Ignore comments and empty lines
+          table.insert(ignores, line)
+        end
+      end
+    end
+    path = vim.fn.fnamemodify(path, ":h") -- Move up one directory
+  end
+  --print("Telescope Ignore Patterns: " .. vim.inspect(ignores))
+  return ignores
+end
 require('telescope').setup {
   defaults = {
+    file_ignore_patterns = load_telescope_excludes(),
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -427,6 +459,24 @@ require('telescope').setup {
     }
   }
 }
+local function update_telescope_ignores()
+  local telescope = require("telescope")
+  -- local current_config = telescope.get_defaults()
+  -- current_config.defaults.file_ignore_patterns = load_telescope_excludes()
+  -- telescope.setup(current_config)
+  telescope.setup({
+    defaults = {
+      file_ignore_patterns = load_telescope_excludes(),
+    },
+  })
+  -- vim.notify("Telescope ignore patterns updated", vim.log.levels.INFO)
+end
+-- Auto-reload on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = ".telescope_ignore",
+  callback = update_telescope_ignores,
+})
+
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
