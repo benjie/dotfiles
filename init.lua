@@ -975,3 +975,6 @@ vim.keymap.set('i', '<C-u>', insert_uuid, { noremap = true, silent = true })
 vim.cmd('iabbrev --! –')
 -- emdash
 vim.cmd('iabbrev ---! —')
+
+-- Scroll offset
+vim.cmd('set scrolloff=10')
