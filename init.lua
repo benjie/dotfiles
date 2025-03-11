@@ -416,7 +416,7 @@ local function load_telescope_excludes()
   -- | `?`       | Matches 0 or 1                |
   -- +-----------+-------------------------------+
   local path = vim.fn.getcwd()
-  local ignores = { "%.git/.*" }
+  local ignores = { "%.git/.*", "%.yarn/.*" }
 
   while path ~= "/" do
     local ignore_file = path .. "/.telescope_ignore"
@@ -429,7 +429,7 @@ local function load_telescope_excludes()
     end
     path = vim.fn.fnamemodify(path, ":h") -- Move up one directory
   end
-  --print("Telescope Ignore Patterns: " .. vim.inspect(ignores))
+  -- print("Telescope Ignore Patterns: " .. vim.inspect(ignores))
   return ignores
 end
 require('telescope').setup {
