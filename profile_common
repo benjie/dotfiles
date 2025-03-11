@@ -162,7 +162,7 @@ alias k='kdialog --title "Finished" --passivepopup "Done" 10'
 
 # I want to be able to open more than a couple files, OSX, please
 # I needed to increase this even more because of all the file watching I do
-#ulimit -n 10240
+ulimit -n 10240
 
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
