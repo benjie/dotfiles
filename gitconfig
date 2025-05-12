@@ -61,7 +61,7 @@
   renames = copies
   mnemonicprefix = true
   algorithm = patience
-  colorMoved = true
+  # colorMoved = true
 
 [url "mbp:/Users/benjiegillam/Documents/"]
   insteadOf = mbp:
@@ -83,7 +83,7 @@
 #  show = diff-so-fancy | less --tabs=1,5 -FRFX
 [merge]
   tool = vimdiff
-  conflictstyle = zdiff3
+  #conflictstyle = zdiff3
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
@@ -104,7 +104,7 @@
   true-color = always
 
   # export DELTA_FEATURES=+side-by-side
-  side-by-side = true
+  #side-by-side = true
 
   # delta detects terminal colors automatically; set one of these to disable auto-detection
   # dark = true
