@@ -3,6 +3,8 @@ cat <<'HERE'
 
 Don't forget to:
 
+- echo fs.inotify.max_user_watches=1048576 | sudo tee -a /etc/sysctl.d/99-benjie.conf
+- echo fs.inotify.max_user_instances=1024 | sudo tee -a /etc/sysctl.d/99-benjie.conf
 - sudo add-apt-repository ppa:neovim-ppa/unstable
 - sudo add-apt-repository ppa:aos1/diff-so-fancy
 - sudo apt update
