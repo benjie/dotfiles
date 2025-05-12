@@ -910,6 +910,17 @@ vim.o.ar = false
 -- Persistent undo
 vim.o.undodir = vim.fn.expand('$HOME/.vimundo')
 vim.o.undofile = true
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.md", "*.mdx", "*.txt" },
+  callback = function()
+    vim.bo.textwidth = 80
+    -- Avoid duplicates.
+    vim.bo.formatoptions = vim.bo.formatoptions:gsub("[tlv]", "")
+    -- See `:help fo-table`
+    vim.bo.formatoptions = vim.bo.formatoptions .. "tlv"
+  end,
+})
+
 
 
 vim.keymap.set("n", "]r", function()
