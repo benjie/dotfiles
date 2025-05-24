@@ -95,13 +95,14 @@
   defaultBranch = main
 
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = "delta --color-only"
 
 [delta]
   navigate = true    # use n and N to move between diff sections
   line-numbers = true
   hyperlinks = true
   true-color = always
+  features = benjie
 
   # export DELTA_FEATURES=+side-by-side
   #side-by-side = true
@@ -109,3 +110,14 @@
   # delta detects terminal colors automatically; set one of these to disable auto-detection
   # dark = true
   # light = true
+
+[delta "benjie"]
+  file-decoration-style = "#ffffff" ol ul
+  file-added-label = [●]
+  file-copied-label = [C]
+  file-modified-label = [+]
+  file-removed-label = [⛌]
+  file-renamed-label = [→]
+  file-style = "#000000" bold "#ffffff"
+[rebase]
+  autosquash = true
