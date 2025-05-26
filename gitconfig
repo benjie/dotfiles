@@ -1,3 +1,6 @@
+[include]
+  path = ~/.dotfiles/themes.gitconfig
+
 [color]
   branch = auto
   diff = auto
@@ -112,6 +115,7 @@
   # light = true
 
 [delta "benjie"]
+  dark = true
   file-decoration-style = "#ffffff" ol ul
   file-added-label = [●]
   file-copied-label = [C]
@@ -119,5 +123,8 @@
   file-removed-label = [⛌]
   file-renamed-label = [→]
   file-style = "#000000" bold "#ffffff"
+  keep-plus-minus-markers = true
+  hunk-header-decoration-style = "#aaaaaa" box
+
 [rebase]
   autosquash = true
