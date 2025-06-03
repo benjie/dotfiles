@@ -441,6 +441,18 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    -- All but the last are default arguments, see `:help vimgrep_arguments`
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      -- Added multiline matching
+      "--multiline",
+    },
   },
   extensions = {
     live_grep_args = {
