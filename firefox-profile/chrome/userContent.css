@@ -1,0 +1,27 @@
+:root {
+  --in-content-page-background: #00000000 !important;
+  --in-content-box-background: #00000088 !important;
+}
+@-moz-document url("about:newtab") {
+  html,
+  body {
+    background-color: transparent !important;
+  }
+}
+@-moz-document url("about:blank") {
+  html,
+  body {
+    background-color: transparent !important;
+  }
+}
+@-moz-document url-prefix("") {
+  html,
+  body {
+    background-color: transparent !important;
+  }
+}
+
+html,
+body {
+  background-color: transparent !important;
+}

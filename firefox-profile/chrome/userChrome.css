@@ -1,0 +1,21 @@
+/* browser.tabs.allow_transparent_browser */
+
+:root {
+  --tabpanel-background-color: transparent !important;
+}
+
+.browser-toolbox-background {
+  background-color: #232627ee !important;
+  backdrop-filter: blur(10px);
+}
+
+#sidebar-main {
+  background: transparent !important;
+}
+
+:root[sidebar-expand-on-hover] {
+  #sidebar-main[sidebar-launcher-expanded] {
+    background-color: #232627ee !important;
+    backdrop-filter: blur(10px);
+  }
+}
