@@ -1,21 +1,37 @@
 -- Based on https://github.com/nvim-lua/kickstart.nvim then with lots of Benjie's edits applied
 
--- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  is_bootstrap = true
-  vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-  vim.cmd [[packadd packer.nvim]]
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpa  {
+    "folke/todo-comments.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        keywords = {
+          ENHANCE = { icon = " ", color = "hint", alt = { "ENHANCEMENT", "IMPROVEMENT", "IMPROVE" } }
+        }
+      }
+    end
+  },.. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
+vim.opt.rtp:prepend(lazypath)
 
-require('packer').startup(function(use)
-  -- Package manager
-  use 'wbthomason/packer.nvim'
+require('lazy').setup({
 
-  use { -- LSP Configuration & Plugins
+  { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    requires = {
+    dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
@@ -27,29 +43,29 @@ require('packer').startup(function(use)
       'folke/neodev.nvim',
       -- TODO: move to 'folke/lazydev.nvim' instead of neodev.nvim
     },
-  }
+  },
 
-  use { -- Autocompletion
+  { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
-  }
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+  },
 
-  use { -- Highlight, edit, and navigate code
+  { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    run = function()
+    build = function()
       -- pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
-  }
+  },
 
-  use { -- Additional text objects via treesitter
+  { -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
-    after = 'nvim-treesitter',
-  }
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+  },
 
-  use { -- Like VSCode "sticky scroll"
+  { -- Like VSCode "sticky scroll"
     'nvim-treesitter/nvim-treesitter-context',
-    after = 'nvim-treesitter',
-    run = function()
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    config = function()
       require'treesitter-context'.setup{
         enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
         max_lines = 8, -- How many lines the window should span. Values <= 0 mean no limit.
@@ -65,49 +81,53 @@ require('packer').startup(function(use)
         on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
       }
     end,
-  }
+  },
 
 
   -- Git related plugins
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
-  use 'lewis6991/gitsigns.nvim'
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+  'lewis6991/gitsigns.nvim',
 
-  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  -- use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  'navarasu/onedark.nvim', -- Theme inspired by Atom
+  'nvim-lualine/lualine.nvim', -- Fancier statusline
+  -- 'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines
+  'numToStr/Comment.nvim', -- "gc" to comment visual regions/lines
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
-  use {
+  {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    requires = {
-      {"nvim-telescope/telescope-live-grep-args.nvim" },
-      {'nvim-lua/plenary.nvim' }
+    dependencies = {
+      'nvim-telescope/telescope-live-grep-args.nvim',
+      'nvim-lua/plenary.nvim'
     },
     config = function()
       require("telescope").load_extension("live_grep_args")
     end
-  }
+  },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+  { 
+    'nvim-telescope/telescope-fzf-native.nvim', 
+    build = 'make', 
+    cond = function() return vim.fn.executable 'make' == 1 end 
+  },
 
   -- Benjie's selection of plugins
-  use 'christoomey/vim-tmux-navigator'
-  use 'tpope/vim-abolish'
-  use 'tpope/vim-eunuch'
-  --use 'tpope/vim-fugitive'
-  use 'tpope/vim-git'
+  'christoomey/vim-tmux-navigator',
+  'tpope/vim-abolish',
+  'tpope/vim-eunuch',
+  --'tpope/vim-fugitive', -- already listed above
+  'tpope/vim-git',
 
-  use 'tpope/vim-ragtag'
-  use 'tpope/vim-repeat'
-  use 'tpope/vim-surround'
+  'tpope/vim-ragtag',
+  'tpope/vim-repeat',
+  'tpope/vim-surround',
 
-  use 'tpope/vim-unimpaired'
-  -- Plug 'nathanaelkane/vim-indent-guides'
+  'tpope/vim-unimpaired',
+  -- 'nathanaelkane/vim-indent-guides'
   -- Entering multiselect:
   --   Ctrl-N to multiselect current word
   --   Ctrl up/down to add vertical cursors
@@ -120,15 +140,15 @@ require('packer').startup(function(use)
   --   Q to remove current cursor and go back to previous
   --   Regular vim (i,a,I,A,r,R,c,...)
   -- :help visual-multi
-  use 'mg979/vim-visual-multi' --, {'branch': 'master'}
-  use 'michaeljsmith/vim-indent-object'
-  use 'tpope/vim-dotenv'
-  -- use 'tpope/vim-dadbod'
-  use 'Olical/vim-enmasse'
+  'mg979/vim-visual-multi', -- {'branch': 'master'}
+  'michaeljsmith/vim-indent-object',
+  'tpope/vim-dotenv',
+  -- 'tpope/vim-dadbod'
+  'Olical/vim-enmasse',
 
-  use {
-  "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+  {
+    "folke/trouble.nvim",
+    dependencies = "kyazdani42/nvim-web-devicons",
     config = function()
       require("trouble").setup {
         -- your configuration comes here
@@ -136,7 +156,7 @@ require('packer').startup(function(use)
         -- refer to the configuration section below
       }
     end
-  }
+  },
   use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -149,36 +169,38 @@ require('packer').startup(function(use)
     end
   }
 
-  use 'benjie/local-npm-bin.vim'
+  'benjie/local-npm-bin.vim',
 
   -- Time tracking
-  use 'wakatime/vim-wakatime'
+  'wakatime/vim-wakatime',
 
-  use 'mhinz/vim-grepper'
+  'mhinz/vim-grepper',
 
-  use 'onsails/lspkind.nvim'
+  'onsails/lspkind.nvim',
 
-  use {
+  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    -- event = "InsertEnter",
+    event = "InsertEnter",
     config = function()
       require("copilot").setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
+        filetypes = { markdown = true }
       })
     end,
-  }
+  },
 
-  use {
+  {
     "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
+    dependencies = { "zbirenbaum/copilot.lua" },
     config = function ()
       require("copilot_cmp").setup()
     end
-  }
-  use { 'sbdchd/neoformat',
-    after = { 'local-npm-bin.vim' },
+  },
+  {
+    'sbdchd/neoformat',
+    dependencies = { 'benjie/local-npm-bin.vim' },
     config = function ()
       vim.g.neoformat_enabled_javascript = {'prettier', 'eslint_d'}
       vim.g.neoformat_enabled_javascriptreact = {'prettier', 'eslint_d'}
@@ -206,39 +228,33 @@ require('packer').startup(function(use)
         command = 'silent Neoformat',
       })
     end
-  }
+  },
 
-
-  -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-  local has_plugins, plugins = pcall(require, 'custom.plugins')
-  if has_plugins then
-    plugins(use)
-  end
-
-  if is_bootstrap then
-    require('packer').sync()
-  end
-end)
-
--- When we are bootstrapping a configuration, it doesn't
--- make sense to execute the rest of the init.lua.
---
--- You'll need to restart nvim, and then it will work.
-if is_bootstrap then
-  print '=================================='
-  print '    Plugins are being installed'
-  print '    Wait until Packer completes,'
-  print '       then restart nvim'
-  print '=================================='
-  return
-end
-
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
-  group = packer_group,
-  pattern = vim.fn.expand '$MYVIMRC',
+}, {
+  -- Lazy.nvim configuration options
+  ui = {
+    icons = {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      source = "📄",
+      start = "🚀",
+      task = "📌",
+    },
+  },
+  -- Add custom plugins from ~/.config/nvim/lua/custom/plugins.lua if it exists
+  spec = (function()
+    local has_plugins, plugins = pcall(require, 'custom.plugins')
+    if has_plugins then
+      return plugins
+    end
+    return {}
+  end)(),
 })
 
 -- [[ Setting options ]]
@@ -963,3 +979,6 @@ vim.cmd('iabbrev ---! —')
 
 -- Scroll offset
 vim.cmd('set scrolloff=10')
+
+-- I cannot spell
+vim.cmd('Abolish indicies indices')
