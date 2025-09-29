@@ -24,7 +24,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 require('lazy').setup({
-
+  spec={
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -153,9 +153,9 @@ require('lazy').setup({
       }
     end
   },
-  use {
+  {
     "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
     config = function()
       require("todo-comments").setup {
         keywords = {
@@ -163,7 +163,7 @@ require('lazy').setup({
         }
       }
     end
-  }
+  },
 
   'benjie/local-npm-bin.vim',
 
@@ -225,7 +225,9 @@ require('lazy').setup({
       })
     end
   },
-}, {
+},
+  install  = { colorscheme = { "onedark" } },
+  checker = { enabled = true }, -- automatically check for plugin updates
   -- Lazy.nvim configuration options
   ui = {
     icons = {
@@ -242,15 +244,23 @@ require('lazy').setup({
       task = "📌",
     },
   },
+  -- Disable luarocks / hererocks
+  rocks = {
+    enabled = false
+  },
+  --pkg = {
+  --  sources = { "lazy", "git", "github" }, -- no "rockspec"
+  --},
 })
 
-local config_group = vim.api.nvim_create_augroup('ConfigReload', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = config_group,
-  pattern = vim.fn.expand '$MYVIMRC',
-  command = 'source <afile>',
-  -- command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
-})
+-- Re-sourcing config is not supported with lazy.nvim
+-- local config_group = vim.api.nvim_create_augroup('ConfigReload', { clear = true })
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--   group = config_group,
+--   pattern = vim.fn.expand '$MYVIMRC',
+--   command = 'source <afile>',
+--   -- command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
+-- })
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
