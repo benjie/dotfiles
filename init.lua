@@ -1,17 +1,7 @@
 -- Based on https://github.com/nvim-lua/kickstart.nvim then with lots of Benjie's edits applied
 
 -- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpa  {
-    "folke/todo-comments.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup {
-        keywords = {
-          ENHANCE = { icon = " ", color = "hint", alt = { "ENHANCEMENT", "IMPROVEMENT", "IMPROVE" } }
-        }
-      }
-    end
-  },.. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -26,6 +16,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
+
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 require('lazy').setup({
 
@@ -229,7 +225,6 @@ require('lazy').setup({
       })
     end
   },
-
 }, {
   -- Lazy.nvim configuration options
   ui = {
@@ -247,14 +242,14 @@ require('lazy').setup({
       task = "📌",
     },
   },
-  -- Add custom plugins from ~/.config/nvim/lua/custom/plugins.lua if it exists
-  spec = (function()
-    local has_plugins, plugins = pcall(require, 'custom.plugins')
-    if has_plugins then
-      return plugins
-    end
-    return {}
-  end)(),
+})
+
+local config_group = vim.api.nvim_create_augroup('ConfigReload', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = config_group,
+  pattern = vim.fn.expand '$MYVIMRC',
+  command = 'source <afile>',
+  -- command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
 })
 
 -- [[ Setting options ]]
@@ -295,12 +290,6 @@ require('onedark').load()
 vim.o.completeopt = 'menuone,noselect'
 
 -- [[ Basic Keymaps ]]
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
