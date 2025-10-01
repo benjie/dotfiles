@@ -182,13 +182,34 @@ require('lazy').setup({
 
   {
     "zbirenbaum/copilot.lua",
+    dependencies = {
+      "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
+      init = function()
+        vim.g.copilot_nes_debounce = 500
+      end,
+    },
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
       require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-        filetypes = { markdown = true }
+        suggestion = { enabled = true },
+        panel = { enabled = true },
+        filetypes = {
+          markdown = true,
+          mdx = true,
+          javascript = true,
+          typescript = true,
+          ["*"] = false,
+        },
+        nes = {
+          enabled = true,
+          auto_trigger = true,
+          keymap = {
+            accept_and_goto = "<leader>p",
+            accept = false,
+            dismiss = "<Esc>",
+          },
+        },
       })
     end,
   },
@@ -728,6 +749,14 @@ cmp.setup {
     })
   }
 }
+
+cmp.event:on("menu_opened", function()
+  vim.b.copilot_suggestion_hidden = true
+end)
+
+cmp.event:on("menu_closed", function()
+  vim.b.copilot_suggestion_hidden = false
+end)
 
 -- vim.lsp.set_log_level("debug")
 
