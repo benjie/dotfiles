@@ -113,7 +113,13 @@ require('lazy').setup({
 
   -- Benjie's selection of plugins
   'christoomey/vim-tmux-navigator',
-  'tpope/vim-abolish',
+  {
+    'tpope/vim-abolish',
+    config = function()
+      -- I cannot spell
+      vim.cmd('Abolish indicies indices')
+    end,
+  },
   'tpope/vim-eunuch',
   --'tpope/vim-fugitive', -- already listed above
   'tpope/vim-git',
@@ -979,5 +985,3 @@ vim.cmd('iabbrev ---! —')
 -- Scroll offset
 vim.cmd('set scrolloff=10')
 
--- I cannot spell
-vim.cmd('Abolish indicies indices')
