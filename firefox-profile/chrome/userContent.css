@@ -1,19 +1,36 @@
+/*
 :root {
-  --in-content-page-background: #00000000 !important;
-  --in-content-box-background: #00000088 !important;
+  --in-content-page-background: #ffffffee !important;
+  --in-content-box-background: #ffffffee !important;
+  --newtab-background-color: transparent !important;
+}
+@-moz-document url("about:newtab"), url("about:home") {
+  --in-content-page-background: transparent !important;
+  --in-content-box-background: transparent !important;
 }
 @-moz-document url("about:newtab") {
+  :root {
+    --in-content-page-background: #00000000 !important;
+    --in-content-box-background: #00000088 !important;
+    --tabpanel-background-color: transparent !important;
+  }
   html,
   body {
     background-color: transparent !important;
   }
 }
 @-moz-document url("about:blank") {
+  :root {
+    --in-content-page-background: #00000000 !important;
+    --in-content-box-background: #00000088 !important;
+  }
   html,
   body {
     background-color: transparent !important;
   }
 }
+*/
+/*
 @-moz-document url-prefix("") {
   html,
   body {
@@ -25,3 +42,4 @@ html,
 body {
   background-color: transparent !important;
 }
+*/

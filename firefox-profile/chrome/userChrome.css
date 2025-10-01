@@ -1,8 +1,13 @@
 /* browser.tabs.allow_transparent_browser */
 
+/*
 :root {
-  --tabpanel-background-color: transparent !important;
+  --tabpanel-background-color: #f9f9f9 !important;
+  @media (-moz-content-prefers-color-scheme: dark) {
+    --tabpanel-background-color: #2b2a33 !important;
+  }
 }
+*/
 
 .browser-toolbox-background {
   background-color: #232627ee !important;
@@ -19,3 +24,19 @@
     backdrop-filter: blur(10px);
   }
 }
+
+#tabbrowser-tabpanels browser {
+  background: #fff !important;
+}
+
+
+/*
+@-moz-document url("about:newtab"), url("about:home") {
+  :root {
+    --tabpanel-background-color: transparent !important;
+    @media (-moz-content-prefers-color-scheme: dark) {
+      --tabpanel-background-color: transparent !important;
+    }
+  }
+}
+*/
