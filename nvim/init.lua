@@ -254,7 +254,7 @@ require('lazy').setup({
   },
 },
   install  = { colorscheme = { "onedark" } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  checker = { enabled = false }, -- Don't! Automatically check for plugin updates
   -- Lazy.nvim configuration options
   ui = {
     icons = {
