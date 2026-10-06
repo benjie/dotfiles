@@ -47,6 +47,9 @@
   delete-merged-branches-main = "! C=$(git rev-parse --abbrev-ref HEAD); git fetch -p; git log --decorate --oneline --simplify-by-decoration | sed -Ee 's/^[a-z0-9]{7,10} \\(([^\\)]+)\\).*$/\\1/' -e 'tx' -e 'd' -e ':x' | sed -e $'s/, /\\\\\\n/g' | grep -Ev '[ /]|HEAD|main|production|'$C | while read branch; do git branch -d $branch; done; true"
   delete-squashed-branches-main = "! bash -c 'git checkout -q main && git for-each-ref refs/heads/ \"--format=%(refname:short)\" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == \"-\"* ]] && git branch -D $branch; done; true'"
   tidyupmain = "! git delete-merged-branches-main && git delete-squashed-branches-main"
+  track-all = "!f() { git config --replace-all remote.origin.fetch \"+refs/heads/*:refs/remotes/origin/*\"; git config --get-all remote.origin.fetch; }; f"
+  track-only = "!f() { git config --replace-all remote.origin.fetch \"+refs/heads/$1:refs/remotes/origin/$1\"; git config --get-all remote.origin.fetch; }; f"
+  track-branch = "!f() { (git config --get-all remote.origin.fetch | grep -Fq -- \"+refs/heads/$1:\") || git config --add remote.origin.fetch \"+refs/heads/$1:refs/remotes/origin/$1\"; git config --get-all remote.origin.fetch; }; f"
 
 [core]
   excludesfile = /Users/benjiegillam/.gitignore
