@@ -1,1 +1,3 @@
 save=true
+ignore-scripts=true
+min-release-age=7
