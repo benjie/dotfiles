@@ -1,19 +1,24 @@
 #!/bin/bash
 cat <<'HERE'
 
-Don't forget to:
+Don't forget to globally/main account:
 
 - echo fs.inotify.max_user_watches=1048576 | sudo tee -a /etc/sysctl.d/99-benjie.conf
 - echo fs.inotify.max_user_instances=1024 | sudo tee -a /etc/sysctl.d/99-benjie.conf
 - sudo add-apt-repository ppa:neovim-ppa/unstable
 - sudo add-apt-repository ppa:aos1/diff-so-fancy
 - sudo apt update
+- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy ripgrep pipx pspg colordiff xclip pspg postgresql-client-16 git-delta rustup
 - Extract Fira Code Nerd Font to `~/.fonts`
 - fc-cache -fv
-- sudo apt install powerline neovim python3-neovim python3-pip curl tmux build-essential tig silversearcher-ag neovim diff-so-fancy ripgrep pipx pspg colordiff xclip pspg postgresql-client-16 git-delta
-- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-- nvm install 20
 - pipx install powerline-status
+
+Per account:
+
+- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+- nvm install 24
+- rustup default stable
+- cargo install --locked tree-sitter-cli
 
 Press enter to continue
 
