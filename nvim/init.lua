@@ -1,3 +1,8 @@
+-- TIPS
+-- Undo history: use `:earlier 5m` to go 5 minutes ago, or `g-` / `g+` to step through history
+
+--------------------------------------------------------------------------------
+
 -- Based on https://github.com/nvim-lua/kickstart.nvim then with lots of Benjie's edits applied
 
 -- Bootstrap lazy.nvim
@@ -48,13 +53,14 @@ require('lazy').setup({
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    build = function()
-      -- pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
+    branch = 'main',
+    lazy = false,
+    build = ':TSUpdate'
   },
 
   { -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
     dependencies = 'nvim-treesitter/nvim-treesitter',
   },
 
@@ -94,7 +100,7 @@ require('lazy').setup({
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    -- branch = '0.1.x',
     dependencies = {
       'nvim-telescope/telescope-live-grep-args.nvim',
       'nvim-lua/plenary.nvim'
@@ -118,6 +124,8 @@ require('lazy').setup({
     config = function()
       -- I cannot spell
       vim.cmd('Abolish indicies indices')
+      vim.cmd('Abolish focussed focused')
+      vim.cmd('Abolish repetative repetitive ')
     end,
   },
   'tpope/vim-eunuch',
@@ -181,6 +189,7 @@ require('lazy').setup({
   'onsails/lspkind.nvim',
 
   {
+    -- ACCEPT IS <leader>p
     "zbirenbaum/copilot.lua",
     dependencies = {
       "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
@@ -562,103 +571,57 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
+local ts = require('nvim-treesitter')
+ts.install {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = {
-    'bash',
-    'c',
-    'comment',
-    'cpp',
-    'css',
-    'diff',
-    'dockerfile',
-    'dot',
-    'git_config',
-    'git_rebase',
-    'gitattributes',
-    'gitcommit',
-    'gitignore',
-    'graphql',
-    'html',
-    'javascript',
-    'jsdoc',
-    'json',
-    'json5',
-    'jsonc',
-    'lua',
-    'luadoc',
-    'make',
-    'markdown',
-    'mermaid',
-    'passwd',
-    'python',
-    'regex',
-    'rust',
-    'sql',
-    'toml',
-    'typescript',
-    'vim',
-    'vimdoc',
-    'xml',
-    'yaml',
-  },
-
-  highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<c-backspace>',
-    },
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
-      },
-    },
-  },
+  'bash',
+  'c',
+  'comment',
+  'cpp',
+  'css',
+  'diff',
+  'dockerfile',
+  'dot',
+  'git_config',
+  'git_rebase',
+  'gitattributes',
+  'gitcommit',
+  'gitignore',
+  'graphql',
+  'html',
+  'javascript',
+  'jsdoc',
+  'json',
+  'json5',
+  -- 'jsonc',
+  'lua',
+  'luadoc',
+  'make',
+  'markdown',
+  'mermaid',
+  'passwd',
+  'python',
+  'regex',
+  'rust',
+  'sql',
+  'toml',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'xml',
+  'yaml',
 }
+
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(ev)
+    local ft = vim.bo[ev.buf].filetype
+    local lang = vim.treesitter.language.get_lang(ft)
+
+    if lang and vim.treesitter.language.add(lang) then
+      vim.treesitter.start(ev.buf, lang)
+    end
+  end,
+})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
