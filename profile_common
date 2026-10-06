@@ -1,24 +1,22 @@
 #!/bin/bash
 export UID
-export GOPATH="$HOME/go"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export DENO_INSTALL="/home/benjie/.deno"
+export DENO_INSTALL="$HOME/.deno"
 export PATH="$PATH:$DENO_INSTALL/bin"
-export PATH="$PATH:/Users/benjiegillam/.apportable/SDK/bin:/Users/benjiegillam/Library/Python/2.7/bin"
-export PATH="$PATH:/usr/local/opt/go/libexec/bin:/Users/benjiegillam/go/bin"
-export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-export PATH="$PATH:$ANDROID_HOME/tools"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
+export PATH="$PATH:/usr/local/opt/go/libexec/bin:$HOME/go/bin"
 export PATH="$PATH:/usr/local/opt/mysql-client/bin"
 export PATH="$PATH:/usr/local/sbin"
-export PATH="$PATH:~/swift/swift-DEVELOPMENT-SNAPSHOT-2020-08-04-a-ubuntu18.04/usr/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 export NEWRELIC_AGENT_ENABLED=false
 export LLVM_ROOT="/usr/local/opt/emscripten/libexec/llvm/bin"
 export LLVM="/usr/local/opt/emscripten/libexec/llvm/bin"
 
 alias vim="nvim"
-export EDITOR="nvim"
+
+# safe and clean vims
+alias svim="nvim --clean --noplugin -u ~/.dotfiles/cleanvim/init.lua"
+alias cvim="nvim --clean --noplugin -u ~/.dotfiles/cleanvim/init.lua"
+export EDITOR="nvim --clean --noplugin -u ~/.dotfiles/cleanvim/init.lua"
 
 source /usr/share/bash-completion/completions/git
 alias gs='git status '
@@ -80,15 +78,6 @@ alias preview="fzf --preview 'bat --color \"always\" {}'"
 # Src: https://remysharp.com/2018/08/23/cli-improved
 alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
-# entr for watching files
-function watch {
-  FILE="$1"
-  shift
-  # -r starts immediately; on change it waits for process to exit before restarting
-  # -c clears the terminal
-  echo "$FILE" | entr -rc "$@" /_
-}
-
 alias watchpsql="entr -rc psql -Xv ON_ERROR_STOP=1 -f /_"
 
 function gou {
@@ -131,6 +120,7 @@ alias mrm='nr db:mrm:dev'
 
 alias rshl='pkill -f "devserver.coffee hotloader"'
 alias ghpr='git pull-request'
+alias vimconflicts='nvim $(git diff --name-only --diff-filter=U)'
 
 function fixupstream {
   BRANCH="$(git symbolic-ref HEAD)" || return 1
@@ -184,8 +174,9 @@ fi
 # Elixir history
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-alias pbcopy="xclip -selection clipboard"
-alias pbpaste="xclip -o"
+alias pbcopy="wl-copy"
+alias pbpaste="wl-paste"
+
 alias open="xdg-open"
 
 function docker_reset {
